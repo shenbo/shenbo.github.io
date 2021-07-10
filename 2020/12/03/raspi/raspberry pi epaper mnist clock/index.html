@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="1. 墨水屏 型号：微雪 2.9inch e-Paper Module， 带驱动板，8PIN  工作电压：3.3V&#x2F;5V  通信接口：SPI  分辨率：296 x 128  显示颜色：黑、白  局部刷新：0.3s  全局刷新 ：2s  接线表：      墨水屏 8PIN 树莓派 40PIN 物理序号 备注    VCC 1 3.3V   GND 6 GND   DIN 19    CLK 23">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用树莓派和墨水屏做一个 mnist-clock">
+<meta property="og:url" content="https://shenbo.github.io/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/index.html">
+<meta property="og:site_name" content="shenbo">
+<meta property="og:description" content="1. 墨水屏 型号：微雪 2.9inch e-Paper Module， 带驱动板，8PIN  工作电压：3.3V&#x2F;5V  通信接口：SPI  分辨率：296 x 128  显示颜色：黑、白  局部刷新：0.3s  全局刷新 ：2s  接线表：      墨水屏 8PIN 树莓派 40PIN 物理序号 备注    VCC 1 3.3V   GND 6 GND   DIN 19    CLK 23">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenbo.github.io/images/mnist-clock.png">
+<meta property="og:image" content="https://shenbo.github.io/images/epd29_mnist_clock.jpg">
+<meta property="article:published_time" content="2020-12-03T13:21:45.000Z">
+<meta property="article:modified_time" content="2021-07-10T00:23:49.281Z">
+<meta property="article:author" content="shen bo">
+<meta property="article:tag" content="raspberry-pi">
+<meta property="article:tag" content="mnist-clock">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenbo.github.io/images/mnist-clock.png">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/","path":"2020/12/03/raspi/raspberry pi epaper mnist clock/","title":"用树莓派和墨水屏做一个 mnist-clock"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用树莓派和墨水屏做一个 mnist-clock | shenbo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="shenbo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">shenbo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A2%A8%E6%B0%B4%E5%B1%8F"><span class="nav-text">1. 墨水屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">2. 树莓派基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A4%84%E7%90%86-mnist-%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%8C%E6%8F%90%E5%8F%96-index"><span class="nav-text">3. 处理 mnist 数据集，提取 index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%88%E6%B5%8B%E8%AF%95%E4%B8%8B%E7%94%A8-opencv-%E6%98%BE%E7%A4%BA%E6%97%B6%E9%97%B4"><span class="nav-text">4. 先测试下用 opencv 显示时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%9C%A8%E5%A2%A8%E6%B0%B4%E5%B1%8F%E6%98%BE%E7%A4%BA%E6%97%B6%E9%97%B4"><span class="nav-text">5. 在墨水屏显示时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-text">所有的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-text">完整代码:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-text">效果</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shen bo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shen bo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shenbo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用树莓派和墨水屏做一个 mnist-clock
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-03 21:21:45" itemprop="dateCreated datePublished" datetime="2020-12-03T21:21:45+08:00">2020-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/raspi/" itemprop="url" rel="index"><span itemprop="name">raspi</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/" class="post-meta-item leancloud_visitors" data-flag-title="用树莓派和墨水屏做一个 mnist-clock" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-墨水屏"><a href="#1-墨水屏" class="headerlink" title="1. 墨水屏"></a>1. 墨水屏</h2><ul>
+<li><p>型号：微雪 2.9inch e-Paper Module， 带驱动板，8PIN</p>
+</li>
+<li><p>工作电压：3.3V/5V</p>
+</li>
+<li><p>通信接口：SPI</p>
+</li>
+<li><p>分辨率：296 x 128</p>
+</li>
+<li><p>显示颜色：黑、白</p>
+</li>
+<li><p>局部刷新：0.3s</p>
+</li>
+<li><p>全局刷新 ：2s</p>
+</li>
+<li><p>接线表：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>墨水屏 8PIN</th>
+<th>树莓派 40PIN 物理序号</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VCC</td>
+<td>1</td>
+<td>3.3V</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>6</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>DIN</td>
+<td>19</td>
+<td></td>
+</tr>
+<tr>
+<td>CLK</td>
+<td>23</td>
+<td></td>
+</tr>
+<tr>
+<td>CS</td>
+<td>24</td>
+<td></td>
+</tr>
+<tr>
+<td>DC</td>
+<td>22</td>
+<td></td>
+</tr>
+<tr>
+<td>RST</td>
+<td>11</td>
+<td></td>
+</tr>
+<tr>
+<td>BUSY</td>
+<td>18</td>
+<td></td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h2 id="2-树莓派基本配置"><a href="#2-树莓派基本配置" class="headerlink" title="2. 树莓派基本配置"></a>2. 树莓派基本配置</h2><ul>
+<li>详细步骤见帮助文档: <a target="_blank" rel="noopener" href="https://www.waveshare.net/wiki/2.9inch_e-Paper_Module">https://www.waveshare.net/wiki/2.9inch_e-Paper_Module</a></li>
+<li>程序源码在 github 也有: <a target="_blank" rel="noopener" href="https://github.com/waveshare/e-Paper">https://github.com/waveshare/e-Paper</a></li>
+<li>1.下载<code>git clone https://github.com/waveshare/e-Paper.git --depth 1</code><br>目录如下，有用的文件就几个：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">├───Arduino
+├───RaspberryPi<span class="token operator">&amp;</span>JetsonNano
+│   ├───c
+│   │   └─── <span class="token punctuation">..</span>.
+│   └───python
+│       │   readme_rpi_CN.txt
+│       │   setup.py
+│       │   <span class="token punctuation">..</span>.
+│       │
+│       ├───examples
+│       │       epd_2in9bc_test.py  <span class="token comment"># 测试程序</span>
+│       │       <span class="token punctuation">..</span>.
+│       │
+│       ├───lib
+│       │   └───waveshare_epd
+│       │           epd2in9.py      <span class="token comment"># 主逻辑</span>
+│       │           epdconfig.py    <span class="token comment"># 配置文件</span>
+│       │           __init__.py
+│       │           <span class="token punctuation">..</span>.
+│       │
+│       └───pic                
+│               2in9.bmp            <span class="token comment"># 图片</span>
+│               Font.ttc            <span class="token comment"># 字体文件，文泉驿，含中文字体</span>
+│               <span class="token punctuation">..</span>.
+└─── <span class="token punctuation">..</span>.
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>2.打开 SPI</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> raspi-config
+<span class="token comment"># 选择Interfacing Options -> SPI -> Yes 开启SPI接口</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>3.安装依赖(python3)</p>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># sudo apt-get update</span>
+<span class="token comment"># sudo apt-get install python3-pip</span>
+
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3-numpy
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3-pil
+
+<span class="token function">sudo</span> pip3 <span class="token function">install</span> RPi.GPIO
+<span class="token function">sudo</span> pip3 <span class="token function">install</span> spidev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>4.运行测试程序</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> e-Paper/<span class="token string">'RaspberryPi&amp;JetsonNano'</span>/
+<span class="token builtin class-name">cd</span> python/examples
+
+<span class="token function">sudo</span> python3 epd_2in9bc_test.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="3-处理-mnist-数据集，提取-index"><a href="#3-处理-mnist-数据集，提取-index" class="headerlink" title="3. 处理 mnist 数据集，提取 index"></a>3. 处理 mnist 数据集，提取 index</h2><ul>
+<li><p>下载 <code>mnist.npz</code><br><a target="_blank" rel="noopener" href="https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz">https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz</a></p>
+</li>
+<li><p>我们使用<code>x_train</code>的60000个数字，把0-9对应的序号(index)，提取出来，保存到 <code>mnist_index.json</code></p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> json
+
+
+img_rows<span class="token punctuation">,</span> img_cols <span class="token operator">=</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span>
+
+<span class="token comment"># the data, split between train and test sets</span>
+path <span class="token operator">=</span> <span class="token string">'mnist.npz'</span>
+<span class="token keyword">with</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    x_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_train'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_train'</span><span class="token punctuation">]</span>
+    x_test<span class="token punctuation">,</span> y_test <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_test'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_test'</span><span class="token punctuation">]</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'x_train.shape: &#123;&#125;, y_train.shape: &#123;&#125;'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>x_train<span class="token punctuation">.</span>shape<span class="token punctuation">,</span> y_train<span class="token punctuation">.</span>shape<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'x_test.shape: &#123;&#125;, y_test.shape: &#123;&#125;'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>x_test<span class="token punctuation">.</span>shape<span class="token punctuation">,</span> y_test<span class="token punctuation">.</span>shape<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>x_train<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> y_train<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x_test<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> y_test<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># 创建一个字典，keys 是0-9，values为空的list，后面将序号存进去</span>
+idx_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    idx_dict<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>idx_dict<span class="token punctuation">)</span>
+
+<span class="token comment"># 将序号存进去</span>
+<span class="token keyword">for</span> idx <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">60000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    num <span class="token operator">=</span> y_train<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+    idx_dict<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>idx<span class="token punctuation">)</span>
+
+    <span class="token comment"># if idx == 60: break</span>
+
+<span class="token comment"># print(idx_dict)</span>
+
+<span class="token comment"># 转为 json 格式， 保存</span>
+idx_json <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>idx_dict<span class="token punctuation">)</span>
+<span class="token comment"># print(idx_json)</span>
+
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'mnist_index.json'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    json<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>idx_dict<span class="token punctuation">,</span> f<span class="token punctuation">)</span>
+
+<span class="token comment"># 读取 json 文件</span>
+<span class="token comment"># with open('mnist_index.json', 'r') as f:</span>
+<span class="token comment">#     data = json.load(f)</span>
+<span class="token comment"># print(data)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4-先测试下用-opencv-显示时间"><a href="#4-先测试下用-opencv-显示时间" class="headerlink" title="4. 先测试下用 opencv 显示时间"></a>4. 先测试下用 opencv 显示时间</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> json
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> cv2
+<span class="token keyword">import</span> time
+
+<span class="token comment"># load mnist dataset</span>
+path <span class="token operator">=</span> <span class="token string">'mnist.npz'</span>
+<span class="token keyword">with</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    x_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_train'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_train'</span><span class="token punctuation">]</span>
+    x_test<span class="token punctuation">,</span> y_test <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_test'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_test'</span><span class="token punctuation">]</span>
+
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'mnist_index.json'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    idx_dict <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>idx_dict<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">get_mnist_num</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    idxs <span class="token operator">=</span> idx_dict<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    idx <span class="token operator">=</span> random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>idxs<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> x_train<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+
+
+gap <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        gap<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">255</span>
+
+last_time <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+last_imgs <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    now <span class="token operator">=</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    sec<span class="token punctuation">,</span> mnt<span class="token punctuation">,</span> hour <span class="token operator">=</span> now<span class="token punctuation">.</span>tm_sec<span class="token punctuation">,</span> now<span class="token punctuation">.</span>tm_min<span class="token punctuation">,</span> now<span class="token punctuation">.</span>tm_hour
+    s1<span class="token punctuation">,</span> s2 <span class="token operator">=</span> sec<span class="token operator">//</span><span class="token number">10</span><span class="token punctuation">,</span> sec<span class="token operator">%</span><span class="token number">10</span>
+    m1<span class="token punctuation">,</span> m2 <span class="token operator">=</span> mnt<span class="token operator">//</span><span class="token number">10</span><span class="token punctuation">,</span> mnt<span class="token operator">%</span><span class="token number">10</span>
+    h1<span class="token punctuation">,</span> h2 <span class="token operator">=</span> hour<span class="token operator">//</span><span class="token number">10</span><span class="token punctuation">,</span> hour<span class="token operator">%</span><span class="token number">10</span>
+    now_time <span class="token operator">=</span> <span class="token punctuation">[</span>h1<span class="token punctuation">,</span> h2<span class="token punctuation">,</span> m1<span class="token punctuation">,</span> m2<span class="token punctuation">,</span> s1<span class="token punctuation">,</span> s2<span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>last_time<span class="token punctuation">,</span> now_time<span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> last_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> now_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            last_imgs<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> get_mnist_num<span class="token punctuation">(</span>now_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            last_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> now_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+
+    img <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>last_imgs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> last_imgs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> gap<span class="token punctuation">,</span>
+                     last_imgs<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> last_imgs<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> gap<span class="token punctuation">,</span>
+                     last_imgs<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> last_imgs<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'num'</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span>
+    <span class="token comment"># cv2.imwrite('mnist-clock.png', img)</span>
+    cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/mnist-clock.png"></p>
+<h2 id="5-在墨水屏显示时间"><a href="#5-在墨水屏显示时间" class="headerlink" title="5. 在墨水屏显示时间"></a>5. 在墨水屏显示时间</h2><p>详见 <code>epd29_mnist_clock.py</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># epd29_mnist_clock.py </span>
+
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> os
+
+<span class="token keyword">import</span> logging
+<span class="token keyword">import</span> json
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> time
+<span class="token keyword">import</span> traceback
+
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image<span class="token punctuation">,</span> ImageDraw<span class="token punctuation">,</span> ImageFont
+
+<span class="token keyword">from</span> lib <span class="token keyword">import</span> epd2in9
+
+
+logging<span class="token punctuation">.</span>basicConfig<span class="token punctuation">(</span>level<span class="token operator">=</span>logging<span class="token punctuation">.</span>DEBUG<span class="token punctuation">)</span>
+font <span class="token operator">=</span> ImageFont<span class="token punctuation">.</span>truetype<span class="token punctuation">(</span><span class="token string">'lib/Font.ttc'</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">)</span>
+
+<span class="token comment"># load mnist dataset</span>
+<span class="token keyword">with</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'mnist.npz'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    x_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_train'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_train'</span><span class="token punctuation">]</span>
+    x_test<span class="token punctuation">,</span> y_test <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_test'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_test'</span><span class="token punctuation">]</span>
+
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'mnist_index.json'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    idx_dict <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+
+gap <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">255</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        gap<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">def</span> <span class="token function">get_mnist_num</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    idxs <span class="token operator">=</span> idx_dict<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    idx <span class="token operator">=</span> random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>idxs<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token number">255</span> <span class="token operator">-</span> x_train<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+
+
+<span class="token comment"># === 0. init </span>
+logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'epd2in9 Demo'</span><span class="token punctuation">)</span>
+
+epd <span class="token operator">=</span> epd2in9<span class="token punctuation">.</span>EPD<span class="token punctuation">(</span><span class="token punctuation">)</span>
+logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'init and Clear'</span><span class="token punctuation">)</span>
+epd<span class="token punctuation">.</span>init<span class="token punctuation">(</span>epd<span class="token punctuation">.</span>lut_full_update<span class="token punctuation">)</span>
+epd<span class="token punctuation">.</span>Clear<span class="token punctuation">(</span><span class="token number">0xFF</span><span class="token punctuation">)</span>
+
+<span class="token comment"># === 1. show date &amp; time</span>
+logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'show date &amp; time'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">YMD</span><span class="token punctuation">(</span>draw<span class="token punctuation">,</span> x1<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> y1<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> x2<span class="token operator">=</span><span class="token number">160</span><span class="token punctuation">,</span> y2<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    draw<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">,</span> fill<span class="token operator">=</span><span class="token number">255</span><span class="token punctuation">)</span>
+    draw<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">)</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d  %a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> font <span class="token operator">=</span> font<span class="token punctuation">,</span> fill<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">HMS</span><span class="token punctuation">(</span>draw<span class="token punctuation">,</span> x1<span class="token operator">=</span><span class="token number">180</span><span class="token punctuation">,</span> y1<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> x2<span class="token operator">=</span><span class="token number">280</span><span class="token punctuation">,</span> y2<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    draw<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">255</span><span class="token punctuation">)</span>
+    draw<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">)</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%H:%M'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> font <span class="token operator">=</span> font<span class="token punctuation">,</span> fill<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    
+<span class="token keyword">def</span> <span class="token function">MNIST</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> draw<span class="token punctuation">,</span> mnist_img<span class="token punctuation">,</span> x1<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">,</span> y1<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">,</span> x2<span class="token operator">=</span><span class="token number">280</span><span class="token punctuation">,</span> y2<span class="token operator">=</span><span class="token number">120</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    draw<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">255</span><span class="token punctuation">)</span>
+    mnist_img <span class="token operator">=</span> Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>mnist_img<span class="token punctuation">)</span>
+    mnist_img <span class="token operator">=</span> mnist_img<span class="token punctuation">.</span>resize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">38</span><span class="token operator">*</span><span class="token number">2</span><span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>paste<span class="token punctuation">(</span>mnist_img<span class="token punctuation">,</span> <span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># partial update</span>
+
+time_image <span class="token operator">=</span> Image<span class="token punctuation">.</span>new<span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>epd<span class="token punctuation">.</span>height<span class="token punctuation">,</span> epd<span class="token punctuation">.</span>width<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
+time_draw <span class="token operator">=</span> ImageDraw<span class="token punctuation">.</span>Draw<span class="token punctuation">(</span>time_image<span class="token punctuation">)</span>
+
+last_time <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+last_imgs <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">255</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    now <span class="token operator">=</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    sec<span class="token punctuation">,</span> mnt<span class="token punctuation">,</span> hour <span class="token operator">=</span> now<span class="token punctuation">.</span>tm_sec<span class="token punctuation">,</span> now<span class="token punctuation">.</span>tm_min<span class="token punctuation">,</span> now<span class="token punctuation">.</span>tm_hour
+    m1<span class="token punctuation">,</span> m2 <span class="token operator">=</span> mnt<span class="token operator">//</span><span class="token number">10</span><span class="token punctuation">,</span> mnt<span class="token operator">%</span><span class="token number">10</span>
+    h1<span class="token punctuation">,</span> h2 <span class="token operator">=</span> hour<span class="token operator">//</span><span class="token number">10</span><span class="token punctuation">,</span> hour<span class="token operator">%</span><span class="token number">10</span>
+    now_time <span class="token operator">=</span> <span class="token punctuation">[</span>h1<span class="token punctuation">,</span> h2<span class="token punctuation">,</span> m1<span class="token punctuation">,</span> m2<span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">&#123;</span>hour<span class="token punctuation">&#125;</span></span><span class="token string">:</span><span class="token interpolation"><span class="token punctuation">&#123;</span>mnt<span class="token punctuation">&#125;</span></span><span class="token string">:</span><span class="token interpolation"><span class="token punctuation">&#123;</span>sec<span class="token punctuation">&#125;</span></span><span class="token string">'</span></span><span class="token punctuation">,</span> last_time<span class="token punctuation">,</span> now_time<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">in</span> last_time <span class="token keyword">or</span> <span class="token punctuation">(</span>mnt <span class="token operator">==</span> <span class="token number">0</span> <span class="token keyword">and</span> sec <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'partial update'</span><span class="token punctuation">)</span>
+        epd<span class="token punctuation">.</span>init<span class="token punctuation">(</span>epd<span class="token punctuation">.</span>lut_full_update<span class="token punctuation">)</span>
+        epd<span class="token punctuation">.</span>Clear<span class="token punctuation">(</span><span class="token number">0xFF</span><span class="token punctuation">)</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'partial update'</span><span class="token punctuation">)</span>
+        epd<span class="token punctuation">.</span>init<span class="token punctuation">(</span>epd<span class="token punctuation">.</span>lut_partial_update<span class="token punctuation">)</span>
+        epd<span class="token punctuation">.</span>Clear<span class="token punctuation">(</span><span class="token number">0xFF</span><span class="token punctuation">)</span>
+        YMD<span class="token punctuation">(</span>time_draw<span class="token punctuation">)</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> last_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> now_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            last_imgs<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> get_mnist_num<span class="token punctuation">(</span>now_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            last_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> now_time<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            mnist_image <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>last_imgs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> last_imgs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> gap<span class="token punctuation">,</span>
+                                     last_imgs<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> last_imgs<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            HMS<span class="token punctuation">(</span>time_draw<span class="token punctuation">)</span>  
+            MNIST<span class="token punctuation">(</span>time_image<span class="token punctuation">,</span> time_draw<span class="token punctuation">,</span> mnist_image<span class="token punctuation">)</span>
+            
+            epd<span class="token punctuation">.</span>display<span class="token punctuation">(</span>epd<span class="token punctuation">.</span>getbuffer<span class="token punctuation">(</span>time_image<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Clear        </span>
+logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'Clear...'</span><span class="token punctuation">)</span>
+epd<span class="token punctuation">.</span>init<span class="token punctuation">(</span>epd<span class="token punctuation">.</span>lut_full_update<span class="token punctuation">)</span>
+epd<span class="token punctuation">.</span>Clear<span class="token punctuation">(</span><span class="token number">0xFF</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Sleep</span>
+logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'Goto Sleep...'</span><span class="token punctuation">)</span>
+epd<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token punctuation">)</span>
+epd<span class="token punctuation">.</span>Dev_exit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="所有的文件"><a href="#所有的文件" class="headerlink" title="所有的文件"></a>所有的文件</h2><p>把有用的几个文件拉出来放在一个文件夹里。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">.</span>
+├── cv2_mnist_clock.py     <span class="token comment"># 测试用 opencv 显示时间</span>
+├── epd29_mnist_clock.py   <span class="token comment"># 在墨水屏显示时间</span>
+├── epd_2in9_test.py
+├── lib
+│ ├── epd2in9.py
+│ ├── epdconfig.py
+│ ├── Font.ttc
+│ └── __init__.py
+├── mnist_index_gen.py     <span class="token comment"># 提取序号(index)</span>
+├── mnist_index.json       <span class="token comment"># 保存序号(index)，以 json 格式</span>
+└── mnist.npz              <span class="token comment"># mnist 原始数据集 </span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码:"></a>完整代码:</h2><p><a target="_blank" rel="noopener" href="https://github.com/shenbo/mnist-clock">https://github.com/shenbo/mnist-clock</a></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/epd29_mnist_clock.jpg"></p>
+<hr>
+<p>灵感: <a target="_blank" rel="noopener" href="https://github.com/dheera/mnist-clock">https://github.com/dheera/mnist-clock</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/wechatpay.png" alt="shen bo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/raspberry-pi/" rel="tag"># raspberry-pi</a>
+              <a href="/tags/mnist-clock/" rel="tag"># mnist-clock</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/24/raspi/raspberry%20pi%20tensorflow-lite%20object%20detect/" rel="prev" title="树莓派 tensorflow-lite 目标检测">
+                  <i class="fa fa-chevron-left"></i> 树莓派 tensorflow-lite 目标检测
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/" rel="next" title="树莓派与LCD屏1602a">
+                  树莓派与LCD屏1602a <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shen bo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

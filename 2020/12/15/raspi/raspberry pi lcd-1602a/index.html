@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="1. 1602a LCD屏 接线端子表：     序号 LCD屏 16PIN 树莓派 40PIN 物理序号 备注    1 VSS 06 GND   2 VDD 02 5V   3 V0 电位器 对比度，0-5V   4 RS 08 GPIO-14   5 RW 06 写模式：接地   6 EN 10 GPIO-15   7 D0 -    8 D1 -    9 D2 -    10 D3 -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派与LCD屏1602a">
+<meta property="og:url" content="https://shenbo.github.io/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/index.html">
+<meta property="og:site_name" content="shenbo">
+<meta property="og:description" content="1. 1602a LCD屏 接线端子表：     序号 LCD屏 16PIN 树莓派 40PIN 物理序号 备注    1 VSS 06 GND   2 VDD 02 5V   3 V0 电位器 对比度，0-5V   4 RS 08 GPIO-14   5 RW 06 写模式：接地   6 EN 10 GPIO-15   7 D0 -    8 D1 -    9 D2 -    10 D3 -">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenbo.github.io/images/raspi-lcd1602a.png">
+<meta property="article:published_time" content="2020-12-15T03:11:33.000Z">
+<meta property="article:modified_time" content="2021-07-10T00:23:49.281Z">
+<meta property="article:author" content="shen bo">
+<meta property="article:tag" content="raspberry-pi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenbo.github.io/images/raspi-lcd1602a.png">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/","path":"2020/12/15/raspi/raspberry pi lcd-1602a/","title":"树莓派与LCD屏1602a"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树莓派与LCD屏1602a | shenbo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="shenbo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">shenbo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1602a-LCD%E5%B1%8F"><span class="nav-text">1. 1602a LCD屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BB%A3%E7%A0%81"><span class="nav-text">2. 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lcd1602-py"><span class="nav-text">lcd1602.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1602-py"><span class="nav-text">1602.py</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shen bo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shen bo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shenbo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派与LCD屏1602a
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-15 11:11:33" itemprop="dateCreated datePublished" datetime="2020-12-15T11:11:33+08:00">2020-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/raspi/" itemprop="url" rel="index"><span itemprop="name">raspi</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/" class="post-meta-item leancloud_visitors" data-flag-title="树莓派与LCD屏1602a" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-1602a-LCD屏"><a href="#1-1602a-LCD屏" class="headerlink" title="1. 1602a LCD屏"></a>1. 1602a LCD屏</h2><ul>
+<li>接线端子表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>LCD屏 16PIN</th>
+<th>树莓派 40PIN 物理序号</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>VSS</td>
+<td>06</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>2</td>
+<td>VDD</td>
+<td>02</td>
+<td>5V</td>
+</tr>
+<tr>
+<td>3</td>
+<td>V0</td>
+<td>电位器</td>
+<td>对比度，0-5V</td>
+</tr>
+<tr>
+<td>4</td>
+<td>RS</td>
+<td>08</td>
+<td>GPIO-14</td>
+</tr>
+<tr>
+<td>5</td>
+<td>RW</td>
+<td>06</td>
+<td>写模式：接地</td>
+</tr>
+<tr>
+<td>6</td>
+<td>EN</td>
+<td>10</td>
+<td>GPIO-15</td>
+</tr>
+<tr>
+<td>7</td>
+<td>D0</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>D1</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>D2</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>D3</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>D4</td>
+<td>11</td>
+<td>GPIO-17</td>
+</tr>
+<tr>
+<td>12</td>
+<td>D5</td>
+<td>12</td>
+<td>GPIO-18</td>
+</tr>
+<tr>
+<td>13</td>
+<td>D6</td>
+<td>13</td>
+<td>GPIO-27</td>
+</tr>
+<tr>
+<td>14</td>
+<td>D7</td>
+<td>15</td>
+<td>GPIO-22</td>
+</tr>
+<tr>
+<td>15</td>
+<td>A</td>
+<td>串约500Ω电阻后接02</td>
+<td>背光正</td>
+</tr>
+<tr>
+<td>16</td>
+<td>K</td>
+<td>06</td>
+<td>背光负</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<ul>
+<li>接线图</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/raspi-lcd1602a.png"></p>
+<h2 id="2-代码"><a href="#2-代码" class="headerlink" title="2. 代码"></a>2. 代码</h2><ul>
+<li>目录如下，就两个文件：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">.</span>
+├───LCD1602a
+│   ├───1602.py     <span class="token comment"># 主程序，可显示时间、CPU、RAM的使用情况</span>
+│   └───lcd1602.py  <span class="token comment"># 配置程序</span>
+│<span class="token punctuation">..</span>.
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="lcd1602-py"><a href="#lcd1602-py" class="headerlink" title="lcd1602.py"></a>lcd1602.py</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># based on code from lrvick and LiquidCrystal</span>
+<span class="token comment"># lrvic - https://github.com/lrvick/raspi-hd44780/blob/master/hd44780.py</span>
+<span class="token comment"># LiquidCrystal - https://github.com/arduino/Arduino/blob/master/libraries/LiquidCrystal/LiquidCrystal.cpp</span>
+
+<span class="token keyword">import</span> time
+
+<span class="token keyword">class</span> <span class="token class-name">lcd1602</span><span class="token punctuation">:</span>
+    <span class="token comment"># commands</span>
+    LCD_CLEARDISPLAY 		<span class="token operator">=</span> <span class="token number">0x01</span>
+    LCD_RETURNHOME 		    <span class="token operator">=</span> <span class="token number">0x02</span>
+    LCD_ENTRYMODESET 		<span class="token operator">=</span> <span class="token number">0x04</span>
+    LCD_DISPLAYCONTROL 		<span class="token operator">=</span> <span class="token number">0x08</span>
+    LCD_CURSORSHIFT 		<span class="token operator">=</span> <span class="token number">0x10</span>
+    LCD_FUNCTIONSET 		<span class="token operator">=</span> <span class="token number">0x20</span>
+    LCD_SETCGRAMADDR 		<span class="token operator">=</span> <span class="token number">0x40</span>
+    LCD_SETDDRAMADDR 		<span class="token operator">=</span> <span class="token number">0x80</span>
+
+    <span class="token comment"># flags for display entry mode</span>
+    LCD_ENTRYRIGHT 		        <span class="token operator">=</span> <span class="token number">0x00</span>
+    LCD_ENTRYLEFT 		        <span class="token operator">=</span> <span class="token number">0x02</span>
+    LCD_ENTRYSHIFTINCREMENT 	<span class="token operator">=</span> <span class="token number">0x01</span>
+    LCD_ENTRYSHIFTDECREMENT 	<span class="token operator">=</span> <span class="token number">0x00</span>
+
+    <span class="token comment"># flags for display on/off control</span>
+    LCD_DISPLAYON 		<span class="token operator">=</span> <span class="token number">0x04</span>
+    LCD_DISPLAYOFF 		<span class="token operator">=</span> <span class="token number">0x00</span>
+    LCD_CURSORON 		<span class="token operator">=</span> <span class="token number">0x02</span>
+    LCD_CURSOROFF 		<span class="token operator">=</span> <span class="token number">0x00</span>
+    LCD_BLINKON 		<span class="token operator">=</span> <span class="token number">0x01</span>
+    LCD_BLINKOFF 		<span class="token operator">=</span> <span class="token number">0x00</span>
+
+    <span class="token comment"># flags for display/cursor shift</span>
+    LCD_DISPLAYMOVE 	<span class="token operator">=</span> <span class="token number">0x08</span>
+    LCD_CURSORMOVE 	    <span class="token operator">=</span> <span class="token number">0x00</span>
+
+    <span class="token comment"># flags for display/cursor shift</span>
+    LCD_DISPLAYMOVE 	<span class="token operator">=</span> <span class="token number">0x08</span>
+    LCD_CURSORMOVE 		<span class="token operator">=</span> <span class="token number">0x00</span>
+    LCD_MOVERIGHT 		<span class="token operator">=</span> <span class="token number">0x04</span>
+    LCD_MOVELEFT 		<span class="token operator">=</span> <span class="token number">0x00</span>
+
+    <span class="token comment"># flags for function set</span>
+    LCD_8BITMODE 		<span class="token operator">=</span> <span class="token number">0x10</span>
+    LCD_4BITMODE 		<span class="token operator">=</span> <span class="token number">0x00</span>
+    LCD_2LINE 			<span class="token operator">=</span> <span class="token number">0x08</span>
+    LCD_1LINE 			<span class="token operator">=</span> <span class="token number">0x00</span>
+    LCD_5x10DOTS 		<span class="token operator">=</span> <span class="token number">0x04</span>
+    LCD_5x8DOTS 		<span class="token operator">=</span> <span class="token number">0x00</span>
+
+
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pin_rs<span class="token operator">=</span><span class="token number">14</span><span class="token punctuation">,</span> pin_e<span class="token operator">=</span><span class="token number">15</span><span class="token punctuation">,</span> pins_db<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">27</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">,</span> GPIO <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> GPIO<span class="token punctuation">:</span>
+            <span class="token keyword">import</span> RPi<span class="token punctuation">.</span>GPIO <span class="token keyword">as</span> GPIO
+
+        self<span class="token punctuation">.</span>GPIO <span class="token operator">=</span> GPIO
+        self<span class="token punctuation">.</span>pin_rs <span class="token operator">=</span> pin_rs
+        self<span class="token punctuation">.</span>pin_e <span class="token operator">=</span> pin_e
+        self<span class="token punctuation">.</span>pins_db <span class="token operator">=</span> pins_db
+
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>setmode<span class="token punctuation">(</span>GPIO<span class="token punctuation">.</span>BCM<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>setup<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pin_e<span class="token punctuation">,</span> GPIO<span class="token punctuation">.</span>OUT<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>setup<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pin_rs<span class="token punctuation">,</span> GPIO<span class="token punctuation">.</span>OUT<span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> pin <span class="token keyword">in</span> self<span class="token punctuation">.</span>pins_db<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>setup<span class="token punctuation">(</span>pin<span class="token punctuation">,</span> GPIO<span class="token punctuation">.</span>OUT<span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token number">0x33</span><span class="token punctuation">)</span> <span class="token comment"># initialization</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token number">0x32</span><span class="token punctuation">)</span> <span class="token comment"># initialization</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token number">0x28</span><span class="token punctuation">)</span> <span class="token comment"># 2 line 5x7 matrix</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token number">0x0C</span><span class="token punctuation">)</span> <span class="token comment"># turn cursor off 0x0E to enable cursor</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token number">0x06</span><span class="token punctuation">)</span> <span class="token comment"># shift cursor right</span>
+
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_DISPLAYON <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_CURSOROFF <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_BLINKOFF
+
+        self<span class="token punctuation">.</span>displayfunction <span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_4BITMODE <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_1LINE <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_5x8DOTS
+        self<span class="token punctuation">.</span>displayfunction <span class="token operator">|</span><span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_2LINE
+
+        <span class="token triple-quoted-string string">""" Initialize to default text direction (for romance languages) """</span>
+        self<span class="token punctuation">.</span>displaymode <span class="token operator">=</span>  self<span class="token punctuation">.</span>LCD_ENTRYLEFT <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_ENTRYSHIFTDECREMENT
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_ENTRYMODESET <span class="token operator">|</span> self<span class="token punctuation">.</span>displaymode<span class="token punctuation">)</span>   <span class="token comment">#  set the entry mode</span>
+
+        self<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">begin</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cols<span class="token punctuation">,</span> lines<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>lines <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>numlines <span class="token operator">=</span> lines
+            self<span class="token punctuation">.</span>displayfunction <span class="token operator">|</span><span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_2LINE
+            self<span class="token punctuation">.</span>currline <span class="token operator">=</span> <span class="token number">0</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">home</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_RETURNHOME<span class="token punctuation">)</span>    <span class="token comment"># set cursor position to zero</span>
+        self<span class="token punctuation">.</span>delayMicroseconds<span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>            <span class="token comment"># this command takes a long time!</span>
+        
+
+    <span class="token keyword">def</span> <span class="token function">clear</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_CLEARDISPLAY<span class="token punctuation">)</span>  <span class="token comment"># command to clear display</span>
+        self<span class="token punctuation">.</span>delayMicroseconds<span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>            <span class="token comment"># 3000 microsecond sleep, clearing the display takes a long time</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">setCursor</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> col<span class="token punctuation">,</span> row<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>row_offsets <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token number">0x00</span><span class="token punctuation">,</span> <span class="token number">0x40</span><span class="token punctuation">,</span> <span class="token number">0x14</span><span class="token punctuation">,</span> <span class="token number">0x54</span> <span class="token punctuation">]</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> row <span class="token operator">></span> self<span class="token punctuation">.</span>numlines <span class="token punctuation">)</span><span class="token punctuation">:</span> 
+                row <span class="token operator">=</span> self<span class="token punctuation">.</span>numlines <span class="token operator">-</span> <span class="token number">1</span>         <span class="token comment"># we count rows starting w/0</span>
+
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_SETDDRAMADDR <span class="token operator">|</span> <span class="token punctuation">(</span>col <span class="token operator">+</span> self<span class="token punctuation">.</span>row_offsets<span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">noDisplay</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+        <span class="token triple-quoted-string string">""" Turn the display off (quickly) """</span>
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>self<span class="token punctuation">.</span>LCD_DISPLAYON
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_DISPLAYCONTROL <span class="token operator">|</span> self<span class="token punctuation">.</span>displaycontrol<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">display</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Turn the display on (quickly) """</span>
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">|</span><span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_DISPLAYON
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_DISPLAYCONTROL <span class="token operator">|</span> self<span class="token punctuation">.</span>displaycontrol<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">noCursor</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Turns the underline cursor on/off """</span>
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>self<span class="token punctuation">.</span>LCD_CURSORON
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_DISPLAYCONTROL <span class="token operator">|</span> self<span class="token punctuation">.</span>displaycontrol<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">cursor</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Cursor On """</span>
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">|</span><span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_CURSORON
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_DISPLAYCONTROL <span class="token operator">|</span> self<span class="token punctuation">.</span>displaycontrol<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">noBlink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Turn on and off the blinking cursor """</span>
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>self<span class="token punctuation">.</span>LCD_BLINKON
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_DISPLAYCONTROL <span class="token operator">|</span> self<span class="token punctuation">.</span>displaycontrol<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">noBlink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Turn on and off the blinking cursor """</span>
+        self<span class="token punctuation">.</span>displaycontrol <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>self<span class="token punctuation">.</span>LCD_BLINKON
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_DISPLAYCONTROL <span class="token operator">|</span> self<span class="token punctuation">.</span>displaycontrol<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">DisplayLeft</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" These commands scroll the display without changing the RAM """</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_CURSORSHIFT <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_DISPLAYMOVE <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_MOVELEFT<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">scrollDisplayRight</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" These commands scroll the display without changing the RAM """</span>
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_CURSORSHIFT <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_DISPLAYMOVE <span class="token operator">|</span> self<span class="token punctuation">.</span>LCD_MOVERIGHT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">leftToRight</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" This is for text that flows Left to Right """</span>
+        self<span class="token punctuation">.</span>displaymode <span class="token operator">|</span><span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_ENTRYLEFT
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_ENTRYMODESET <span class="token operator">|</span> self<span class="token punctuation">.</span>displaymode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">rightToLeft</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" This is for text that flows Right to Left """</span>
+        self<span class="token punctuation">.</span>displaymode <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>self<span class="token punctuation">.</span>LCD_ENTRYLEFT
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_ENTRYMODESET <span class="token operator">|</span> self<span class="token punctuation">.</span>displaymode<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">autoscroll</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" This will 'right justify' text from the cursor """</span>
+        self<span class="token punctuation">.</span>displaymode <span class="token operator">|</span><span class="token operator">=</span> self<span class="token punctuation">.</span>LCD_ENTRYSHIFTINCREMENT
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_ENTRYMODESET <span class="token operator">|</span> self<span class="token punctuation">.</span>displaymode<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">noAutoscroll</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+        <span class="token triple-quoted-string string">""" This will 'left justify' text from the cursor """</span>
+        self<span class="token punctuation">.</span>displaymode <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>self<span class="token punctuation">.</span>LCD_ENTRYSHIFTINCREMENT
+        self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span>self<span class="token punctuation">.</span>LCD_ENTRYMODESET <span class="token operator">|</span> self<span class="token punctuation">.</span>displaymode<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">write4bits</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> bits<span class="token punctuation">,</span> char_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Send command to LCD """</span>
+        self<span class="token punctuation">.</span>delayMicroseconds<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token comment"># 1000 microsecond sleep</span>
+        bits<span class="token operator">=</span><span class="token builtin">bin</span><span class="token punctuation">(</span>bits<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>zfill<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pin_rs<span class="token punctuation">,</span> char_mode<span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> pin <span class="token keyword">in</span> self<span class="token punctuation">.</span>pins_db<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>pin<span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> bits<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pins_db<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>pulseEnable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> pin <span class="token keyword">in</span> self<span class="token punctuation">.</span>pins_db<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>pin<span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> bits<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pins_db<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>pulseEnable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">delayMicroseconds</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> microseconds<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        seconds <span class="token operator">=</span> microseconds <span class="token operator">/</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span>        <span class="token comment"># divide microseconds by 1 million for seconds</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span>seconds<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">pulseEnable</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pin_e<span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>delayMicroseconds<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>                <span class="token comment"># 1 microsecond pause - enable pulse must be > 450ns </span>
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pin_e<span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>delayMicroseconds<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>                <span class="token comment"># 1 microsecond pause - enable pulse must be > 450ns </span>
+        self<span class="token punctuation">.</span>GPIO<span class="token punctuation">.</span>output<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pin_e<span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>delayMicroseconds<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>                <span class="token comment"># commands need > 37us to settle</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">message</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" Send string to LCD. Newline wraps to second line"""</span>
+        <span class="token keyword">for</span> char <span class="token keyword">in</span> text<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> char <span class="token operator">==</span> <span class="token string">'\n'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token number">0xC0</span><span class="token punctuation">)</span> <span class="token comment"># next line</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>write4bits<span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    lcd <span class="token operator">=</span> lcd1602<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    lcd<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    lcd<span class="token punctuation">.</span>message<span class="token punctuation">(</span><span class="token string">" LCD 1602 Test \n123456789ABCDEF"</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="1602-py"><a href="#1602-py" class="headerlink" title="1602.py"></a>1602.py</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
+
+<span class="token keyword">import</span> time
+<span class="token keyword">from</span> lcd1602 <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime
+
+<span class="token comment"># run command</span>
+<span class="token keyword">def</span> <span class="token function">run_cmd</span><span class="token punctuation">(</span>cmd<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    p <span class="token operator">=</span> os<span class="token punctuation">.</span>popen<span class="token punctuation">(</span>cmd<span class="token punctuation">)</span><span class="token punctuation">.</span>readline<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> p
+
+
+<span class="token keyword">def</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d %a \n%H:%M:%S'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">cpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cpu_temp <span class="token operator">=</span> run_cmd<span class="token punctuation">(</span><span class="token string">'vcgencmd measure_temp'</span><span class="token punctuation">)</span>
+    cpu_info <span class="token operator">=</span> run_cmd<span class="token punctuation">(</span><span class="token string">"top -bn1 | awk '/Cpu\(s\)/'"</span><span class="token punctuation">)</span>
+    cpu_usage <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> <span class="token builtin">float</span><span class="token punctuation">(</span>cpu_info<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">100.0</span>
+
+    status <span class="token operator">=</span> <span class="token string">'CPU Temp: &#123;&#125;\n'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>cpu_temp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"temp="</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    status <span class="token operator">+=</span> <span class="token string">'    Used: &#123;:.2%&#125;'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>cpu_usage<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> status
+
+<span class="token keyword">def</span> <span class="token function">ram</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ram_info <span class="token operator">=</span> run_cmd<span class="token punctuation">(</span><span class="token string">"free -m | awk '/Mem/'"</span><span class="token punctuation">)</span>
+    ram_usage <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>ram_info<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">int</span><span class="token punctuation">(</span>ram_info<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">float</span><span class="token punctuation">(</span>ram_info<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    status <span class="token operator">=</span> <span class="token string">'RAM Totl: &#123;&#125;M\n'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>ram_info<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    status <span class="token operator">+=</span> <span class="token string">'    Used: &#123;:.2%&#125;'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>ram_usage<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> status
+
+<span class="token keyword">def</span> <span class="token function">ip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ip <span class="token operator">=</span> run_cmd<span class="token punctuation">(</span><span class="token string">"sudo ifconfig wlan0 | awk '/inet/'"</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token string">'IP Addr: \n  &#123;&#125;'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>ip<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ram<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
+
+
+lcd <span class="token operator">=</span> lcd1602<span class="token punctuation">(</span><span class="token punctuation">)</span>
+lcd<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    lcd<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    lcd<span class="token punctuation">.</span>message<span class="token punctuation">(</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+
+    lcd<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    lcd<span class="token punctuation">.</span>message<span class="token punctuation">(</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+
+    lcd<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    lcd<span class="token punctuation">.</span>message<span class="token punctuation">(</span>ram<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/wechatpay.png" alt="shen bo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/raspberry-pi/" rel="tag"># raspberry-pi</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/03/raspi/raspberry%20pi%20epaper%20mnist%20clock/" rel="prev" title="用树莓派和墨水屏做一个 mnist-clock">
+                  <i class="fa fa-chevron-left"></i> 用树莓派和墨水屏做一个 mnist-clock
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/22/ros/wsl-ubuntu-ros/" rel="next" title="Win10-WSL-Ubuntu18.04-ROS-melodic 安装与配置">
+                  Win10-WSL-Ubuntu18.04-ROS-melodic 安装与配置 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shen bo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/2020/12/15/raspi/raspberry%20pi%20lcd-1602a/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

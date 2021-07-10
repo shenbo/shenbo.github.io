@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="1. GMiner 说明ref： https:&#x2F;&#x2F;github.com&#x2F;develsoftware&#x2F;GMinerRelease  1.1 下载 gminer_2_XX_windows64.zip, 解压后目录如下：  ├───miner.exe            # 主程序 ├───mine_aeternity.bat   # 快捷脚本 ├───... ├───readme.txt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GMiner-ETH-HuobiPool">
+<meta property="og:url" content="https://shenbo.github.io/2021/04/23/tensorflow/GMiner-ETH-HuobiPool/index.html">
+<meta property="og:site_name" content="shenbo">
+<meta property="og:description" content="1. GMiner 说明ref： https:&#x2F;&#x2F;github.com&#x2F;develsoftware&#x2F;GMinerRelease  1.1 下载 gminer_2_XX_windows64.zip, 解压后目录如下：  ├───miner.exe            # 主程序 ├───mine_aeternity.bat   # 快捷脚本 ├───... ├───readme.txt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-23T15:42:39.000Z">
+<meta property="article:modified_time" content="2021-07-10T00:23:49.281Z">
+<meta property="article:author" content="shen bo">
+<meta property="article:tag" content="GMiner">
+<meta property="article:tag" content="Huobi">
+<meta property="article:tag" content="ETH">
+<meta property="article:tag" content="RTX2070">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2021/04/23/tensorflow/GMiner-ETH-HuobiPool/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2021/04/23/tensorflow/GMiner-ETH-HuobiPool/","path":"2021/04/23/tensorflow/GMiner-ETH-HuobiPool/","title":"GMiner-ETH-HuobiPool"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GMiner-ETH-HuobiPool | shenbo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="shenbo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">shenbo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-GMiner-%E8%AF%B4%E6%98%8E"><span class="nav-text">1. GMiner 说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Huobi-%E7%BD%91%E7%AB%99"><span class="nav-text">2. Huobi 网站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shen bo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2021/04/23/tensorflow/GMiner-ETH-HuobiPool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shen bo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shenbo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GMiner-ETH-HuobiPool
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-23 23:42:39" itemprop="dateCreated datePublished" datetime="2021-04-23T23:42:39+08:00">2021-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2021/04/23/tensorflow/GMiner-ETH-HuobiPool/" class="post-meta-item leancloud_visitors" data-flag-title="GMiner-ETH-HuobiPool" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-GMiner-说明"><a href="#1-GMiner-说明" class="headerlink" title="1. GMiner 说明"></a>1. GMiner 说明</h2><p>ref： <a target="_blank" rel="noopener" href="https://github.com/develsoftware/GMinerRelease">https://github.com/develsoftware/GMinerRelease</a></p>
+<ul>
+<li>1.1 下载 <code>gminer_2_XX_windows64.zip</code>, 解压后目录如下：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">├───miner.exe            <span class="token comment"># 主程序</span>
+├───mine_aeternity.bat   <span class="token comment"># 快捷脚本</span>
+├───<span class="token punctuation">..</span>.
+├───readme.txt           <span class="token comment"># 说明文档</span>
+├───sample_config.txt    <span class="token comment"># 配置文件</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>1.2 参数设置说明</li>
+</ul>
+<p>以在 <strong>火币矿池</strong> 挖 <strong>以太币</strong> 为例，</p>
+<p><a target="_blank" rel="noopener" href="https://pool.huobi.pe/pow/help/3/all">https://pool.huobi.pe/pow/help/3/all</a></p>
+<p>主要参数如下： </p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">-<span class="token operator">-</span>algo:     算法<span class="token punctuation">,</span>可省略； 对于以太币，默认 ethash
+<span class="token operator">--</span>server:   矿池地址； 这里填写的是火币矿池
+<span class="token operator">--</span>user:     火币矿池的子账户名；注意不是钱包地址，也不是邮箱号
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>1.3 使用方法（ 直接命令行运行 ）</li>
+</ul>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">.</span><span class="token operator">/</span>miner <span class="token operator">--</span>algo ethash <span class="token operator">--</span>server stratum<span class="token operator">+</span>tcp:<span class="token operator">/</span><span class="token operator">/</span>es<span class="token punctuation">.</span>huobipool<span class="token punctuation">.</span>com:1800 <span class="token operator">--</span>user shenyoyo0706<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>也可以用配置文件运行, 或用快捷脚本运行， 参数设置方法是一样的。</p>
+</blockquote>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token comment"># Sample configuration file to mine BitcoinGold</span>
+<span class="token comment"># options has same names as command line arguments</span>
+<span class="token comment"># you can access to environment variables by %variable_name%</span>
+<span class="token comment"># run "miner --config sample_config.txt"</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">common</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">algo</span><span class="token punctuation">=</span><span class="token value attr-value">ethash</span>
+<span class="token key attr-name">templimit</span><span class="token punctuation">=</span><span class="token value attr-value">80</span>
+<span class="token key attr-name">color</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">api</span><span class="token punctuation">=</span><span class="token value attr-value">10555</span>
+<span class="token key attr-name">logfile</span><span class="token punctuation">=</span><span class="token value attr-value">miner.log</span>
+<span class="token key attr-name">log_date</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">log_newjob</span><span class="token punctuation">=</span><span class="token value attr-value">0</span>
+
+<span class="token comment"># Main pool</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">server</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">host</span><span class="token punctuation">=</span><span class="token value attr-value">es.huobipool.com</span>
+<span class="token key attr-name">port</span><span class="token punctuation">=</span><span class="token value attr-value">1800</span>
+<span class="token key attr-name">user</span><span class="token punctuation">=</span><span class="token value attr-value">shenyoyo0706</span>
+<span class="token key attr-name">pass</span><span class="token punctuation">=</span><span class="token value attr-value">x</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h2 id="2-Huobi-网站"><a href="#2-Huobi-网站" class="headerlink" title="2. Huobi 网站"></a>2. Huobi 网站</h2><ul>
+<li><p>2.1 注册火币网/火币矿池账户 （统一的）<br>火币网： <a target="_blank" rel="noopener" href="https://www.huobi.pe/zh-cn/">https://www.huobi.pe/zh-cn/</a><br>火币矿池： <a target="_blank" rel="noopener" href="https://pool.huobi.pe/pow/">https://pool.huobi.pe/pow/</a><br>火币矿池ETH连接规则: <a target="_blank" rel="noopener" href="https://pool.huobi.pe/pow/help/3/all">https://pool.huobi.pe/pow/help/3/all</a></p>
+</li>
+<li><p>2.2 创建子账户</p>
+<ul>
+<li><p>子账户需要设置币种，这里选 <code>ETH</code>，即收益会按 <strong>以太币</strong> 结算。</p>
+</li>
+<li><p>子账户名就是火币矿池的收款地址！</p>
+<blockquote>
+<p>这也意味着不用关注以太币的钱包地址<br>有利有弊吧，<br>优点： 可在火币平台上用火币账户直接交易，提现；不用记钱包地址。<br>缺点： 收益默认都托管在平台上。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>2.3 开始挖矿</p>
+</li>
+</ul>
+<p>开始挖矿后，一般等待15-30分钟后就能看到收益。</p>
+<ul>
+<li>2.4 监测矿机、收益</li>
+</ul>
+<p><strong>web版</strong></p>
+<ul>
+<li>矿机监控： <a target="_blank" rel="noopener" href="https://pool.huobi.pe/pow/miners">https://pool.huobi.pe/pow/miners</a></li>
+<li>收益监控： <a target="_blank" rel="noopener" href="https://pool.huobi.pe/pow/earnings">https://pool.huobi.pe/pow/earnings</a></li>
+</ul>
+<p><strong>app版</strong></p>
+<ul>
+<li>火币矿池 pro： <a target="_blank" rel="noopener" href="http://eoshuobipool.com/zj.html">http://eoshuobipool.com/zj.html</a></li>
+</ul>
+<p><strong>名词解释：</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>单位</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>币价</td>
+<td>USDT/ETH</td>
+<td>3091</td>
+<td>美元/以太币</td>
+</tr>
+<tr>
+<td>币价</td>
+<td>CNY/ETH</td>
+<td>20311</td>
+<td>人民币/以太币</td>
+</tr>
+<tr>
+<td>全网算力</td>
+<td>TH/s</td>
+<td>541.07</td>
+<td></td>
+</tr>
+<tr>
+<td>矿池算力</td>
+<td>TH/s</td>
+<td>30.51</td>
+<td></td>
+</tr>
+<tr>
+<td>预计日收益</td>
+<td>CNY/M</td>
+<td>0.63</td>
+<td>人民币/兆算力</td>
+</tr>
+<tr>
+<td>预计日收益</td>
+<td>ETH/M</td>
+<td>0.00003117</td>
+<td></td>
+</tr>
+<tr>
+<td>我的算力</td>
+<td>MH/s</td>
+<td>36.08</td>
+<td></td>
+</tr>
+<tr>
+<td>ETH收益</td>
+<td>ETH/d</td>
+<td>0.00128769</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>2.5 交易、提现</li>
+</ul>
+<p><strong>app版</strong></p>
+<ul>
+<li>火币 pro： <a target="_blank" rel="noopener" href="http://m.huobi.pe/zh-cn/download/">http://m.huobi.pe/zh-cn/download/</a></li>
+</ul>
+<p>提现流程：</p>
+<blockquote>
+<p>资产页面 –&gt; 币币 –(划转)–&gt; 法币 –(我要卖)–&gt; 散户收购（支持 微信/支付宝/银行卡）</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/wechatpay.png" alt="shen bo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/GMiner/" rel="tag"># GMiner</a>
+              <a href="/tags/Huobi/" rel="tag"># Huobi</a>
+              <a href="/tags/ETH/" rel="tag"># ETH</a>
+              <a href="/tags/RTX2070/" rel="tag"># RTX2070</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6(2)-github%E5%8A%A0%E9%80%9F/" rel="prev" title="使用 scoop 安装管理 windows 软件（2）：github 加速">
+                  <i class="fa fa-chevron-left"></i> 使用 scoop 安装管理 windows 软件（2）：github 加速
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/11/opencv/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96-opencv-tesseract/" rel="next" title="视频字幕提取-基于opencv和tesseract">
+                  视频字幕提取-基于opencv和tesseract <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shen bo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/2021/04/23/tensorflow/GMiner-ETH-HuobiPool/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

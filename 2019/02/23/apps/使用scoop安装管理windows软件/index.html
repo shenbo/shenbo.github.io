@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="ref: (https:&#x2F;&#x2F;github.com&#x2F;lukesampson&#x2F;scoop)  1. 安装 scoop 1.1 安装 PowerShell 5.0 以上版本  win10： 已自带； win7 x64： 下载 Win7AndW2K8R2-KB3191566-x64.zip，安装； ref: https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;powershell&#x2F;scri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 scoop 安装管理 windows 软件">
+<meta property="og:url" content="https://shenbo.github.io/2019/02/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6/index.html">
+<meta property="og:site_name" content="shenbo">
+<meta property="og:description" content="ref: (https:&#x2F;&#x2F;github.com&#x2F;lukesampson&#x2F;scoop)  1. 安装 scoop 1.1 安装 PowerShell 5.0 以上版本  win10： 已自带； win7 x64： 下载 Win7AndW2K8R2-KB3191566-x64.zip，安装； ref: https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;powershell&#x2F;scri">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-23T04:31:20.000Z">
+<meta property="article:modified_time" content="2021-07-10T00:23:49.281Z">
+<meta property="article:author" content="shen bo">
+<meta property="article:tag" content="scoop">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2019/02/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2019/02/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6/","path":"2019/02/23/apps/使用scoop安装管理windows软件/","title":"使用 scoop 安装管理 windows 软件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用 scoop 安装管理 windows 软件 | shenbo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="shenbo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">shenbo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-scoop"><span class="nav-text">1. 安装 scoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">2. 使用方法</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shen bo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2019/02/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shen bo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shenbo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 scoop 安装管理 windows 软件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-23 12:31:20" itemprop="dateCreated datePublished" datetime="2019-02-23T12:31:20+08:00">2019-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apps/" itemprop="url" rel="index"><span itemprop="name">apps</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/02/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="使用 scoop 安装管理 windows 软件" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>ref: (<a target="_blank" rel="noopener" href="https://github.com/lukesampson/scoop">https://github.com/lukesampson/scoop</a>)</p>
+</blockquote>
+<h3 id="1-安装-scoop"><a href="#1-安装-scoop" class="headerlink" title="1. 安装 scoop"></a>1. 安装 scoop</h3><ul>
+<li><p>1.1 安装 PowerShell 5.0 以上版本</p>
+<ul>
+<li>win10： 已自带；</li>
+<li>win7 x64： 下载 Win7AndW2K8R2-KB3191566-x64.zip，安装；<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-windows-powershell?view=powershell-6">https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-windows-powershell?view=powershell-6</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>1.2 以当前Win账户运行PowerShell</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">set-executionpolicy</span> remotesigned <span class="token operator">-</span>s cu<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>1.3 安装 scoop</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">iex</span> <span class="token punctuation">(</span><span class="token function">new-object</span> net<span class="token punctuation">.</span>webclient<span class="token punctuation">)</span><span class="token punctuation">.</span>downloadstring<span class="token punctuation">(</span><span class="token string">'https://get.scoop.sh'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<span id="more"></span>
+
+<h3 id="2-使用方法"><a href="#2-使用方法" class="headerlink" title="2. 使用方法"></a>2. 使用方法</h3><ul>
+<li>2.1 安装常用软件<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">scoop install sudo
+scoop install git 7zip openssh
+scoop install aria2
+scoop install ffmpeg
+scoop install nodejs
+scoop install python
+
+<span class="token comment"># 安装指定的版本，不要更新</span>
+scoop install python@3<span class="token punctuation">.</span>6<span class="token punctuation">.</span>8
+scoop hold python
+<span class="token comment"># scoop unhold python</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>git 配置</strong></p>
+</li>
+<li><p>右键菜单里添加 <code>git bash here</code> 的方法</p>
+</li>
+<li><p>新建注册表文件 <code>git bash here.reg</code>, 内容如下（路径按需修改）</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">Windows Registry Editor Version 5<span class="token punctuation">.</span>00
+
+<span class="token namespace">[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Git Bash Here]</span>
+<span class="token string">"ICON"</span>=<span class="token string">"\"</span>C:\\Users\\XXXX\\scoop\\apps\\git\\current\\git<span class="token operator">-</span>bash<span class="token punctuation">.</span>exe\<span class="token string">""</span> 
+
+<span class="token namespace">[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Git Bash Here\command]</span>
+@=<span class="token string">"\"</span>C:\\Users\\XXXX\\scoop\\apps\\git\\current\\git<span class="token operator">-</span>bash<span class="token punctuation">.</span>exe\<span class="token string">""</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>2.2 安装 extras 库的软件</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 添加库 extras </span>
+scoop bucket add extras
+<span class="token comment"># 安装</span>
+scoop install googlechrome
+scoop install everything
+scoop install screentogif
+scoop install snipaste
+scoop install vscode
+
+<span class="token comment"># 添加库 versions, 可以安装其他（落后的)版本</span>
+scoop bucket add versions
+scoop install python@3<span class="token punctuation">.</span>7<span class="token punctuation">.</span>7
+
+<span class="token comment"># 添加库 jetbrains</span>
+scoop bucket add jetbrains
+scoop install pycharm<span class="token operator">-</span>professional
+
+<span class="token comment"># 添加库 Ash258</span>
+scoop bucket add Ash258 <span class="token string">'https://github.com/Ash258/scoop-Ash258.git'</span>
+scoop install potplayer
+
+<span class="token comment"># 添加 第三方库 dorado</span>
+scoop bucket add dorado <span class="token string">'https://github.com/h404bi/dorado'</span>
+scoop install trafficmonitor
+scoop install wechat
+scoop install qqplayer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><strong>更多的库</strong> <a target="_blank" rel="noopener" href="https://github.com/lukesampson/scoop/blob/master/buckets.json">https://github.com/lukesampson/scoop/blob/master/buckets.json</a></p>
+</li>
+</ul>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"https://github.com/ScoopInstaller/Main"</span><span class="token punctuation">,</span>
+    <span class="token property">"extras"</span><span class="token operator">:</span> <span class="token string">"https://github.com/lukesampson/scoop-extras"</span><span class="token punctuation">,</span>
+    <span class="token property">"versions"</span><span class="token operator">:</span> <span class="token string">"https://github.com/ScoopInstaller/Versions"</span><span class="token punctuation">,</span>
+    <span class="token property">"nightlies"</span><span class="token operator">:</span> <span class="token string">"https://github.com/ScoopInstaller/Nightlies"</span><span class="token punctuation">,</span>
+    <span class="token property">"nirsoft"</span><span class="token operator">:</span> <span class="token string">"https://github.com/kodybrown/scoop-nirsoft"</span><span class="token punctuation">,</span>
+    <span class="token property">"php"</span><span class="token operator">:</span> <span class="token string">"https://github.com/ScoopInstaller/PHP"</span><span class="token punctuation">,</span>
+    <span class="token property">"nerd-fonts"</span><span class="token operator">:</span> <span class="token string">"https://github.com/matthewjberger/scoop-nerd-fonts"</span><span class="token punctuation">,</span>
+    <span class="token property">"nonportable"</span><span class="token operator">:</span> <span class="token string">"https://github.com/oltolm/scoop-nonportable"</span><span class="token punctuation">,</span>
+    <span class="token property">"java"</span><span class="token operator">:</span> <span class="token string">"https://github.com/ScoopInstaller/Java"</span><span class="token punctuation">,</span>
+    <span class="token property">"games"</span><span class="token operator">:</span> <span class="token string">"https://github.com/Calinou/scoop-games"</span><span class="token punctuation">,</span>
+    <span class="token property">"jetbrains"</span><span class="token operator">:</span> <span class="token string">"https://github.com/Ash258/Scoop-JetBrains"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<ul>
+<li><strong>更多更多的第三方库</strong> <a target="_blank" rel="noopener" href="https://github.com/rasa/scoop-directory/">https://github.com/rasa/scoop-directory/</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>2.3 其他命令<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 显示已安装软件</span>
+scoop list
+
+<span class="token comment"># 显示可更新的软件</span>
+scoop status
+
+<span class="token comment"># 更新scoop, 更新指定软件</span>
+scoop update
+scoop update &lt;app>
+scoop update vscode<span class="token operator">-</span>insiders <span class="token operator">-</span>kf    <span class="token comment"># 更新 nightly 版本</span>
+
+
+<span class="token comment"># 清理所有旧版软件, 清理指定软件, 清理过期的安装包</span>
+scoop cleanup <span class="token operator">*</span>
+scoop cleanup &lt;app>
+
+scoop cleanup <span class="token operator">-</span>k <span class="token operator">*</span>  <span class="token comment"># 或 scoop cleanup --cache *</span>
+
+
+<span class="token comment"># 查找软件</span>
+scoop search &lt;app>
+
+<span class="token comment"># 显示软件信息（含必要配置说明）</span>
+scoop info &lt;app>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<hr>
+<p>用scoop管理软件，清爽多了，全部都在<code>c：/user/xxx/scoop/app</code>里，但是也有几个问题：</p>
+<ul>
+<li>好多软件是从官网，github，amazon下载的，网速比较渣，<strong>可以先安装aria2，安装后scoop会优先调用aria2来下载软件</strong>；</li>
+<li>安装之后一般系统环境变量是设置好了的，但是有些软件的文件关联，右键菜单之类需要手动添加，<strong>可以先scoop info <app>，看看有没有相关配置说明参考</strong>。</li>
+</ul>
+<hr>
+<p>scoop 调用 aria2 的相关配置, 配置文件路径 <code>c：/user/xxx/.config/scoop/config.json</code> , 加入以下：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"aria2-enabled"</span><span class="token operator">:</span>  <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">"aria2-retry-wait"</span><span class="token operator">:</span>  <span class="token number">5</span><span class="token punctuation">,</span>
+  <span class="token property">"aria2-split"</span><span class="token operator">:</span>  <span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token property">"aria2-min-split-size"</span><span class="token operator">:</span>  <span class="token string">"2M"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>也可以用命令行 <code>scoop config </code>:</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">scoop config aria2<span class="token operator">-</span>enabled true                   <span class="token comment"># default: true</span>
+scoop config aria2<span class="token operator">-</span>retry<span class="token operator">-</span>wait 8                   <span class="token comment"># default: 2</span>
+scoop config aria2<span class="token operator">-</span>split 8                        <span class="token comment"># default: 5</span>
+scoop config aria2<span class="token operator">-</span>max<span class="token operator">-</span>connection<span class="token operator">-</span>per<span class="token operator">-</span>server 8   <span class="token comment"># default: 5</span>
+scoop config aria2<span class="token operator">-</span>min<span class="token operator">-</span><span class="token function">split-size</span><span class="token punctuation">]</span> 2M             <span class="token comment"># default: 5M</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/wechatpay.png" alt="shen bo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/scoop/" rel="tag"># scoop</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/24/python/runcat-for-win%20%E5%9C%A8windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E5%85%BB%E7%8C%AB/" rel="prev" title="runcat-pyqt5-win：在windows任务栏养猫">
+                  <i class="fa fa-chevron-left"></i> runcat-pyqt5-win：在windows任务栏养猫
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/02/27/apps/frp%E9%85%8D%E7%BD%AE%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E3%80%81ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E3%80%81systemctl%E8%87%AA%E5%90%AF%E5%8A%A8/" rel="next" title="frp配置内网穿透、ssh远程连接、systemctl自启动">
+                  frp配置内网穿透、ssh远程连接、systemctl自启动 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shen bo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/2019/02/23/apps/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

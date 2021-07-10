@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="硬件准备 树莓派3B，5V 2A充电器 + 充电线 TF卡(&gt;8g，class10) + 读卡器 无线路由器 笔记本&#x2F;电脑 显示器 + HDMI线  软件准备 Raspbian系统， https:&#x2F;&#x2F;www.raspberrypi.org&#x2F;downloads&#x2F;raspberry-pi-os&#x2F;， （下载文件类似“201x-xx-xx-raspbian-buster-lite” ）  Win32">
+<meta property="og:type" content="article">
+<meta property="og:title" content="raspberry pi 安装配置">
+<meta property="og:url" content="https://shenbo.github.io/2017/02/03/raspi/raspberry%20pi%20%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="shenbo">
+<meta property="og:description" content="硬件准备 树莓派3B，5V 2A充电器 + 充电线 TF卡(&gt;8g，class10) + 读卡器 无线路由器 笔记本&#x2F;电脑 显示器 + HDMI线  软件准备 Raspbian系统， https:&#x2F;&#x2F;www.raspberrypi.org&#x2F;downloads&#x2F;raspberry-pi-os&#x2F;， （下载文件类似“201x-xx-xx-raspbian-buster-lite” ）  Win32">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-02-03T04:21:25.000Z">
+<meta property="article:modified_time" content="2021-07-10T00:23:49.281Z">
+<meta property="article:author" content="shen bo">
+<meta property="article:tag" content="raspberry-pi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2017/02/03/raspi/raspberry%20pi%20%E9%85%8D%E7%BD%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2017/02/03/raspi/raspberry%20pi%20%E9%85%8D%E7%BD%AE/","path":"2017/02/03/raspi/raspberry pi 配置/","title":"raspberry pi 安装配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>raspberry pi 安装配置 | shenbo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="shenbo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">shenbo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-text">硬件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-text">软件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%B6%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9B%98"><span class="nav-text">1. 制作系统盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BC%80%E6%9C%BA"><span class="nav-text">2. 开机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-text">3. SSH远程连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">4. 基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%AB%AFVNC-Viewer%E8%BD%AF%E4%BB%B6%E6%89%93%E5%BC%80%EF%BC%8C%E8%BE%93%E5%85%A5ip%E8%BF%9E%E6%8E%A5%E3%80%82"><span class="nav-text">5. 笔记本端VNC-Viewer软件打开，输入ip连接。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%90%AF%E7%94%A8root%E8%B4%A6%E6%88%B7"><span class="nav-text">6. 启用root账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%9B%B4%E6%8D%A2%E8%BD%AF%E4%BB%B6%E6%9B%B4%E6%96%B0%E6%BA%90%E3%80%82"><span class="nav-text">7. 更换软件更新源。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E3%80%82"><span class="nav-text">8. 安装中文字体。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%AE%89%E8%A3%85teamviewer-https-www-teamviewer-com-zhcn-download-linux-%E3%80%82"><span class="nav-text">9. 安装teamviewer, https:&#x2F;&#x2F;www.teamviewer.com&#x2F;zhcn&#x2F;download&#x2F;linux&#x2F;。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-python"><span class="nav-text">10. python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-zsh-amp-ohmyzsh"><span class="nav-text">11. zsh &amp; ohmyzsh</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shen bo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2017/02/03/raspi/raspberry%20pi%20%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shen bo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shenbo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          raspberry pi 安装配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-02-03 12:21:25" itemprop="dateCreated datePublished" datetime="2017-02-03T12:21:25+08:00">2017-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/raspi/" itemprop="url" rel="index"><span itemprop="name">raspi</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/02/03/raspi/raspberry%20pi%20%E9%85%8D%E7%BD%AE/" class="post-meta-item leancloud_visitors" data-flag-title="raspberry pi 安装配置" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="硬件准备"><a href="#硬件准备" class="headerlink" title="硬件准备"></a>硬件准备</h2><ul>
+<li>树莓派3B，5V 2A充电器 + 充电线</li>
+<li>TF卡(&gt;8g，class10) + 读卡器</li>
+<li>无线路由器</li>
+<li>笔记本/电脑</li>
+<li><del>显示器 + HDMI线</del></li>
+</ul>
+<h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><ul>
+<li><p>Raspbian系统， <a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspberry-pi-os/%EF%BC%8C">https://www.raspberrypi.org/downloads/raspberry-pi-os/，</a> （下载文件类似“201x-xx-xx-raspbian-buster-lite” ）</p>
+</li>
+<li><p>Win32diskimager, <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/win32diskimager/">https://sourceforge.net/projects/win32diskimager/</a> （用于烧录系统）</p>
+</li>
+<li><p>SDCardFormatter, <a target="_blank" rel="noopener" href="https://www.sdcard.org/">https://www.sdcard.org/</a> （非必需，用于SD卡格式化）</p>
+</li>
+<li><p><del>putty （用于SSH；非必需，win10已自带openssh）</del></p>
+</li>
+<li><p><del>VNC-Viewer （远程桌面）</del></p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><h3 id="1-制作系统盘"><a href="#1-制作系统盘" class="headerlink" title="1. 制作系统盘"></a>1. 制作系统盘</h3><ul>
+<li><p>TF卡装系统：将Raspbian系统文件 <code>*.zip</code> 解压，提取出 <code>*.img</code> 镜像文件 ，用 Win32diskimager 将 <code>*.img</code> 文件烧录至TF卡。</p>
+</li>
+<li><p>SSH 服务：由于Raspbian系统默认关闭SSH，需要在TF卡根目录新建名字为 <code>ssh</code> 的文件或文件夹，开机后可自动启动SSH服务。</p>
+</li>
+<li><p>WiFi配置：在TF卡根目录下新建 <code>wpa_supplicant.conf</code> 文件，填入以下内容并保存文件。</p>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token key attr-name">country</span><span class="token punctuation">=</span><span class="token value attr-value">CN</span>
+<span class="token key attr-name">ctrl_interface</span><span class="token punctuation">=</span><span class="token value attr-value">DIR=/var/run/wpa_supplicant GROUP=netdev</span>
+<span class="token key attr-name">update_config</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+
+<span class="token key attr-name">network</span><span class="token punctuation">=</span><span class="token value attr-value">&#123;</span>
+<span class="token key attr-name">ssid</span><span class="token punctuation">=</span><span class="token value attr-value">"<span class="token inner-value">xxxx</span>"</span>
+<span class="token key attr-name">psk</span><span class="token punctuation">=</span><span class="token value attr-value">"<span class="token inner-value">12345678</span>"</span>
+<span class="token key attr-name">key_mgmt</span><span class="token punctuation">=</span><span class="token value attr-value">WPA-PSK</span>
+<span class="token key attr-name">priority</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="2-开机"><a href="#2-开机" class="headerlink" title="2. 开机"></a>2. 开机</h3><ul>
+<li>将TF卡插入树莓派，通电后自动开机；</li>
+<li>LED指示灯说明：PWR为电源，红色常亮；ACT为硬盘灯，绿色闪烁。</li>
+</ul>
+<h3 id="3-SSH远程连接"><a href="#3-SSH远程连接" class="headerlink" title="3. SSH远程连接"></a>3. SSH远程连接</h3><ul>
+<li>开机后WiFi自动连接(或用网线将pi与路由器连接)，进入路由器管理页面，找到raspi的ip。</li>
+<li>打开Powershell命令行，连接ip进入， 用户名为：pi，密码为：raspberry。</li>
+<li>或者直接ssh：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> pi@xxx.xxx.xxx.xxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h3 id="4-基本配置"><a href="#4-基本配置" class="headerlink" title="4. 基本配置"></a>4. 基本配置</h3><ul>
+<li>运行命令 <code>sudo raspi-config</code></li>
+<li>Network Options： WiFi设置；</li>
+<li>Interfacing Options： ssh服务打开，<del>vnc服务打开</del>；</li>
+<li>Advanced Options： Expand Filesystem。</li>
+</ul>
+<h3 id="5-笔记本端VNC-Viewer软件打开，输入ip连接。"><a href="#5-笔记本端VNC-Viewer软件打开，输入ip连接。" class="headerlink" title="5. 笔记本端VNC-Viewer软件打开，输入ip连接。"></a>5. <del>笔记本端VNC-Viewer软件打开，输入ip连接</del>。</h3><h3 id="6-启用root账户"><a href="#6-启用root账户" class="headerlink" title="6. 启用root账户"></a>6. 启用root账户</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 设置 root 账号的密码</span>
+<span class="token function">sudo</span> <span class="token function">passwd</span> root
+<span class="token comment"># 启用 root 账号登录</span>
+<span class="token function">sudo</span> <span class="token function">passwd</span> --unlock root
+<span class="token comment"># 测试</span>
+<span class="token function">su</span> root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-更换软件更新源。"><a href="#7-更换软件更新源。" class="headerlink" title="7. 更换软件更新源。"></a>7. 更换软件更新源。</h3><p>7.1 清华源</p>
+<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/">https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/</a></p>
+</blockquote>
+<ul>
+<li>运行命令 <code>sudo nano /etc/apt/sources.list</code> ，改为以下内容：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># </span>
+deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li>运行命令 <code>sudo nano /etc/apt/sources.list.d/raspi.list</code> ，改为以下内容：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># </span>
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<p>7.2 中科大源</p>
+<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/help/raspbian.html">https://mirrors.ustc.edu.cn/help/raspbian.html</a><br>直接运行：</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">sed</span> -i <span class="token string">'s|raspbian.raspberrypi.org|mirrors.ustc.edu.cn/raspbian|g'</span> /etc/apt/sources.list
+
+<span class="token function">sudo</span> <span class="token function">sed</span> -i <span class="token string">'s|//archive.raspberrypi.org|//mirrors.ustc.edu.cn/archive.raspberrypi.org|g'</span> /etc/apt/sources.list.d/raspi.list<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>当然也可以直接编辑 文件（需要使用 sudo）。删除原文件所有内容，用以下内容取代（以 Buster 示例）：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># filename: /etc/apt/sources.list </span>
+deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi
+<span class="token comment">#deb-src http://mirrors.ustc.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span>
+
+<span class="token comment"># filename: /etc/apt/sources.list.d/raspi.list</span>
+deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui
+<span class="token comment">#deb-src http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ buster main ui</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>7.3 更新、升级</p>
+<ul>
+<li>编辑此文件后， 使用 <code>sudo apt-get update</code>命令，更新软件列表。</li>
+<li>使用<code>sudo apt-get upgrade</code>命令，更新软件。</li>
+</ul>
+<h3 id="8-安装中文字体。"><a href="#8-安装中文字体。" class="headerlink" title="8. 安装中文字体。"></a>8. <del>安装中文字体。</del></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> ttf-wqy-zenhei <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="9-安装teamviewer-https-www-teamviewer-com-zhcn-download-linux-。"><a href="#9-安装teamviewer-https-www-teamviewer-com-zhcn-download-linux-。" class="headerlink" title="9. 安装teamviewer, https://www.teamviewer.com/zhcn/download/linux/。"></a>9. <del>安装teamviewer, <a target="_blank" rel="noopener" href="https://www.teamviewer.com/zhcn/download/linux/%E3%80%82">https://www.teamviewer.com/zhcn/download/linux/。</a></del></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://download.teamviewer.com/download/linux/teamviewer-host_armhf.deb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="10-python"><a href="#10-python" class="headerlink" title="10. python"></a>10. python</h3><ul>
+<li>安装pip3<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> python3-venv python3-pip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>修改pip源, <code>sudo nano ~/.pip/pip.conf </code>，改为以下内容：<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">global</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">index-url</span> <span class="token punctuation">=</span> <span class="token value attr-value">https://pypi.mirrors.ustc.edu.cn/simple/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>或 用命令行修改配置<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip config <span class="token builtin class-name">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+<span class="token comment"># pip config list</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="11-zsh-amp-ohmyzsh"><a href="#11-zsh-amp-ohmyzsh" class="headerlink" title="11. zsh &amp; ohmyzsh"></a>11. zsh &amp; ohmyzsh</h3><ul>
+<li>安装 zsh<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">zsh</span>
+
+<span class="token comment"># echo $SHELL           # 显示当前 shell 类型</span>
+<span class="token comment"># cat /etc/shells       # 显示可使用的 shell</span>
+<span class="token comment"># chsh -s /bin/zsh      # 将 zsh 设为默认终端</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>安装 ohmyzsh<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sh</span> -c <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">wget</span> https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -<span class="token variable">)</span></span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<blockquote>
+<p>有时候会出现 443 网路错误，可手动下载、安装 install.sh</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nano</span> zsh-install.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>打开 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh">https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh</a><br>将安装代码全部复制进去</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">chmod</span> +x zsh-install.sh
+./zsh-install.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</blockquote>
+<ul>
+<li>简单配置一下，打开配置文件 <code>nano ~/.zshrc</code><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 主题</span>
+<span class="token assign-left variable">ZSH_THEME</span><span class="token operator">=</span><span class="token string">"ys"</span>
+
+<span class="token comment"># 插件</span>
+<span class="token assign-left variable">plugins</span><span class="token operator">=</span><span class="token punctuation">(</span>git zsh-syntax-highlighting zsh-autosuggestions<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>下载插件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/zsh-users/zsh-autosuggestions <span class="token variable">$&#123;ZSH_CUSTOM<span class="token operator">:-</span>~<span class="token operator">/</span>.oh-my-zsh<span class="token operator">/</span>custom&#125;</span>/plugins/zsh-autosuggestions
+
+<span class="token function">git</span> clone https://github.com/zsh-users/zsh-syntax-highlighting <span class="token variable">$&#123;ZSH_CUSTOM<span class="token operator">:-</span>~<span class="token operator">/</span>.oh-my-zsh<span class="token operator">/</span>custom&#125;</span>/plugins/zsh-syntax-highlighting<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li>加载配置文件， <code>source ~/.zshrc</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/images/wechatpay.png" alt="shen bo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/raspberry-pi/" rel="tag"># raspberry-pi</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/01/28/yoyo/20170128-%E7%B4%AB%E9%87%91%E5%B1%B1/" rel="prev" title="正月初一登紫金山">
+                  <i class="fa fa-chevron-left"></i> 正月初一登紫金山
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/02/18/yoyo/20170218-%E5%8F%91%E7%83%A7/" rel="next" title="发烧">
+                  发烧 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shen bo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/2017/02/03/raspi/raspberry%20pi%20%E9%85%8D%E7%BD%AE/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
