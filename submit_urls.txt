@@ -1,0 +1,10 @@
+https://shenbo.github.io/2023/10/12/wsl/wsl-ubuntu-openmc/
+https://shenbo.github.io/2023/07/23/scoop/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6(4)-%E5%AE%89%E8%A3%85%E5%8C%85%E8%A7%A3%E5%8E%8B%E5%AF%86%E7%A0%81/
+https://shenbo.github.io/2023/07/16/synology/%E7%BE%A4%E6%99%96-vscoderemote%E9%85%8D%E7%BD%AE/
+https://shenbo.github.io/2023/02/23/scoop/%E4%BD%BF%E7%94%A8scoop%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6(3)-%E8%87%AA%E5%B7%B1%E5%81%9A%E4%B8%80%E4%B8%AA%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6/
+https://shenbo.github.io/2023/02/03/wsl/oh-my-zsh/
+https://shenbo.github.io/2022/07/13/synology/%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85aria2/
+https://shenbo.github.io/2022/06/23/scoop/%E4%BD%BF%E7%94%A8winget%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86windows%E8%BD%AF%E4%BB%B6-Win10-LTSC/
+https://shenbo.github.io/2022/04/30/xps/XPS9370%20%E6%9B%B4%E6%8D%A2%E5%B1%8F%E5%B9%95/
+https://shenbo.github.io/2022/01/06/synology/%E7%BE%A4%E6%99%96%E5%8D%87%E7%BA%A7ffmpeg/
+https://shenbo.github.io/2021/09/25/synology/%E7%BE%A4%E6%99%96218+%E5%A2%9E%E5%8A%A0%E5%86%85%E5%AD%98/
