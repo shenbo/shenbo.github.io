@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenyoyo.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;687823459# 数据可视化：matplotlib color 字符对照title: 数据可视化：matplotlib color 字符对照date: 2024-03-07 12:23:33tags: matplotlibcategories: scimatplotlib marker color 字符对照 ref: https:">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yoyo">
+<meta property="og:url" content="https://shenyoyo.com/zhihu/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-matplotlib%20color%20%E5%AD%97%E7%AC%A6%E5%AF%B9%E7%85%A7.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;687823459# 数据可视化：matplotlib color 字符对照title: 数据可视化：matplotlib color 字符对照date: 2024-03-07 12:23:33tags: matplotlibcategories: scimatplotlib marker color 字符对照 ref: https:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-4234569088861c033e3adefe083f7e01.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-8eaada7618c834c5f55fa6cd8a24ddb3.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-b143849a02fa75cb99048ec9ee93f991.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-a79a78b389a3e930cd7959a23ba423ec.png">
+<meta property="article:published_time" content="2024-05-13T11:05:08.923Z">
+<meta property="article:modified_time" content="2024-05-13T11:05:08.923Z">
+<meta property="article:author" content="yoyo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-4234569088861c033e3adefe083f7e01.png">
+
+
+<link rel="canonical" href="https://shenyoyo.com/zhihu/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-matplotlib%20color%20%E5%AD%97%E7%AC%A6%E5%AF%B9%E7%85%A7">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://shenyoyo.com/zhihu/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-matplotlib%20color%20%E5%AD%97%E7%AC%A6%E5%AF%B9%E7%85%A7.html","path":"zhihu/sci-matplotlib/数据可视化-matplotlib color 字符对照.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | yoyo
+</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPWHMME3NF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#https-zhuanlan-zhihu-com-p-687823459-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%9Amatplotlib-color-%E5%AD%97%E7%AC%A6%E5%AF%B9%E7%85%A7"><span class="nav-text">#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;687823459# 数据可视化：matplotlib color 字符对照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#title-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%9Amatplotlib-color-%E5%AD%97%E7%AC%A6%E5%AF%B9%E7%85%A7date-2024-03-07-12-23-33tags-matplotlibcategories-sci"><span class="nav-text">title: 数据可视化：matplotlib color 字符对照date: 2024-03-07 12:23:33tags: matplotlibcategories: sci</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matplotlib-marker-color-%E5%AD%97%E7%AC%A6%E5%AF%B9%E7%85%A7"><span class="nav-text">matplotlib marker color 字符对照</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mcolors-BASE-COLORS-8"><span class="nav-text">mcolors.BASE_COLORS (8)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mcolors-TABLEAU-COLORS-10"><span class="nav-text">mcolors.TABLEAU_COLORS (10)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mcolors-CSS4-COLORS-148"><span class="nav-text">mcolors.CSS4_COLORS (148)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mcolors-XKCD-COLORS-949"><span class="nav-text">mcolors.XKCD_COLORS (949)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-text">code</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/sci-matplotlib/">SCI-MATPLOTLIB</a></li>
+            <li>数据可视化-MATPLOTLIB COLOR 字符对照</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="https-zhuanlan-zhihu-com-p-687823459-数据可视化：matplotlib-color-字符对照"><a href="#https-zhuanlan-zhihu-com-p-687823459-数据可视化：matplotlib-color-字符对照" class="headerlink" title="#! https://zhuanlan.zhihu.com/p/687823459# 数据可视化：matplotlib color 字符对照"></a>#! <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/687823459">https://zhuanlan.zhihu.com/p/687823459</a><br># 数据可视化：matplotlib color 字符对照</h2><h2 id="title-数据可视化：matplotlib-color-字符对照date-2024-03-07-12-23-33tags-matplotlibcategories-sci"><a href="#title-数据可视化：matplotlib-color-字符对照date-2024-03-07-12-23-33tags-matplotlibcategories-sci" class="headerlink" title="title: 数据可视化：matplotlib color 字符对照date: 2024-03-07 12:23:33tags: matplotlibcategories: sci"></a>title: 数据可视化：matplotlib color 字符对照<br>date: 2024-03-07 12:23:33<br>tags: matplotlib<br>categories: sci</h2><h2 id="matplotlib-marker-color-字符对照"><a href="#matplotlib-marker-color-字符对照" class="headerlink" title="matplotlib marker color 字符对照"></a>matplotlib marker color 字符对照</h2><blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/colors_api.html">https://matplotlib.org/stable/api/colors_api.html</a><br>ref: <a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/color/named_colors.html">https://matplotlib.org/stable/gallery/color/named_colors.html</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (k, v) <span class="keyword">in</span> mcolors.BASE_COLORS.items():</span><br><span class="line">    v = <span class="string">&quot;#&quot;</span> + <span class="string">&quot;&quot;</span>.join(<span class="built_in">format</span>(<span class="built_in">round</span>(val * <span class="number">255</span>), <span class="string">&quot;02x&quot;</span>) <span class="keyword">for</span> val <span class="keyword">in</span> v)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;&lt;font color=&quot;<span class="subst">&#123;v&#125;</span>&quot;&gt; <span class="subst">&#123;k:&lt;<span class="number">10</span>&#125;</span> ■  &lt;/font&gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (k, v) <span class="keyword">in</span> mcolors.TABLEAU_COLORS.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;&lt;font color=&quot;<span class="subst">&#123;v&#125;</span>&quot;&gt; <span class="subst">&#123;k:&lt;<span class="number">10</span>&#125;</span> ■ &lt;/font&gt;&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="mcolors-BASE-COLORS-8"><a href="#mcolors-BASE-COLORS-8" class="headerlink" title="mcolors.BASE_COLORS (8)"></a>mcolors.BASE_COLORS (8)</h3><p>$$ {\color { #0000ff } { ████ b          }} $$<br>$$ {\color { #008000 } { ████ g          }} $$<br>$$ {\color { #ff0000 } { ████ r          }} $$<br>$$ {\color { #00bfbf } { ████ c          }} $$<br>$$ {\color { #bf00bf } { ████ m          }} $$<br>$$ {\color { #bfbf00 } { ████ y          }} $$<br>$$ {\color { #000000 } { ████ k          }} $$<br>$$ {\color { #ffffff } { ████ w          }} $$</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://pic4.zhimg.com/80/v2-4234569088861c033e3adefe083f7e01.png" alt="Image"></p>
+<h3 id="mcolors-TABLEAU-COLORS-10"><a href="#mcolors-TABLEAU-COLORS-10" class="headerlink" title="mcolors.TABLEAU_COLORS (10)"></a>mcolors.TABLEAU_COLORS (10)</h3><p>$$ {\color { #1f77b4 } { ████ tab:blue   }} $$<br>$$ {\color { #ff7f0e } { ████ tab:orange }} $$<br>$$ {\color { #2ca02c } { ████ tab:green  }} $$<br>$$ {\color { #d62728 } { ████ tab:red    }} $$<br>$$ {\color { #9467bd } { ████ tab:purple }} $$<br>$$ {\color { #8c564b } { ████ tab:brown  }} $$<br>$$ {\color { #e377c2 } { ████ tab:pink   }} $$<br>$$ {\color { #7f7f7f } { ████ tab:gray   }} $$<br>$$ {\color { #bcbd22 } { ████ tab:olive  }} $$<br>$$ {\color { #17becf } { ████ tab:cyan   }} $$</p>
+<span id="more"></span>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://pic4.zhimg.com/80/v2-8eaada7618c834c5f55fa6cd8a24ddb3.png" alt="Image"></p>
+<h3 id="mcolors-CSS4-COLORS-148"><a href="#mcolors-CSS4-COLORS-148" class="headerlink" title="mcolors.CSS4_COLORS (148)"></a>mcolors.CSS4_COLORS (148)</h3><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://pic4.zhimg.com/80/v2-b143849a02fa75cb99048ec9ee93f991.png" alt="Image"></p>
+<h3 id="mcolors-XKCD-COLORS-949"><a href="#mcolors-XKCD-COLORS-949" class="headerlink" title="mcolors.XKCD_COLORS (949)"></a>mcolors.XKCD_COLORS (949)</h3><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://pic4.zhimg.com/80/v2-a79a78b389a3e930cd7959a23ba423ec.png" alt="Image"></p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Rectangle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_colortable</span>(<span class="params">colors, *, ncols=<span class="number">4</span>, sort_colors=<span class="literal">True</span></span>):</span><br><span class="line"></span><br><span class="line">    cell_width = <span class="number">212</span></span><br><span class="line">    cell_height = <span class="number">22</span></span><br><span class="line">    swatch_width = <span class="number">48</span></span><br><span class="line">    margin = <span class="number">12</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Sort colors by hue, saturation, value and name.</span></span><br><span class="line">    <span class="keyword">if</span> sort_colors <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">        names = <span class="built_in">sorted</span>(</span><br><span class="line">            colors, key=<span class="keyword">lambda</span> c: <span class="built_in">tuple</span>(mcolors.rgb_to_hsv(mcolors.to_rgb(c))))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        names = <span class="built_in">list</span>(colors)</span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">len</span>(names)</span><br><span class="line">    nrows = math.ceil(n / ncols)</span><br><span class="line"></span><br><span class="line">    width = cell_width * ncols + <span class="number">2</span> * margin</span><br><span class="line">    height = cell_height * nrows + <span class="number">2</span> * margin</span><br><span class="line">    dpi = <span class="number">72</span></span><br><span class="line"></span><br><span class="line">    fig, ax = plt.subplots(figsize=(width / dpi, height / dpi), dpi=dpi)</span><br><span class="line">    fig.subplots_adjust(margin/width, margin/height,</span><br><span class="line">                        (width-margin)/width, (height-margin)/height)</span><br><span class="line">    ax.set_xlim(<span class="number">0</span>, cell_width * ncols)</span><br><span class="line">    ax.set_ylim(cell_height * (nrows-<span class="number">0.5</span>), -cell_height/<span class="number">2.</span>)</span><br><span class="line">    ax.yaxis.set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.xaxis.set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.set_axis_off()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, name <span class="keyword">in</span> <span class="built_in">enumerate</span>(names):</span><br><span class="line">        row = i % nrows</span><br><span class="line">        col = i // nrows</span><br><span class="line">        y = row * cell_height</span><br><span class="line"></span><br><span class="line">        swatch_start_x = cell_width * col</span><br><span class="line">        text_pos_x = cell_width * col + swatch_width + <span class="number">7</span></span><br><span class="line"></span><br><span class="line">        ax.text(text_pos_x, y, name, fontsize=<span class="number">14</span>,</span><br><span class="line">                horizontalalignment=<span class="string">&#x27;left&#x27;</span>,</span><br><span class="line">                verticalalignment=<span class="string">&#x27;center&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        ax.add_patch(</span><br><span class="line">            Rectangle(xy=(swatch_start_x, y-<span class="number">9</span>), width=swatch_width,</span><br><span class="line">                      height=<span class="number">18</span>, facecolor=colors[name], edgecolor=<span class="string">&#x27;0.7&#x27;</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> fig</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># =========== 1 =================</span></span><br><span class="line"><span class="keyword">for</span> cl <span class="keyword">in</span> [mcolors.BASE_COLORS, mcolors.TABLEAU_COLORS, mcolors.CSS4_COLORS, mcolors.XKCD_COLORS]:</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">len</span>(cl))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (k, v) <span class="keyword">in</span> mcolors.BASE_COLORS.items():</span><br><span class="line">    v = <span class="string">&quot;#&quot;</span> + <span class="string">&quot;&quot;</span>.join(<span class="built_in">format</span>(<span class="built_in">round</span>(val * <span class="number">255</span>), <span class="string">&quot;02x&quot;</span>) <span class="keyword">for</span> val <span class="keyword">in</span> v)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;&lt;font color=&quot;<span class="subst">&#123;v&#125;</span>&quot;&gt; ████ <span class="subst">&#123;k:&lt;<span class="number">10</span>&#125;</span> &lt;/font&gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (k, v) <span class="keyword">in</span> mcolors.TABLEAU_COLORS.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;&lt;font color=&quot;<span class="subst">&#123;v&#125;</span>&quot;&gt; ████ <span class="subst">&#123;k:&lt;<span class="number">10</span>&#125;</span> &lt;/font&gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># =========== 2 =================</span></span><br><span class="line">plot_colortable(mcolors.BASE_COLORS, ncols=<span class="number">5</span>, sort_colors=<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># plt.savefig(&#x27;mcolors.BASE_COLORS.png&#x27;, dpi=300)</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot_colortable(mcolors.TABLEAU_COLORS, ncols=<span class="number">5</span>, sort_colors=<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># plt.savefig(&#x27;mcolors.TABLEAU_COLORS.png&#x27;, dpi=300)</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot_colortable(mcolors.CSS4_COLORS, ncols=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># plt.savefig(&#x27;mcolors.CSS4_COLORS.png&#x27;, dpi=300)</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot_colortable(mcolors.XKCD_COLORS, ncols=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># plt.savefig(&#x27;mcolors.XKCD_COLORS.png&#x27;, dpi=300)</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/sci-matplotlib/">SCI-MATPLOTLIB</a></li>
+            <li>数据可视化-MATPLOTLIB COLOR 字符对照</li>
+  </ul>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">48k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:55</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
