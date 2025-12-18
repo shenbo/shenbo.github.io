@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="runcat-pyqt5-win V2之前撸了一个 runcat-pyqt5-win，可以在windows任务栏养猫，用奔跑的猫来显示当前系统资源（CPU）的占用情况。  github仓库： https:&#x2F;&#x2F;github.com&#x2F;shenbo&#x2F;runcat-pyqt5-win 原mac应用： http:&#x2F;&#x2F;kyomesuke.com&#x2F;runcat&#x2F;index.html  原来的功能比较简单，这次增">
+<meta property="og:type" content="website">
+<meta property="og:title" content="runcat-pyqt5-win：在windows任务栏养猫（2）">
+<meta property="og:url" content="https://shenbo.github.io/zhihu/python-app/runcat-for-win-%E5%9C%A8windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E5%85%BB%E7%8C%AB%20V2.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="runcat-pyqt5-win V2之前撸了一个 runcat-pyqt5-win，可以在windows任务栏养猫，用奔跑的猫来显示当前系统资源（CPU）的占用情况。  github仓库： https:&#x2F;&#x2F;github.com&#x2F;shenbo&#x2F;runcat-pyqt5-win 原mac应用： http:&#x2F;&#x2F;kyomesuke.com&#x2F;runcat&#x2F;index.html  原来的功能比较简单，这次增">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-4060d17531ceac94b3f42f5ff88c276c.png">
+<meta property="article:published_time" content="2020-02-29T15:48:10.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.282Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="zhihu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-4060d17531ceac94b3f42f5ff88c276c.png">
+
+
+<link rel="canonical" href="https://shenbo.github.io/zhihu/python-app/runcat-for-win-%E5%9C%A8windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E5%85%BB%E7%8C%AB%20V2">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/zhihu/python-app/runcat-for-win-%E5%9C%A8windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E5%85%BB%E7%8C%AB%20V2.html","path":"zhihu/python-app/runcat-for-win-在windows任务栏养猫 V2.html","title":"runcat-pyqt5-win：在windows任务栏养猫（2）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>runcat-pyqt5-win：在windows任务栏养猫（2） | yoyo
+</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#runcat-pyqt5-win-V2"><span class="nav-text">runcat-pyqt5-win V2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C"><span class="nav-text">运行效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Requirements"><span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-text">完整代码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">runcat-pyqt5-win：在windows任务栏养猫（2）
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/python-app/">PYTHON-APP</a></li>
+            <li>RUNCAT-FOR-WIN-在WINDOWS任务栏养猫 V2</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="runcat-pyqt5-win-V2"><a href="#runcat-pyqt5-win-V2" class="headerlink" title="runcat-pyqt5-win V2"></a>runcat-pyqt5-win V2</h2><p>之前撸了一个 <code>runcat-pyqt5-win</code>，可以在windows任务栏养猫，用奔跑的猫来显示当前系统资源（CPU）的占用情况。</p>
+<ul>
+<li>github仓库： <a target="_blank" rel="noopener" href="https://github.com/shenbo/runcat-pyqt5-win">https://github.com/shenbo/runcat-pyqt5-win</a></li>
+<li>原mac应用： <a target="_blank" rel="noopener" href="http://kyomesuke.com/runcat/index.html">http://kyomesuke.com/runcat/index.html</a></li>
+</ul>
+<p>原来的功能比较简单，这次增加了右键菜单：</p>
+<ul>
+<li>可切换图标类型： [cat, mario]</li>
+<li>可切换监控类型： [cpu, memory, gpu(nVidia)]</li>
+<li>增加了退出按钮</li>
+</ul>
+<h2 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h2><p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://pic4.zhimg.com/80/v2-4060d17531ceac94b3f42f5ff88c276c.png" alt="Image"></p>
+<span id="more"></span>
+
+<h2 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h2><ul>
+<li>psutil</li>
+<li>pyqt5</li>
+<li>nvidia-ml-py</li>
+</ul>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtGui <span class="keyword">import</span> QIcon</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> QApplication, QSystemTrayIcon, QMenu, QAction</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pynvml</span><br><span class="line"></span><br><span class="line">pynvml.nvmlInit()</span><br><span class="line">handle = pynvml.nvmlDeviceGetHandleByIndex(<span class="number">0</span>)   <span class="comment"># GPU id: 0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TrayIcon</span>(<span class="title class_ inherited__">QSystemTrayIcon</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, parent=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(TrayIcon, <span class="variable language_">self</span>).__init__(parent)</span><br><span class="line">        <span class="variable language_">self</span>.monitor = <span class="string">&#x27;cpu&#x27;</span></span><br><span class="line">        <span class="variable language_">self</span>.cpu_usage = <span class="number">0.2</span>  <span class="comment"># 初始化</span></span><br><span class="line">        <span class="variable language_">self</span>.mem_usage = <span class="number">0.2</span>  <span class="comment"># 初始化</span></span><br><span class="line">        <span class="variable language_">self</span>.gpu_usage = <span class="number">0.2</span>  <span class="comment"># 初始化</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.icon_type = <span class="string">&#x27;runcat&#x27;</span>         <span class="comment"># 设定默认图标，并加载</span></span><br><span class="line">        <span class="variable language_">self</span>.icon_list = <span class="variable language_">self</span>.loadIcon()</span><br><span class="line">        <span class="variable language_">self</span>.setIcon(<span class="variable language_">self</span>.icon_list[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.setVisible(<span class="literal">True</span>)</span><br><span class="line">        <span class="variable language_">self</span>.setMenu()  <span class="comment"># 加载菜单</span></span><br><span class="line">        <span class="variable language_">self</span>.updateIcon()  <span class="comment"># 更新图标</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加载图标</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">loadIcon</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.icon_type == <span class="string">&#x27;mario&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> [QIcon(<span class="string">f&#x27;icons/<span class="subst">&#123;self.icon_type&#125;</span>/<span class="subst">&#123;i&#125;</span>.png&#x27;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line">        <span class="keyword">return</span> [QIcon(<span class="string">f&#x27;icons/<span class="subst">&#123;self.icon_type&#125;</span>/<span class="subst">&#123;i&#125;</span>.png&#x27;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置菜单</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">setMenu</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.menu = QMenu()</span><br><span class="line">        <span class="variable language_">self</span>.action_1 = QAction(QIcon(<span class="string">f&#x27;icons/cat.png&#x27;</span>),</span><br><span class="line">                                <span class="string">&#x27;Cat&#x27;</span>, <span class="variable language_">self</span>, triggered=<span class="keyword">lambda</span>: <span class="variable language_">self</span>.changeIconType(<span class="string">&#x27;runcat&#x27;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.action_2 = QAction(QIcon(<span class="string">f&#x27;icons/mario/0.png&#x27;</span>),</span><br><span class="line">                                <span class="string">&#x27;Mario&#x27;</span>, <span class="variable language_">self</span>, triggered=<span class="keyword">lambda</span>: <span class="variable language_">self</span>.changeIconType(<span class="string">&#x27;mario&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.action_c = QAction(QIcon(<span class="string">f&#x27;icons/cpu.png&#x27;</span>),</span><br><span class="line">                                <span class="string">&#x27;CPU&#x27;</span>, <span class="variable language_">self</span>, triggered=<span class="keyword">lambda</span>: <span class="variable language_">self</span>.changeMonitor(<span class="string">&#x27;cpu&#x27;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.action_m = QAction(QIcon(<span class="string">f&#x27;icons/mem.png&#x27;</span>),</span><br><span class="line">                                <span class="string">&#x27;Memory&#x27;</span>, <span class="variable language_">self</span>, triggered=<span class="keyword">lambda</span>: <span class="variable language_">self</span>.changeMonitor(<span class="string">&#x27;mem&#x27;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.action_g = QAction(QIcon(<span class="string">f&#x27;icons/gpu.png&#x27;</span>),</span><br><span class="line">                                <span class="string">&#x27;GPU&#x27;</span>, <span class="variable language_">self</span>, triggered=<span class="keyword">lambda</span>: <span class="variable language_">self</span>.changeMonitor(<span class="string">&#x27;gpu&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.action_q = QAction(QIcon(<span class="string">f&#x27;icons/quit.png&#x27;</span>),</span><br><span class="line">                                <span class="string">&#x27;Quit&#x27;</span>, <span class="variable language_">self</span>, triggered=<span class="variable language_">self</span>.quit)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.menu.addAction(<span class="variable language_">self</span>.action_c)</span><br><span class="line">        <span class="variable language_">self</span>.menu.addAction(<span class="variable language_">self</span>.action_m)</span><br><span class="line">        <span class="variable language_">self</span>.menu.addAction(<span class="variable language_">self</span>.action_g)</span><br><span class="line">        <span class="variable language_">self</span>.menu.addSeparator()</span><br><span class="line">        <span class="variable language_">self</span>.menu.addAction(<span class="variable language_">self</span>.action_1)</span><br><span class="line">        <span class="variable language_">self</span>.menu.addAction(<span class="variable language_">self</span>.action_2)</span><br><span class="line">        <span class="variable language_">self</span>.menu.addSeparator()</span><br><span class="line">        <span class="variable language_">self</span>.menu.addAction(<span class="variable language_">self</span>.action_q)</span><br><span class="line">        <span class="variable language_">self</span>.setContextMenu(<span class="variable language_">self</span>.menu)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据使用率更新图标，</span></span><br><span class="line">    <span class="comment"># 创建两个 threading：一个获取使用率，一个更新图标</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">updateIcon</span>(<span class="params">self</span>):</span><br><span class="line">        threading.Timer(<span class="number">0.1</span>, <span class="variable language_">self</span>.thread_get_cpu_usage, []).start()</span><br><span class="line">        threading.Timer(<span class="number">0.1</span>, <span class="variable language_">self</span>.thread_update_icon, []).start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># get cpu usage</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">thread_get_cpu_usage</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="variable language_">self</span>.cpu_usage = psutil.cpu_percent(interval=<span class="number">1</span>) / <span class="number">100</span></span><br><span class="line">            <span class="variable language_">self</span>.mem_usage = psutil.virtual_memory().percent / <span class="number">100</span></span><br><span class="line">            meminfo = pynvml.nvmlDeviceGetMemoryInfo(handle)</span><br><span class="line">            <span class="variable language_">self</span>.gpu_usage = meminfo.used / meminfo.total</span><br><span class="line">            <span class="comment"># print(self.cpu_usage)</span></span><br><span class="line">            time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># update icon</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">thread_update_icon</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            mon = <span class="variable language_">self</span>.cpu_usage</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.monitor == <span class="string">&#x27;mem&#x27;</span>:</span><br><span class="line">                mon = <span class="variable language_">self</span>.mem_usage</span><br><span class="line">            <span class="keyword">elif</span> <span class="variable language_">self</span>.monitor == <span class="string">&#x27;gpu&#x27;</span>:</span><br><span class="line">                mon = <span class="variable language_">self</span>.gpu_usage</span><br><span class="line">            </span><br><span class="line">            t = <span class="number">0.18</span> - mon * <span class="number">0.15</span></span><br><span class="line">            <span class="comment"># print(mon, t)</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable language_">self</span>.icon_list:</span><br><span class="line">                <span class="variable language_">self</span>.setIcon(i)</span><br><span class="line">                tip = <span class="string">f&#x27;cpu: <span class="subst">&#123;self.cpu_usage:<span class="number">.2</span>%&#125;</span> \nmem: <span class="subst">&#123;self.mem_usage:<span class="number">.2</span>%&#125;</span> \ngpu: <span class="subst">&#123;self.gpu_usage:<span class="number">.2</span>%&#125;</span>&#x27;</span></span><br><span class="line">                <span class="variable language_">self</span>.setToolTip(tip)</span><br><span class="line">                <span class="comment"># print(i, self.cpu_usage)</span></span><br><span class="line">                time.sleep(t)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Change icon type</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">changeIconType</span>(<span class="params">self, <span class="built_in">type</span></span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">type</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span> != <span class="variable language_">self</span>.icon_type:</span><br><span class="line">            <span class="variable language_">self</span>.icon_type = <span class="built_in">type</span></span><br><span class="line">            <span class="variable language_">self</span>.icon_list = <span class="variable language_">self</span>.loadIcon()</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;Load <span class="subst">&#123;self.icon_type&#125;</span>(<span class="subst">&#123;<span class="built_in">len</span>(self.icon_list)&#125;</span>) icons...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># change monitor type</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">changeMonitor</span>(<span class="params">self, monitor_type</span>):</span><br><span class="line">        <span class="built_in">print</span>(monitor_type)</span><br><span class="line">        <span class="keyword">if</span> monitor_type != <span class="variable language_">self</span>.monitor:</span><br><span class="line">            <span class="variable language_">self</span>.monitor = monitor_type</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 退出程序</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">quit</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.setVisible(<span class="literal">False</span>)</span><br><span class="line">        app.quit()</span><br><span class="line">        os._exit(-<span class="number">1</span>) <span class="comment"># 完全退出程序</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    tray = TrayIcon()</span><br><span class="line"></span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/python-app/">PYTHON-APP</a></li>
+            <li>RUNCAT-FOR-WIN-在WINDOWS任务栏养猫 V2</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/zhihu/python-app/runcat-for-win-%E5%9C%A8windows%E4%BB%BB%E5%8A%A1%E6%A0%8F%E5%85%BB%E7%8C%AB%20V2.html"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

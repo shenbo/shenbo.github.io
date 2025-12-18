@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="四阶幻方构造方法将 1-16 填入4×4的方格里，一共有 16! &#x3D; 20922789888000 种组合，计算量有点大。 可以先假设其中的 7 个数（用 a-g 表示），就可以推出其他数字：           a b c 34-a-b-c   d e f 34-d-e-f   34-2a-b-c-d+f+g g 34-e-f-g 2a+b+c+d+e-g-34   a+b+c-f-g">
+<meta property="og:type" content="website">
+<meta property="og:title" content="python暴力穷举求所有四阶幻方">
+<meta property="og:url" content="https://shenbo.github.io/zhihu/python/python-%E6%9A%B4%E5%8A%9B%E7%A9%B7%E4%B8%BE%E6%B1%82%E6%89%80%E6%9C%89%E5%9B%9B%E9%98%B6%E5%B9%BB%E6%96%B9.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="四阶幻方构造方法将 1-16 填入4×4的方格里，一共有 16! &#x3D; 20922789888000 种组合，计算量有点大。 可以先假设其中的 7 个数（用 a-g 表示），就可以推出其他数字：           a b c 34-a-b-c   d e f 34-d-e-f   34-2a-b-c-d+f+g g 34-e-f-g 2a+b+c+d+e-g-34   a+b+c-f-g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2013-01-02T03:21:11.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.283Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="zhihu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/zhihu/python/python-%E6%9A%B4%E5%8A%9B%E7%A9%B7%E4%B8%BE%E6%B1%82%E6%89%80%E6%9C%89%E5%9B%9B%E9%98%B6%E5%B9%BB%E6%96%B9">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/zhihu/python/python-%E6%9A%B4%E5%8A%9B%E7%A9%B7%E4%B8%BE%E6%B1%82%E6%89%80%E6%9C%89%E5%9B%9B%E9%98%B6%E5%B9%BB%E6%96%B9.html","path":"zhihu/python/python-暴力穷举求所有四阶幻方.html","title":"python暴力穷举求所有四阶幻方"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python暴力穷举求所有四阶幻方 | yoyo
+</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E9%98%B6%E5%B9%BB%E6%96%B9%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-text">四阶幻方构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PS%EF%BC%9A%E4%B8%89%E9%98%B6%E5%B9%BB%E6%96%B9%E4%BB%8B%E7%BB%8D"><span class="nav-text">PS：三阶幻方介绍</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">python暴力穷举求所有四阶幻方
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/python/">PYTHON</a></li>
+            <li>PYTHON-暴力穷举求所有四阶幻方</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="四阶幻方构造方法"><a href="#四阶幻方构造方法" class="headerlink" title="四阶幻方构造方法"></a>四阶幻方构造方法</h2><p>将 1-16 填入4×4的方格里，一共有 16! &#x3D; 20922789888000 种组合，计算量有点大。</p>
+<p>可以先假设其中的 7 个数（用 a-g 表示），就可以推出其他数字：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>34-a-b-c</td>
+</tr>
+<tr>
+<td>d</td>
+<td>e</td>
+<td>f</td>
+<td>34-d-e-f</td>
+</tr>
+<tr>
+<td>34-2a-b-c-d+f+g</td>
+<td>g</td>
+<td>34-e-f-g</td>
+<td>2a+b+c+d+e-g-34</td>
+</tr>
+<tr>
+<td>a+b+c-f-g</td>
+<td>34-b-e-g</td>
+<td>-c+e+g</td>
+<td>-a+f+g</td>
+</tr>
+</tbody></table>
+<p>这样就减少到 A(16,7) &#x3D; 16! &#x2F; 9! &#x3D; 57657600 种组合。</p>
+<ul>
+<li>python 代码：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen_ms</span>():</span><br><span class="line">    <span class="comment"># itertools.permutations 函数 可以生成排列组合</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> itertools.permutations(<span class="built_in">range</span>(<span class="number">1</span>, <span class="number">17</span>), <span class="number">7</span>):</span><br><span class="line">        (a, b, c, d, e, f, g) = i</span><br><span class="line">        </span><br><span class="line">        ms = np.zeros(<span class="number">16</span>, dtype=<span class="built_in">int</span>)</span><br><span class="line">        ms[<span class="number">0</span>] = a</span><br><span class="line">        ms[<span class="number">1</span>] = b</span><br><span class="line">        ms[<span class="number">2</span>] = c</span><br><span class="line">        ms[<span class="number">3</span>] = <span class="number">34</span> - a - b - c</span><br><span class="line"></span><br><span class="line">        ms[<span class="number">4</span>] = d</span><br><span class="line">        ms[<span class="number">5</span>] = e</span><br><span class="line">        ms[<span class="number">6</span>] = f</span><br><span class="line">        ms[<span class="number">7</span>] = <span class="number">34</span> - d - e - f</span><br><span class="line"></span><br><span class="line">        ms[<span class="number">8</span>] = <span class="number">34</span> - <span class="number">2</span> * a - b - c - d + f + g</span><br><span class="line">        ms[<span class="number">9</span>] = g</span><br><span class="line">        ms[<span class="number">10</span>] = <span class="number">34</span> - e - f - g</span><br><span class="line">        ms[<span class="number">11</span>] = <span class="number">2</span> * a + b + c + d + e - g -<span class="number">34</span></span><br><span class="line"></span><br><span class="line">        ms[<span class="number">12</span>] = a + b + c - f - g</span><br><span class="line">        ms[<span class="number">13</span>] = <span class="number">34</span> - b - e - g</span><br><span class="line">        ms[<span class="number">14</span>] = -c + e + g</span><br><span class="line">        ms[<span class="number">15</span>] = -a + f + g</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 判断</span></span><br><span class="line">        <span class="keyword">if</span> np.<span class="built_in">max</span>(ms) &gt; <span class="number">16</span> <span class="keyword">or</span> np.<span class="built_in">min</span>(ms) &lt; <span class="number">1</span> <span class="keyword">or</span> <span class="built_in">len</span>(np.unique(ms)) &lt; <span class="number">16</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(ms)</span><br></pre></td></tr></table></figure>
+
+<p>这是最直观的的穷举方法，性能有点弱鸡，跑完要 4-5 分钟。。。</p>
+<p>总共有 7040 种幻方，包含对称、镜像的形式；<br>所以不重复的是 7040 &#x2F; 8 &#x3D; 880 种。</p>
+<hr>
+<h2 id="PS：三阶幻方介绍"><a href="#PS：三阶幻方介绍" class="headerlink" title="PS：三阶幻方介绍"></a>PS：三阶幻方介绍</h2><p>三阶幻方又叫九宫格，最早是《河图洛书》的描述：</p>
+<blockquote>
+<p>二四为肩，六八为足，左七右三，戴九履一</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>9</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1</td>
+<td>6</td>
+</tr>
+</tbody></table>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/python/">PYTHON</a></li>
+            <li>PYTHON-暴力穷举求所有四阶幻方</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/zhihu/python/python-%E6%9A%B4%E5%8A%9B%E7%A9%B7%E4%B8%BE%E6%B1%82%E6%89%80%E6%9C%89%E5%9B%9B%E9%98%B6%E5%B9%BB%E6%96%B9.html"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

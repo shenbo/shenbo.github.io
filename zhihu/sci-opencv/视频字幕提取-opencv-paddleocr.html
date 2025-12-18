@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="视频内字幕提取 video-subtitles-ocr视频字幕提取，基于 opencv 和 paddleocr 视频内字幕提取这里是针对内封了硬字幕的视频，字幕已经成为了画面的一部分。 思路：简单用 opencv 提取视频内的所有帧，现在可以使用 paddleocr，更加方便一点对图片进行 ocr 识别。 0. 首先需要配置一下0.1 安装 python 库 opencv-python sciki">
+<meta property="og:type" content="website">
+<meta property="og:title" content="视频字幕提取(2)-基于opencv和paddleocr">
+<meta property="og:url" content="https://shenbo.github.io/zhihu/sci-opencv/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96-opencv-paddleocr.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="视频内字幕提取 video-subtitles-ocr视频字幕提取，基于 opencv 和 paddleocr 视频内字幕提取这里是针对内封了硬字幕的视频，字幕已经成为了画面的一部分。 思路：简单用 opencv 提取视频内的所有帧，现在可以使用 paddleocr，更加方便一点对图片进行 ocr 识别。 0. 首先需要配置一下0.1 安装 python 库 opencv-python sciki">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-11T13:44:00.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.285Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="zhihu - paddleocr - opencv">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/zhihu/sci-opencv/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96-opencv-paddleocr">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/zhihu/sci-opencv/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96-opencv-paddleocr.html","path":"zhihu/sci-opencv/视频字幕提取-opencv-paddleocr.html","title":"视频字幕提取(2)-基于opencv和paddleocr"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>视频字幕提取(2)-基于opencv和paddleocr | yoyo
+</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#video-subtitles-ocr"><span class="nav-text">video-subtitles-ocr</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E5%86%85%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96"><span class="nav-text">视频内字幕提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%8B"><span class="nav-text">0. 首先需要配置一下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-%E5%AE%89%E8%A3%85-python-%E5%BA%93"><span class="nav-text">0.1 安装 python 库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AF%BB%E5%8F%96%E8%A7%86%E9%A2%91"><span class="nav-text">1. 读取视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8F%90%E5%8F%96%E6%89%80%E6%9C%89%E5%B8%A7"><span class="nav-text">2. 提取所有帧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8F%AA%E4%BF%9D%E7%95%99%E7%94%BB%E9%9D%A2%E4%B8%AD%E6%9C%89%E5%AD%97%E5%B9%95%E7%9A%84%E5%8C%BA%E5%9F%9F"><span class="nav-text">3. 只保留画面中有字幕的区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8E%BB%E9%99%A4%E7%9B%B8%E4%BC%BC%E5%BA%A6%E8%BE%83%E9%AB%98%E7%9A%84%E5%B8%A7%EF%BC%8C%E4%BF%9D%E7%95%99%E5%85%B3%E9%94%AE%E5%B8%A7"><span class="nav-text">4. 去除相似度较高的帧，保留关键帧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E8%AF%86%E5%88%AB%E5%AD%97%E5%B9%95-pytesseract"><span class="nav-text">5.1 识别字幕 pytesseract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E8%AF%86%E5%88%AB%E5%AD%97%E5%B9%95-paddleocr"><span class="nav-text">5.2 识别字幕 paddleocr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E5%B9%95"><span class="nav-text">6. 格式化字幕</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">视频字幕提取(2)-基于opencv和paddleocr
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/sci-opencv/">SCI-OPENCV</a></li>
+            <li>视频字幕提取-OPENCV-PADDLEOCR</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p><strong>视频内字幕提取</strong></p>
+<h1 id="video-subtitles-ocr"><a href="#video-subtitles-ocr" class="headerlink" title="video-subtitles-ocr"></a>video-subtitles-ocr</h1><p>视频字幕提取，基于 opencv 和 paddleocr</p>
+<h2 id="视频内字幕提取"><a href="#视频内字幕提取" class="headerlink" title="视频内字幕提取"></a>视频内字幕提取</h2><p>这里是针对内封了硬字幕的视频，字幕已经成为了画面的一部分。</p>
+<p>思路：简单用 opencv 提取视频内的所有帧，现在可以使用 paddleocr，更加方便一点对图片进行 ocr 识别。</p>
+<h2 id="0-首先需要配置一下"><a href="#0-首先需要配置一下" class="headerlink" title="0. 首先需要配置一下"></a>0. 首先需要配置一下</h2><h3 id="0-1-安装-python-库"><a href="#0-1-安装-python-库" class="headerlink" title="0.1 安装 python 库"></a>0.1 安装 python 库</h3><ul>
+<li>opencv-python</li>
+<li>scikit-image</li>
+<li>paddleocr</li>
+</ul>
+<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://paddlepaddle.github.io/PaddleOCR/latest/quick_start.html#1-paddlepaddle">https://paddlepaddle.github.io/PaddleOCR/latest/quick_start.html#1-paddlepaddle</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="1-读取视频"><a href="#1-读取视频" class="headerlink" title="1. 读取视频"></a>1. 读取视频</h2><p>使用 opencv 读取视频</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">video_path = <span class="string">&#x27;d7.mp4&#x27;</span></span><br><span class="line"></span><br><span class="line">v = cv2.VideoCapture(video_path)</span><br><span class="line">num_frames = <span class="built_in">int</span>(v.get(cv2.CAP_PROP_FRAME_COUNT))</span><br><span class="line">fps = v.get(cv2.CAP_PROP_FPS)</span><br><span class="line">height = <span class="built_in">int</span>(v.get(cv2.CAP_PROP_FRAME_HEIGHT))</span><br><span class="line">width = <span class="built_in">int</span>(v.get(cv2.CAP_PROP_FRAME_WIDTH))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;video      :  <span class="subst">&#123;video_path&#125;</span>\n&#x27;</span></span><br><span class="line">      <span class="string">f&#x27;num_frames :  <span class="subst">&#123;num_frames&#125;</span>\n&#x27;</span></span><br><span class="line">      <span class="string">f&#x27;fps        :  <span class="subst">&#123;fps&#125;</span>\n&#x27;</span></span><br><span class="line">      <span class="string">f&#x27;resolution :  <span class="subst">&#123;width&#125;</span> x <span class="subst">&#123;height&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-提取所有帧"><a href="#2-提取所有帧" class="headerlink" title="2. 提取所有帧"></a>2. 提取所有帧</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_frame_index</span>(<span class="params">time_str: <span class="built_in">str</span>, fps: <span class="built_in">float</span></span>):</span><br><span class="line">    t = time_str.split(<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">    t = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">float</span>, t))</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(t) == <span class="number">3</span>:</span><br><span class="line">        td = datetime.timedelta(hours=t[<span class="number">0</span>], minutes=t[<span class="number">1</span>], seconds=t[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(t) == <span class="number">2</span>:</span><br><span class="line">        td = datetime.timedelta(minutes=t[<span class="number">0</span>], seconds=t[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(</span><br><span class="line">            <span class="string">&#x27;Time data &quot;&#123;&#125;&quot; does not match format &quot;%H:%M:%S&quot;&#x27;</span>.<span class="built_in">format</span>(time_str))</span><br><span class="line">    index = <span class="built_in">int</span>(td.total_seconds() * fps)</span><br><span class="line">    <span class="keyword">return</span> index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 起始时间、结束时间</span></span><br><span class="line">time_start = <span class="string">&#x27;0:00&#x27;</span></span><br><span class="line">time_end = <span class="string">&#x27;0:10&#x27;</span></span><br><span class="line">ocr_start = get_frame_index(time_start, fps) <span class="keyword">if</span> time_start <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">ocr_end = get_frame_index(time_end, fps) <span class="keyword">if</span> time_end <span class="keyword">else</span> num_frames</span><br><span class="line">num_ocr_frames = ocr_end - ocr_start</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;ocr_start       :  <span class="subst">&#123;ocr_start&#125;</span>\n&#x27;</span></span><br><span class="line">      <span class="string">f&#x27;ocr_end         :  <span class="subst">&#123;ocr_end&#125;</span>\n&#x27;</span></span><br><span class="line">      <span class="string">f&#x27;num_ocr_frames  :  <span class="subst">&#123;num_ocr_frames&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-只保留画面中有字幕的区域"><a href="#3-只保留画面中有字幕的区域" class="headerlink" title="3. 只保留画面中有字幕的区域"></a>3. 只保留画面中有字幕的区域</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># *** 调整字幕区域的高度，按比例 ***</span></span><br><span class="line">h1, h2 = <span class="number">0.86</span>, <span class="number">0.94</span></span><br><span class="line">h1, h2 = <span class="built_in">int</span>(height * h1), <span class="built_in">int</span>(height * h2)</span><br><span class="line"></span><br><span class="line">v.<span class="built_in">set</span>(cv2.CAP_PROP_POS_FRAMES, ocr_start)</span><br><span class="line">frames = [v.read()[<span class="number">1</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_ocr_frames)]</span><br><span class="line">z_frames = [frame[h1:h2, :] <span class="keyword">for</span> frame <span class="keyword">in</span> frames]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预览一下</span></span><br><span class="line">title = <span class="string">&#x27;preview&#x27;</span></span><br><span class="line">cv2.startWindowThread()</span><br><span class="line">cv2.namedWindow(title)</span><br><span class="line"><span class="keyword">for</span> idx, img <span class="keyword">in</span> <span class="built_in">enumerate</span>(z_frames):</span><br><span class="line">    tmp_img = img.copy()</span><br><span class="line">    cv2.putText(tmp_img, <span class="string">f&#x27;idx:<span class="subst">&#123;idx&#125;</span>&#x27;</span>, (<span class="number">5</span>, <span class="number">25</span>), </span><br><span class="line">                cv2.FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">    cv2.imshow(title, tmp_img)</span><br><span class="line">    cv2.imshow(title, img)</span><br><span class="line">    cv2.waitKey(<span class="number">50</span>)</span><br><span class="line">cv2.destroyWindow(title)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-去除相似度较高的帧，保留关键帧"><a href="#4-去除相似度较高的帧，保留关键帧" class="headerlink" title="4. 去除相似度较高的帧，保留关键帧"></a>4. 去除相似度较高的帧，保留关键帧</h2><p>为了减少识别量，先去除一部分相似度较高的图片。</p>
+<ul>
+<li>计算两个图片的均方差（即 MSE）， 采用 skimage.metrics.mean_squared_error 函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 设置阈值</span></span><br><span class="line">mse_threshold = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> skimage.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">k_frames = [&#123;<span class="string">&#x27;start&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">             <span class="string">&#x27;end&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">             <span class="string">&#x27;frame&#x27;</span>: z_frames[<span class="number">0</span>],</span><br><span class="line">             <span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, num_ocr_frames):</span><br><span class="line">    img1 = z_frames[idx - <span class="number">1</span>]</span><br><span class="line">    img2 = z_frames[idx]</span><br><span class="line"></span><br><span class="line">    mse = mean_squared_error(img1, img2)</span><br><span class="line">    <span class="comment"># print(idx, mse)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> mse &lt; mse_threshold:</span><br><span class="line">        k_frames[-<span class="number">1</span>][<span class="string">&#x27;end&#x27;</span>] = idx</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        k_frames.append(&#123;<span class="string">&#x27;start&#x27;</span>: idx,</span><br><span class="line">                         <span class="string">&#x27;end&#x27;</span>: idx,</span><br><span class="line">                         <span class="string">&#x27;frame&#x27;</span>: z_frames[idx],</span><br><span class="line">                         <span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> kf <span class="keyword">in</span> k_frames:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;kf[<span class="string">&#x27;start&#x27;</span>]&#125;</span> --&gt; <span class="subst">&#123;kf[<span class="string">&#x27;end&#x27;</span>]&#125;</span> : <span class="subst">&#123;kf[<span class="string">&#x27;text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-1-识别字幕-pytesseract"><a href="#5-1-识别字幕-pytesseract" class="headerlink" title="5.1 识别字幕 pytesseract"></a>5.1 识别字幕 pytesseract</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> pytesseract</span><br><span class="line"></span><br><span class="line">config = <span class="string">f&#x27;--tessdata-dir &quot;<span class="subst">&#123;tessdata_dir&#125;</span>&quot; --psm 7&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, kf <span class="keyword">in</span> <span class="built_in">enumerate</span>(k_frames):</span><br><span class="line">    <span class="comment"># 识别为字符串</span></span><br><span class="line">    ocr_str = pytesseract.image_to_string(kf[<span class="string">&#x27;frame&#x27;</span>], lang=lang, config=config)</span><br><span class="line">    ocr_str = ocr_str.strip().replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ocr_str:</span><br><span class="line">        k_frames[idx][<span class="string">&#x27;text&#x27;</span>] = ocr_str</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;kf[<span class="string">&#x27;start&#x27;</span>]&#125;</span> --&gt; <span class="subst">&#123;kf[<span class="string">&#x27;end&#x27;</span>]&#125;</span> : <span class="subst">&#123;kf[<span class="string">&#x27;text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>([k_frames.remove(kf) <span class="keyword">for</span> kf <span class="keyword">in</span> k_frames <span class="keyword">if</span> <span class="keyword">not</span> kf[<span class="string">&#x27;text&#x27;</span>]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-识别字幕-paddleocr"><a href="#5-2-识别字幕-paddleocr" class="headerlink" title="5.2 识别字幕 paddleocr"></a>5.2 识别字幕 paddleocr</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> paddleocr <span class="keyword">import</span> PaddleOCR</span><br><span class="line"></span><br><span class="line">ocr = PaddleOCR(lang=<span class="string">&#x27;ch&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, kf <span class="keyword">in</span> <span class="built_in">enumerate</span>(k_frames):</span><br><span class="line">    <span class="comment"># 识别字符串    </span></span><br><span class="line">    result = ocr.ocr(kf[<span class="string">&#x27;frame&#x27;</span>])</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> result:</span><br><span class="line">        <span class="keyword">if</span> line == <span class="literal">None</span>: <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        words = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> rect, word <span class="keyword">in</span> line:</span><br><span class="line">            words += word[<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(idx, words)</span><br><span class="line"></span><br><span class="line">        k_frames[idx][<span class="string">&#x27;text&#x27;</span>] = words</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>([k_frames.remove(kf) <span class="keyword">for</span> kf <span class="keyword">in</span> k_frames <span class="keyword">if</span> <span class="keyword">not</span> kf[<span class="string">&#x27;text&#x27;</span>]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-格式化字幕"><a href="#6-格式化字幕" class="headerlink" title="6. 格式化字幕"></a>6. 格式化字幕</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> kf <span class="keyword">in</span> k_frames:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;kf[<span class="string">&#x27;start&#x27;</span>]&#125;</span> --&gt; <span class="subst">&#123;kf[<span class="string">&#x27;end&#x27;</span>]&#125;</span> : <span class="subst">&#123;kf[<span class="string">&#x27;text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_srt_timestamp</span>(<span class="params">frame_index: <span class="built_in">int</span>, fps: <span class="built_in">float</span></span>):</span><br><span class="line">    td = datetime.timedelta(seconds=frame_index / fps)</span><br><span class="line">    ms = td.microseconds // <span class="number">1000</span></span><br><span class="line">    m, s = <span class="built_in">divmod</span>(td.seconds, <span class="number">60</span>)</span><br><span class="line">    h, m = <span class="built_in">divmod</span>(m, <span class="number">60</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#123;:02d&#125;:&#123;:02d&#125;:&#123;:02d&#125;,&#123;:03d&#125;&#x27;</span>.<span class="built_in">format</span>(h, m, s, ms)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> kf <span class="keyword">in</span> k_frames:</span><br><span class="line">    time1 = get_srt_timestamp(kf[<span class="string">&#x27;start&#x27;</span>], fps)</span><br><span class="line">    time2 = get_srt_timestamp(kf[<span class="string">&#x27;end&#x27;</span>], fps)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;time1&#125;</span> --&gt; <span class="subst">&#123;time2&#125;</span>\n<span class="subst">&#123;kf[<span class="string">&#x27;text&#x27;</span>]&#125;</span>\n&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/sci-opencv/">SCI-OPENCV</a></li>
+            <li>视频字幕提取-OPENCV-PADDLEOCR</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/zhihu/sci-opencv/%E8%A7%86%E9%A2%91%E5%AD%97%E5%B9%95%E6%8F%90%E5%8F%96-opencv-paddleocr.html"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="ref: excel_formulas_and_functions, https:&#x2F;&#x2F;support.office.com&#x2F;en-us&#x2F;article&#x2F;overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173?wt.mc_id&#x3D;fsn_excel_formulas_and_functions  0 示例表格    A B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="excel常用函数：查找、线性插值">
+<meta property="og:url" content="https://shenbo.github.io/2017/12/14/office/excel-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="ref: excel_formulas_and_functions, https:&#x2F;&#x2F;support.office.com&#x2F;en-us&#x2F;article&#x2F;overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173?wt.mc_id&#x3D;fsn_excel_formulas_and_functions  0 示例表格    A B">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-12-14T14:23:45.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.159Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="excel">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2017/12/14/office/excel-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2017/12/14/office/excel-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/","path":"2017/12/14/office/excel-常用函数/","title":"excel常用函数：查找、线性插值"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>excel常用函数：查找、线性插值 | yoyo</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-%E7%A4%BA%E4%BE%8B%E8%A1%A8%E6%A0%BC"><span class="nav-text">0 示例表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%B7%B2%E7%9F%A5key%EF%BC%8C%E6%9F%A5%E6%89%BE%E5%AF%B9%E5%BA%94value"><span class="nav-text">1 已知key，查找对应value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B7%B2%E7%9F%A5value%EF%BC%8C%E6%9F%A5%E6%89%BE%E5%AF%B9%E5%BA%94%E5%BA%8F%E5%8F%B7"><span class="nav-text">2 已知value，查找对应序号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B7%B2%E7%9F%A5%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%8F%B7%EF%BC%8C%E6%9F%A5%E6%89%BEvalue"><span class="nav-text">3 已知在数组中的序号，查找value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B7%B2%E7%9F%A5-value1%EF%BC%8C%E6%9F%A5%E6%89%BE%E5%81%8F%E7%A7%BBn-rows%E8%A1%8C%EF%BC%8Cn-cols%E5%88%97%E5%90%8E%E5%AF%B9%E5%BA%94%E7%9A%84-value2"><span class="nav-text">4 已知 value1，查找偏移n_rows行，n_cols列后对应的 value2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BA%BF%E6%80%A7%E8%B6%8B%E5%8A%BF"><span class="nav-text">5 线性趋势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC"><span class="nav-text">6 线性插值</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2017/12/14/office/excel-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yoyo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yoyo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="excel常用函数：查找、线性插值 | yoyo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          excel常用函数：查找、线性插值
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-12-14 22:23:45" itemprop="dateCreated datePublished" datetime="2017-12-14T22:23:45+08:00">2017-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/office/" itemprop="url" rel="index"><span itemprop="name">office</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/12/14/office/excel-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="post-meta-item leancloud_visitors" data-flag-title="excel常用函数：查找、线性插值" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>426</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>ref: excel_formulas_and_functions, <a target="_blank" rel="noopener" href="https://support.office.com/en-us/article/overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173?wt.mc_id=fsn_excel_formulas_and_functions">https://support.office.com/en-us/article/overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173?wt.mc_id=fsn_excel_formulas_and_functions</a></p>
+</blockquote>
+<h3 id="0-示例表格"><a href="#0-示例表格" class="headerlink" title="0 示例表格"></a>0 示例表格</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>NO</td>
+<td>key</td>
+<td>value</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>10</td>
+<td>100</td>
+</tr>
+<tr>
+<td>5</td>
+<td>4</td>
+<td>15</td>
+<td>225</td>
+</tr>
+<tr>
+<td>6</td>
+<td>5</td>
+<td>20</td>
+<td>400</td>
+</tr>
+<tr>
+<td>7</td>
+<td>6</td>
+<td>25</td>
+<td>625</td>
+</tr>
+<tr>
+<td>8</td>
+<td>7</td>
+<td>30</td>
+<td>900</td>
+</tr>
+<tr>
+<td>9</td>
+<td>8</td>
+<td>35</td>
+<td>1225</td>
+</tr>
+<tr>
+<td>10</td>
+<td>9</td>
+<td>40</td>
+<td>1600</td>
+</tr>
+<tr>
+<td>11</td>
+<td>10</td>
+<td>45</td>
+<td>2025</td>
+</tr>
+</tbody></table>
+<h3 id="1-已知key，查找对应value"><a href="#1-已知key，查找对应value" class="headerlink" title="1 已知key，查找对应value"></a>1 已知key，查找对应value</h3><ul>
+<li><strong>VLOOKUP</strong>(lookup value, lookup array, column, range lookup)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>key</td>
+<td>Formula</td>
+<td>value</td>
+</tr>
+<tr>
+<td>5</td>
+<td>20</td>
+<td>&#x3D;VLOOKUP(F5,B2:C11,2)</td>
+<td>400</td>
+</tr>
+<tr>
+<td>6</td>
+<td>25</td>
+<td>&#x3D;VLOOKUP(F6,B2:C11,2,FALSE)</td>
+<td>625</td>
+</tr>
+<tr>
+<td>7</td>
+<td>24</td>
+<td>&#x3D;VLOOKUP(F7,B2:C11,2)</td>
+<td>400</td>
+</tr>
+<tr>
+<td>8</td>
+<td>24</td>
+<td>&#x3D;VLOOKUP(F8,B2:C11,2,FALSE)</td>
+<td>#N&#x2F;A</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h3 id="2-已知value，查找对应序号"><a href="#2-已知value，查找对应序号" class="headerlink" title="2 已知value，查找对应序号"></a>2 已知value，查找对应序号</h3><ul>
+<li><strong>MATCH</strong>(lookup_value, lookup_array, [match_type])<ul>
+<li>match_type：0 精确；1小于；-1大于</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>value</td>
+<td>Formula</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>5</td>
+<td>400</td>
+<td>&#x3D;MATCH(F5,C2:C11)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>500</td>
+<td>&#x3D;MATCH(E6,C2:C11,0)</td>
+<td>#N&#x2F;A</td>
+</tr>
+<tr>
+<td>7</td>
+<td>500</td>
+<td>&#x3D;MATCH(F7,C2:C11,1)</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<h3 id="3-已知在数组中的序号，查找value"><a href="#3-已知在数组中的序号，查找value" class="headerlink" title="3 已知在数组中的序号，查找value"></a>3 已知在数组中的序号，查找value</h3><ul>
+<li><strong>INDEX</strong>(array, row number )</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>NO</td>
+<td>Formula</td>
+<td>value</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>&#x3D;INDEX(C2:C11,F5)</td>
+<td>400</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>&#x3D;INDEX(C2:C11,F6)</td>
+<td>625</td>
+</tr>
+</tbody></table>
+<h3 id="4-已知-value1，查找偏移n-rows行，n-cols列后对应的-value2"><a href="#4-已知-value1，查找偏移n-rows行，n-cols列后对应的-value2" class="headerlink" title="4 已知 value1，查找偏移n_rows行，n_cols列后对应的 value2"></a>4 已知 value1，查找偏移n_rows行，n_cols列后对应的 value2</h3><ul>
+<li><strong>OFFSET</strong>(reference, rows, cols, [height], [width])			</li>
+<li>value1 设为数组的表头A1, 即参数 reference</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+<th>I</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>n_rows</td>
+<td>n_clns</td>
+<td>Formula</td>
+<td>value2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+<td>&#x3D;OFFSET(A1,F5,G5)</td>
+<td>20</td>
+</tr>
+<tr>
+<td>6</td>
+<td>5</td>
+<td>2</td>
+<td>&#x3D;OFFSET(A1,F6,G6)</td>
+<td>400</td>
+</tr>
+</tbody></table>
+<h3 id="5-线性趋势"><a href="#5-线性趋势" class="headerlink" title="5 线性趋势"></a>5 线性趋势</h3><ul>
+<li><strong>TREND</strong>(known_y’s, [known_x’s], [new_x’s], [const])</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>NO</td>
+<td>Formula</td>
+<td>key</td>
+</tr>
+<tr>
+<td>5</td>
+<td>4</td>
+<td>&#x3D;TREND(B2:B11,A2:A11,K5)</td>
+<td>15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>4.5</td>
+<td>&#x3D;TREND(B2:B11,A2:A11,K6)</td>
+<td>17.5</td>
+</tr>
+</tbody></table>
+<h3 id="6-线性插值"><a href="#6-线性插值" class="headerlink" title="6 线性插值"></a>6 线性插值</h3><ul>
+<li>线性插值需要用到3个组合函数		</li>
+<li><strong>MATCH</strong>(key,x_s)			</li>
+<li><strong>OFFSET</strong>(y_title,MATCH(key,x_s),,2)			</li>
+<li><strong>OFFSET</strong>(x_title,MATCH(key,x_s),,2)			</li>
+<li><strong>TREND</strong>(OFFSET(y_title,MATCH(key,x_s),,2),OFFSET(x_title,MATCH(key,x_s),,2),key)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>NO</td>
+<td>Formula</td>
+<td>value</td>
+</tr>
+<tr>
+<td>5</td>
+<td>20</td>
+<td>&#x3D;TREND(OFFSET(C1,MATCH(K5,B2:B11),,2),</td>
+<td>400</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OFFSET(B1,MATCH(K5,B2:B11),,2),K5)</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>24</td>
+<td>&#x3D;TREND(OFFSET(C1,MATCH(K6,B2:B11),,2),</td>
+<td>580</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OFFSET(B1,MATCH(K6,B2:B11),,2),K6)</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>25</td>
+<td>&#x3D;TREND(OFFSET(C1,MATCH(K7,B2:B11),,2),</td>
+<td>625</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OFFSET(B1,MATCH(K7,B2:B11),,2),K7)</td>
+<td></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/images/wechatpay.png" alt="yoyo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/excel/" rel="tag"># excel</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/11/12/office/excel-%E8%B0%83%E7%94%A8%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91/" rel="prev" title="excel调用有道翻译api">
+                  <i class="fa fa-angle-left"></i> excel调用有道翻译api
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/13/python/python-%E8%B0%83%E7%94%A8ffmpeg%E5%A4%84%E7%90%86%E8%A7%86%E9%A2%91-%E6%8F%90%E5%8F%96%E5%9B%BE%E7%89%87/" rel="next" title="python调用ffmpeg处理视频-提取图片">
+                  python调用ffmpeg处理视频-提取图片 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/2017/12/14/office/excel-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

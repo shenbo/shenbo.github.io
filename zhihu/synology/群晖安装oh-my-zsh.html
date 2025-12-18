@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="1. zsh 安装 ref: https:&#x2F;&#x2F;synocommunity.com&#x2F;  先从套件中心中安装zsh 。  登录DSM，找到 套件中心 → 设置， 将 信任层级 设为 Synology Inc. 和信任的发行者.  在 套件来源 选项卡中, 增加一项：  名称： SynoCommunity  位置： http:&#x2F;&#x2F;packages.synocommunity.com&#x2F;   返回 套件中心">
+<meta property="og:type" content="website">
+<meta property="og:title" content="群晖安装oh-my-zsh">
+<meta property="og:url" content="https://shenbo.github.io/zhihu/synology/%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85oh-my-zsh.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="1. zsh 安装 ref: https:&#x2F;&#x2F;synocommunity.com&#x2F;  先从套件中心中安装zsh 。  登录DSM，找到 套件中心 → 设置， 将 信任层级 设为 Synology Inc. 和信任的发行者.  在 套件来源 选项卡中, 增加一项：  名称： SynoCommunity  位置： http:&#x2F;&#x2F;packages.synocommunity.com&#x2F;   返回 套件中心">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-13T05:33:58.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.286Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="zhihu - synology - zsh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/zhihu/synology/%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85oh-my-zsh">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/zhihu/synology/%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85oh-my-zsh.html","path":"zhihu/synology/群晖安装oh-my-zsh.html","title":"群晖安装oh-my-zsh"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>群晖安装oh-my-zsh | yoyo
+</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-zsh-%E5%AE%89%E8%A3%85"><span class="nav-text">1. zsh 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-oh-my-zsh-%E5%AE%89%E8%A3%85"><span class="nav-text">2. oh-my-zsh 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B0%86-zsh-%E8%AE%BE%E4%B8%BA%E9%BB%98%E8%AE%A4"><span class="nav-text">3. 将 zsh 设为默认</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">群晖安装oh-my-zsh
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/synology/">SYNOLOGY</a></li>
+            <li>群晖安装OH-MY-ZSH</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h3 id="1-zsh-安装"><a href="#1-zsh-安装" class="headerlink" title="1. zsh 安装"></a>1. zsh 安装</h3><blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://synocommunity.com/">https://synocommunity.com/</a></p>
+</blockquote>
+<p>先从套件中心中安装zsh 。</p>
+<ul>
+<li><p>登录DSM，找到 <code>套件中心</code> → <code>设置</code>， 将 <code>信任层级</code> 设为 <code>Synology Inc. 和信任的发行者</code>.</p>
+</li>
+<li><p>在 <code>套件来源</code> 选项卡中, 增加一项：</p>
+<ul>
+<li>名称： SynoCommunity </li>
+<li>位置： <a target="_blank" rel="noopener" href="http://packages.synocommunity.com/">http://packages.synocommunity.com/</a></li>
+</ul>
+</li>
+<li><p>返回 <code>套件中心</code>， 左侧可以看到 <code>社群</code> 选项卡， 打开后可以看到里面有 <code>Z shell (with modules)</code>， 安装套件.</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前 shell 类型</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示可使用的 shell</span></span><br><span class="line"><span class="built_in">cat</span> /etc/shells</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 zsh 安装路径</span></span><br><span class="line"><span class="built_in">which</span> zsh</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-oh-my-zsh-安装"><a href="#2-oh-my-zsh-安装" class="headerlink" title="2. oh-my-zsh 安装"></a>2. oh-my-zsh 安装</h3><blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://ohmyz.sh/">https://ohmyz.sh/</a></p>
+</blockquote>
+<ul>
+<li><p><strong>需要先安装 git.</strong> (在套件中心里有)</p>
+</li>
+<li><p>用 wget 安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>简单配置一下，打开配置文件 <code>nano ~/.zshrc</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主题</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;ys&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 插件</span></span><br><span class="line">plugins=(git zsh-syntax-highlighting zsh-autosuggestions)</span><br></pre></td></tr></table></figure></li>
+<li><p>下载插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加载配置文件， <code>source ~/.zshrc</code></p>
+</li>
+</ul>
+<span id="more"></span>
+
+
+<h3 id="3-将-zsh-设为默认"><a href="#3-将-zsh-设为默认" class="headerlink" title="3. 将 zsh 设为默认"></a>3. 将 zsh 设为默认</h3><p>一般用 <code>chsh -s /bin/zsh</code> 就可以更改了。</p>
+<p>但群晖没有 <code>chsh</code> 命令，新建配置文件 <code>nano ~/.profile</code>，加入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ -x /usr/local/bin/zsh ]]; <span class="keyword">then</span></span><br><span class="line"><span class="built_in">export</span> SHELL=/usr/local/bin/zsh</span><br><span class="line"><span class="built_in">exec</span> /usr/local/bin/zsh</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://migege.com/post/install-ohmyzsh-on-synology-dsm">https://migege.com/post/install-ohmyzsh-on-synology-dsm</a><br>ref: <a target="_blank" rel="noopener" href="https://3os.org/guides/synology/">https://3os.org/guides/synology/</a></p>
+</blockquote>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/synology/">SYNOLOGY</a></li>
+            <li>群晖安装OH-MY-ZSH</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/zhihu/synology/%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85oh-my-zsh.html"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

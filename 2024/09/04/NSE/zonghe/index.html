@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一、原子核物理基础 了解原子和原子核的基本性质、原子核的放射性、射线及其与物质相互作用、原子核反应。 熟悉放射性活度的含义及三大天然放射性系列中的主要核素、常用的核辐射类型及其特征、核裂变及核能的利用。 掌握放射性核素的衰变规律及放射性核素的衰变常数、半衰期及寿命的概念，γ射线与物质的相互作用，介质对γ、X射线的衰减规律；中子诱发裂变与裂变能。  1.1原子和原子核的基本性质1.原子的核式模型是1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="注册核安全工程师-综合知识">
+<meta property="og:url" content="https://shenbo.github.io/2024/09/04/NSE/zonghe/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="一、原子核物理基础 了解原子和原子核的基本性质、原子核的放射性、射线及其与物质相互作用、原子核反应。 熟悉放射性活度的含义及三大天然放射性系列中的主要核素、常用的核辐射类型及其特征、核裂变及核能的利用。 掌握放射性核素的衰变规律及放射性核素的衰变常数、半衰期及寿命的概念，γ射线与物质的相互作用，介质对γ、X射线的衰减规律；中子诱发裂变与裂变能。  1.1原子和原子核的基本性质1.原子的核式模型是1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-04T11:33:21.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.119Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="NSE">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2024/09/04/NSE/zonghe/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2024/09/04/NSE/zonghe/","path":"2024/09/04/NSE/zonghe/","title":"注册核安全工程师-综合知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>注册核安全工程师-综合知识 | yoyo</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%89%A9%E7%90%86%E5%9F%BA%E7%A1%80"><span class="nav-text">一、原子核物理基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E5%8E%9F%E5%AD%90%E5%92%8C%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="nav-text">1.1原子和原子核的基本性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E5%8E%9F%E5%AD%90%E7%9A%84%E5%A3%B3%E5%B1%82%E7%BB%93%E6%9E%84"><span class="nav-text">1.1.1 原子的壳层结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E7%BB%84%E6%88%90%E5%8F%8A%E5%85%B6%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-text">1.1.2 原子核的组成及其稳定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-text">1.1.3 原子核的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E7%BB%93%E5%90%88%E8%83%BD"><span class="nav-text">1.1.4 原子核的结合能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E6%94%BE%E5%B0%84%E6%80%A7"><span class="nav-text">1.2 原子核的放射性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E6%94%BE%E5%B0%84%E6%80%A7%E8%A1%B0%E5%8F%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%BE%8B"><span class="nav-text">1.2.1 放射性衰变的基本规律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E6%94%BE%E5%B0%84%E7%B3%BB"><span class="nav-text">1.2.2 放射系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-%E6%94%BE%E5%B0%84%E6%80%A7%E8%A1%B0%E5%8F%98%E8%A7%84%E5%BE%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BA%94%E7%94%A8%EF%BC%88%E7%95%A5%EF%BC%89"><span class="nav-text">1.2.3 放射性衰变规律的一些应用（略）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E5%B0%84%E7%BA%BF%E5%8F%8A%E5%85%B6%E4%B8%8E%E7%89%A9%E8%B4%A8%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8"><span class="nav-text">1.3射线及其与物质相互作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A0%B8%E8%BE%90%E5%B0%84%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81"><span class="nav-text">1.3.1 常用的核辐射类型及其特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E5%B0%84%E7%BA%BF%E4%B8%8E%E7%89%A9%E8%B4%A8%E7%9A%84%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8"><span class="nav-text">1.3.2 射线与物质的相互作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E5%8E%9F%E5%AD%90%E6%A0%B8%E5%8F%8D%E5%BA%94"><span class="nav-text">1.4 原子核反应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E6%A0%B8%E5%8F%8D%E5%BA%94%E7%9A%84%E4%B8%80%E8%88%AC%E6%8F%8F%E8%BF%B0"><span class="nav-text">1.4.1 核反应的一般描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E6%A0%B8%E5%8F%8D%E5%BA%94%E8%83%BD%E5%8F%8A%E5%85%B6%E9%98%88%E8%83%BD"><span class="nav-text">1.4.2 核反应能及其阈能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E6%A0%B8%E5%8F%8D%E5%BA%94%E6%88%AA%E9%9D%A2%E5%92%8C%E4%BA%A7%E9%A2%9D"><span class="nav-text">1.4.3 核反应截面和产额</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5%E6%A0%B8%E8%A3%82%E5%8F%98%E5%8F%8A%E6%A0%B8%E8%83%BD%E7%9A%84%E5%88%A9%E7%94%A8"><span class="nav-text">1. 5核裂变及核能的利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E8%87%AA%E5%8F%91%E8%A3%82%E5%8F%98%E4%B8%8E%E8%AF%B1%E5%8F%91%E8%A3%82%E5%8F%98"><span class="nav-text">1.5.1 自发裂变与诱发裂变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E8%A3%82%E5%8F%98%E5%90%8E%E7%8E%B0%E8%B1%A1"><span class="nav-text">1.5.2 裂变后现象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="nav-text">二、核反应堆工程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">2.1 核反应堆的基本工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E4%B8%AD%E5%AD%90%E4%B8%8E%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8"><span class="nav-text">2.1.1 中子与原子核的相互作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-%E6%A0%B8%E5%8F%8D%E5%BA%94%E6%88%AA%E9%9D%A2%E5%92%8C%E6%A0%B8%E5%8F%8D%E5%BA%94%E7%8E%87%E5%AF%86%E5%BA%A6"><span class="nav-text">2.1.2 核反应截面和核反应率密度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-%E4%B8%AD%E5%AD%90%E7%9A%84%E6%85%A2%E5%8C%96"><span class="nav-text">2.1.3 中子的慢化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4-%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E4%B8%B4%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="nav-text">2.1.4 核反应堆临界条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-5-%E6%A0%B8%E7%87%83%E6%96%99%E7%9A%84%E6%B6%88%E8%80%97%E3%80%81%E8%BD%AC%E5%8C%96%E4%B8%8E%E5%A2%9E%E6%AE%96"><span class="nav-text">2.1.5 核燃料的消耗、转化与增殖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-6-%E5%A0%86%E5%86%85%E4%B8%AD%E5%AD%90%E6%B3%A8%E9%87%8F%E7%8E%87%E5%88%86%E5%B8%83%E4%B8%8E%E5%8A%9F%E7%8E%87%E5%B1%95%E5%B9%B3"><span class="nav-text">2.1.6 堆内中子注量率分布与功率展平</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%8F%8D%E5%BA%94%E6%80%A7%E4%B8%8E%E5%8F%8D%E5%BA%94%E6%80%A7%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-text">2.2 反应性与反应性的控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-%E5%8F%8D%E5%BA%94%E6%80%A7%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-text">2.2.1 反应性的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-%E5%8F%8D%E5%BA%94%E6%80%A7%E7%B3%BB%E6%95%B0"><span class="nav-text">2.2.2 反应性系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-%E5%BD%B1%E5%93%8D%E5%8F%8D%E5%BA%94%E6%80%A7%E5%8F%98%E5%8C%96%E7%9A%84%E5%9B%A0%E7%B4%A0"><span class="nav-text">2.2.3 影响反应性变化的因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-%E5%8F%8D%E5%BA%94%E6%80%A7%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-text">2.2.4 反应性的控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E5%86%85%E7%9A%84%E9%87%8A%E7%83%AD%E4%B8%8E%E4%BC%A0%E7%83%AD"><span class="nav-text">2.3 核反应堆内的释热与传热</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E7%83%AD%E6%BA%90%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83"><span class="nav-text">2.3.1 核反应堆热源及其分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-%E4%BC%A0%E7%83%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E5%BC%8F"><span class="nav-text">2.3.2 传热的基本方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-%E6%B2%B8%E8%85%BE%E4%BC%A0%E7%83%AD"><span class="nav-text">2.3.3 沸腾传热</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-4-%E4%B8%B4%E7%95%8C%E7%83%AD%E6%B5%81%E5%AF%86%E5%BA%A6%E5%92%8C%E5%81%8F%E7%A6%BB%E7%82%AE%E5%92%8C%E6%B2%B8%E8%85%BE%E6%AF%94"><span class="nav-text">2.3.4 临界热流密度和偏离炮和沸腾比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E4%B8%8E%E6%A0%B8%E5%8A%A8%E5%8A%9B%E5%8E%82"><span class="nav-text">三、核反应堆与核动力厂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-0-%E5%BC%95%E8%A8%80"><span class="nav-text">3.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E7%9A%84%E4%B8%BB%E8%A6%81%E7%B1%BB%E5%9E%8B"><span class="nav-text">3.1 核反应堆的主要类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%8E%8B%E6%B0%B4%E5%A0%86%E6%A0%B8%E7%94%B5%E5%8E%82"><span class="nav-text">3.2 压水堆核电厂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%A0%B8%E5%8A%A8%E5%8A%9B%E5%8E%82%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E5%A0%86%E5%9E%8B"><span class="nav-text">3.3 核动力厂使用的其他核反应堆堆型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%96%B0%E5%9E%8B%E5%8E%8B%E6%B0%B4%E5%8F%8D%E5%BA%94%E5%A0%86"><span class="nav-text">3.4 新型压水反应堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E7%A0%94%E7%A9%B6%E5%A0%86"><span class="nav-text">3.5 研究堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E5%8F%8D%E5%BA%94%E5%A0%86%E5%8F%8A%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE%E7%9A%84%E5%8A%9F%E7%8E%87%E6%8E%A7%E5%88%B6"><span class="nav-text">3.6 反应堆及核动力装置的功率控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-%E6%A0%B8%E5%8F%8D%E5%BA%94%E5%A0%86%E4%BF%9D%E6%8A%A4%E7%B3%BB%E7%BB%9F"><span class="nav-text">3.7 核反应堆保护系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%B0%91%E7%94%A8%E6%A0%B8%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-text">四、民用核安全设备基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E6%B0%91%E7%94%A8%E6%A0%B8%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87%E7%9A%84%E7%89%B9%E6%AE%8A%E6%80%A7"><span class="nav-text">4.1 民用核安全设备的特殊性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E6%B0%91%E7%94%A8%E6%A0%B8%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87%E7%9A%84%E6%A0%B8%E5%AE%89%E5%85%A8%E5%88%86%E7%BA%A7%E8%A6%81%E6%B1%82"><span class="nav-text">4.2 民用核安全设备的核安全分级要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%B0%91%E7%94%A8%E6%A0%B8%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87%E6%A0%87%E5%87%86"><span class="nav-text">4.3 民用核安全设备标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E6%B0%91%E7%94%A8%E6%A0%B8%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87%E5%B8%B8%E7%94%A8%E9%87%91%E5%B1%9E%E7%BB%93%E6%9E%84%E6%9D%90%E6%96%99"><span class="nav-text">4.4 民用核安全设备常用金属结构材料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5%E4%B8%BB%E8%A6%81%E6%B0%91%E7%94%A8%E6%A0%B8%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87%E4%B8%BE%E4%BE%8B"><span class="nav-text">4.5主要民用核安全设备举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%A0%B8%E7%87%83%E6%96%99%E5%BE%AA%E7%8E%AF%E8%AE%BE%E6%96%BD"><span class="nav-text">五、核燃料循环设施</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-0-%E5%BC%95%E8%A8%80"><span class="nav-text">5.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E9%93%80%E7%9F%BF%E5%9C%B0%E8%B4%A8%E5%8B%98%E6%8E%A2"><span class="nav-text">5.1 铀矿地质勘探</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E9%93%80%E7%9F%BF%E5%BC%80%E9%87%87"><span class="nav-text">5.2 铀矿开采</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E9%93%80%E7%9A%84%E6%8F%90%E5%8F%96%E5%92%8C%E7%B2%BE%E5%88%B6%EF%BC%88%E7%BA%AF%E5%8C%96%EF%BC%89"><span class="nav-text">5.3 铀的提取和精制（纯化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E9%93%80%E5%8C%96%E5%90%88%E7%89%A9%E7%9A%84%E8%BD%AC%E5%8C%96"><span class="nav-text">5.4 铀化合物的转化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-%E9%93%80%E6%B5%93%E7%BC%A9"><span class="nav-text">5.5 铀浓缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-%E7%87%83%E6%96%99%E7%BB%84%E4%BB%B6%E5%88%B6%E9%80%A0"><span class="nav-text">5.6 燃料组件制造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7%E4%B9%8F%E7%87%83%E6%96%99%E5%8F%8A%E5%85%B6%E5%90%8E%E5%A4%84%E7%90%86"><span class="nav-text">5.7乏燃料及其后处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E8%BE%90%E5%B0%84%E9%98%B2%E6%8A%A4%E5%9F%BA%E7%A1%80"><span class="nav-text">七、辐射防护基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E8%BE%90%E5%B0%84%E9%98%B2%E6%8A%A4%E7%9A%84%E7%9B%AE%E7%9A%84%E4%B8%8E%E4%BB%BB%E5%8A%A1"><span class="nav-text">7.1 辐射防护的目的与任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E8%BE%90%E5%B0%84%E6%BA%90%E7%A7%8D%E7%B1%BB%E3%80%81%E6%9D%A5%E6%BA%90%E4%B8%8E%E6%B0%B4%E5%B9%B3"><span class="nav-text">7.2 辐射源种类、来源与水平</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-%E8%BE%90%E5%B0%84%E7%85%A7%E5%B0%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">7.3 辐射照射的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-%E7%94%B5%E7%A6%BB%E8%BE%90%E5%B0%84%E7%9A%84%E7%94%9F%E7%89%A9%E6%95%88%E5%BA%94"><span class="nav-text">7.4 电离辐射的生物效应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-%E8%BE%90%E5%B0%84%E9%98%B2%E6%8A%A4%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E9%87%8F%E5%8F%8A%E5%85%B6%E5%8D%95%E4%BD%8D"><span class="nav-text">7.5 辐射防护中使用的量及其单位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6%E5%AE%9E%E8%B7%B5%E4%B8%8E%E5%B9%B2%E9%A2%84"><span class="nav-text">7.6实践与干预</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2024/09/04/NSE/zonghe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yoyo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yoyo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="注册核安全工程师-综合知识 | yoyo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          注册核安全工程师-综合知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-04 19:33:21" itemprop="dateCreated datePublished" datetime="2024-09-04T19:33:21+08:00">2024-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NSE/" itemprop="url" rel="index"><span itemprop="name">NSE</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2024/09/04/NSE/zonghe/" class="post-meta-item leancloud_visitors" data-flag-title="注册核安全工程师-综合知识" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>32k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:55</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一、原子核物理基础"><a href="#一、原子核物理基础" class="headerlink" title="一、原子核物理基础"></a>一、原子核物理基础</h1><ul>
+<li>了解原子和原子核的基本性质、原子核的放射性、射线及其与物质相互作用、原子核反应。</li>
+<li>熟悉放射性活度的含义及三大天然放射性系列中的主要核素、常用的核辐射类型及其特征、核裂变及核能的利用。</li>
+<li>掌握放射性核素的衰变规律及放射性核素的衰变常数、半衰期及寿命的概念，γ射线与物质的相互作用，介质对γ、X射线的衰减规律；中子诱发裂变与裂变能。</li>
+</ul>
+<h2 id="1-1原子和原子核的基本性质"><a href="#1-1原子和原子核的基本性质" class="headerlink" title="1.1原子和原子核的基本性质"></a>1.1原子和原子核的基本性质</h2><p>1.原子的核式模型是1911年卢瑟福根据α粒子散射实验而提出的：原子由原子核和核外电子组成。</p>
+<p>2.电子由汤姆逊于1987年发现，电子电荷值 $e \approx 1.6 \times 10^{-19}$ C（库伦）；电子的质量 $m_e \approx 9.1 \times 10^{-31}$ kg。</p>
+<h3 id="1-1-1-原子的壳层结构"><a href="#1-1-1-原子的壳层结构" class="headerlink" title="1.1.1 原子的壳层结构"></a>1.1.1 原子的壳层结构</h3><p>3.原子半径约为 $10^{-8}$ cm（或 $10^{-10}$ m），原子核的尺度大小量级为 fm（$10^{-15}$ cm，飞米），几十飞米，原子核半径 $R$ 与质量数 $A^{1&#x2F;3}$ 成正比关系；原子核的密度高达 $10^8$ t&#x2F;cm$^3$ 量级。</p>
+<p>4.物质的许多物理化学性质、光谱特性基本上只与核外电子有关，而放射性现象主要归因于原子核。</p>
+<p>5.原子的壳层结构：</p>
+<p>（1）原子的核外电子称为轨道电子。原子的轨道电子离核的距离是不能取任意值的，按照一定的规律形成彼此分离的壳层。</p>
+<p>（2）最靠近核的一个壳层称为K层，在它的外面依次为L、M、N、O壳层等，以此类推。</p>
+<ul>
+<li>通常用量子数 $n(n&#x3D;1,2,3\ldots)$ 代表壳层，并分别对应K、L、M、N、O壳层。</li>
+<li>每个壳层可容纳 $2n^2$ 个电子（即：K:2，L:8，M:18，N:32）。</li>
+<li>除K层以外的其他壳层又可分成 $2l+1$（$l&#x3D;n-1$）个支壳层，$l$ 是描述电子轨道的量子数。</li>
+<li>（即：K, $L_I \sim L_{III}$, $M_I \sim M_V$, $N_I \sim N_{VII}$, …）</li>
+</ul>
+<p>（3）处于不同壳层的电子具有不同的位能，当电子从无穷远处移动到靠近原子核的位置时是电场力作功，K层的能级最低。能级的能量大小就等于该壳层电子的结合能，即要使该壳层电子脱离核的束缚成为自由电子所需做的功。结合能是负值，通常以KeV为单位，K壳层电子的结合能的绝对值最大。</p>
+<h3 id="1-1-2-原子核的组成及其稳定性"><a href="#1-1-2-原子核的组成及其稳定性" class="headerlink" title="1.1.2 原子核的组成及其稳定性"></a>1.1.2 原子核的组成及其稳定性</h3><p>6.原子核由质子和中子组成：$^A_ZX_N$</p>
+<ul>
+<li>$A$ 表示质量数，$Z$ 表示质子数，$N$ 表示中子数。</li>
+<li>$A$ 为核子数，$A &#x3D; Z + N$。</li>
+</ul>
+<p>7.核素是指具有一定数目质子和一定数目中子的一种原子；具有一定核电荷数和质量数，并且具有同一能态的一种原子核或原子，称为一种核素。</p>
+<p>8.多核素元素中各核素互称同位素，因为它们处于周期表中同一位置上，化学性质基本相同，但核性质不同；单核素元素没有同位素。</p>
+<p>9.同质异能素（nuclear isomer），处于较长寿命激发态的核素。通常在核素符号的右上角加写m或*标记它。例如 $^{60}\text{Co}^m$（或 $^{60}\text{Co}^{*}$）是 $^{60}\text{Co}$ 的一种同质异能素，它的能量为59 keV，半衰期为10.5 min。大多数同质异能素要发生γ跃迁，少数发生β衰变，个别的可以发生α衰变。</p>
+<p>10.原子核的稳定性：根据原子核的稳定性，可以把核素分为稳定的核素和不稳定的放射性核素，原子核的稳定性与核内质子数和中子数之间的比例存在密切的关系，</p>
+<ul>
+<li>$Z &lt; 20$ 时核素的 $N&#x2F;Z \approx 1$；$Z$ 为中等数值时 $N&#x2F;Z \approx 1.4$；$Z \approx 90$ 时 $N&#x2F;Z \approx 1.6$</li>
+<li>丰中子核素易发生β-衰变，缺中子核素易发生β+衰变；</li>
+<li>原子核的稳定性还与核内质子数和中子数的奇偶性有关。</li>
+</ul>
+<h3 id="1-1-3-原子核的大小"><a href="#1-1-3-原子核的大小" class="headerlink" title="1.1.3 原子核的大小"></a>1.1.3 原子核的大小</h3><p>11.原子的线度约为 $10^{-8}$ cm（或 $10^{-10}$ m），原子核的尺度大小量级为 fm（$10^{-15}$ m，飞米），原子核半径 $R \approx 1.2A^{1&#x2F;3}$ fm，取一个核子的质量为 $1 \text{ u} &#x3D; 1.66 \times 10^{-27}$ kg，核物质密度 $\rho &#x3D; n \times m &#x3D; 1.66 \times 10^{14}$ g·cm$^{-3}$。</p>
+<h3 id="1-1-4-原子核的结合能"><a href="#1-1-4-原子核的结合能" class="headerlink" title="1.1.4 原子核的结合能"></a>1.1.4 原子核的结合能</h3><p>12.核子结合成原子核时释放出的能量称为结合能，$B(Z,A) &#x3D; \Delta m(Z,A)c^2$</p>
+<p>13.原子核的结合能除以质量数称为平均结合能或比结合能，$\varepsilon(Z,A) &#x3D; \frac{B(Z,A)}{A}$，单位 MeV&#x2F;Nu（Nu 为核子）。比结合能的物理意义为原子核拆散为自由核子时，外界对每个核子所做的最小的平均功；或表示核子结合为原子核时，平均每个核子所释放的能量。ε越大，核结合紧，稳定性高。</p>
+<span id="more"></span>
+<h2 id="1-2-原子核的放射性"><a href="#1-2-原子核的放射性" class="headerlink" title="1.2 原子核的放射性"></a>1.2 原子核的放射性</h2><p>1.核素总共约为2600个，其中天然核素约为332个（其中270多个是稳定核素），其余为人造核素。</p>
+<h3 id="1-2-1-放射性衰变的基本规律"><a href="#1-2-1-放射性衰变的基本规律" class="headerlink" title="1.2.1 放射性衰变的基本规律"></a>1.2.1 放射性衰变的基本规律</h3><p>2.任何物质在单独存在时，都服从指数衰减规律（$N_t &#x3D; N_0 e^{-\lambda t}$），放射性衰变是原子核内部规律决定的，采用加压、加热等物理或化学手段都不能改变其衰减规律。</p>
+<p>3.衰变常数 $\lambda$，代表单位时间内一个原子核发生衰变的概率，表示该放射性核素衰变的快慢，$\lambda$ 越大，衰变越快，$\lambda$ 越小，衰变越慢。</p>
+<p>4.半衰期 $T_{1&#x2F;2}$ 表示该放射性核素衰变掉一半所需要的时间，$T_{1&#x2F;2}$ 越大，衰变越慢，$T_{1&#x2F;2}$ 越小，衰变越快。$T_{1&#x2F;2} &#x3D; \frac{\ln 2}{\lambda} \approx \frac{0.693}{\lambda}$</p>
+<p>5.放射性核素的平均寿命 $\tau$ 为衰变常数 $\lambda$ 的倒数，$\tau &#x3D; 1.44 T_{1&#x2F;2}$，表示经过时间 $\tau$ 后剩下的核素约为原来的 $1&#x2F;e \approx 37%$。</p>
+<p>6.放射性活度 $A$ 表示一个放射源在单位时间内发生衰变的原子核数，曾用单位 Ci（居里），国际单位为 Bq（贝克），$1 \text{ Bq} &#x3D; 1&#x2F;\text{s}$，$1 \text{ Ci} &#x3D; 3.7 \times 10^{10}$ Bq。</p>
+<p>7.比放射性活度 $\alpha$ 表示单位质量放射源的放射性活度，$\alpha &#x3D; A&#x2F;m$，单位为 Bq&#x2F;g。</p>
+<p>8.衰变率 $J(t)$ 表示该放射源在单位时间内发生衰变的原子核数，$J(t) &#x3D; A \cdot \lambda$。</p>
+<h3 id="1-2-2-放射系"><a href="#1-2-2-放射系" class="headerlink" title="1.2.2 放射系"></a>1.2.2 放射系</h3><p>9.天然放射系：</p>
+<ul>
+<li>钍系 $^{232}_{90}\text{Th}$（4n系），半衰期141亿年；</li>
+<li>铀系 $^{238}_{92}\text{U}$（4n+2系），半衰期44.7亿年；</li>
+<li>锕-铀系 $^{235}_{92}\text{U}$（4n+3系），半衰期7.04亿年；</li>
+<li>天然放射系中缺少4n+1系，后来由人工发现：镎系 $^{237}_{93}\text{Np}$（4n+1系），半衰期214万年。</li>
+</ul>
+<h3 id="1-2-3-放射性衰变规律的一些应用（略）"><a href="#1-2-3-放射性衰变规律的一些应用（略）" class="headerlink" title="1.2.3 放射性衰变规律的一些应用（略）"></a>1.2.3 放射性衰变规律的一些应用（略）</h3><h2 id="1-3射线及其与物质相互作用"><a href="#1-3射线及其与物质相互作用" class="headerlink" title="1.3射线及其与物质相互作用"></a>1.3射线及其与物质相互作用</h2><h3 id="1-3-1-常用的核辐射类型及其特征"><a href="#1-3-1-常用的核辐射类型及其特征" class="headerlink" title="1.3.1 常用的核辐射类型及其特征"></a>1.3.1 常用的核辐射类型及其特征</h3><p>1.辐射又称射线，我们只关注能量在10eV量级以上的辐射，这个能量下限是辐射或辐射与物质作用后的次级产物能使空气等典型材料发生电离所需的最低能量。能量大于这个最低值的辐射称为电离辐射。</p>
+<p>2.常用核辐射类型：α辐射、β辐射、γ辐射和中子辐射。</p>
+<p>（1）α射线：衰变释放α粒子，即 $^4_2\text{He}^{2+}$，质量数4和原子序数2；</p>
+<p>（2）β射线：衰变有三种类型：$\beta^-$ 衰变、$\beta^+$ 衰变和轨道电子俘获（轨道电子俘获是放射性核俘获一个核外轨道电子而使核内的一个质子转化为中子并放出中微子的过程）；质量数不变；</p>
+<p>（3）X射线和γ射线：是一定能量范围的电磁波，又称光子；质量和电荷数不变。</p>
+<ul>
+<li>γ射线是原子核退激（高激发态向低激发态的跃迁或者粒子的湮灭辐射）时发射的电磁波；</li>
+<li>X射线是原子的核外电子跃迁发射的电磁波。</li>
+<li>光子的静止质量为0，单个光子的质量与辐射的频率 $\nu$ 成正比，$E &#x3D; h\nu$，$h$ 为普朗克常数。</li>
+</ul>
+<p>（4）中子：自由中子是不稳定的，它会自发发生 $\beta^-$ 衰变，生成质子、电子和反中微子，中子的半衰期是10.6 min。常用的中子源：同位素中子源、加速器中子源、反应堆中子源。</p>
+<p>3.能够直接或间接引起介质原子电离或激发的核辐射叫电离辐射。</p>
+<h3 id="1-3-2-射线与物质的相互作用"><a href="#1-3-2-射线与物质的相互作用" class="headerlink" title="1.3.2 射线与物质的相互作用"></a>1.3.2 射线与物质的相互作用</h3><p>4.带电粒子与物质相互作用能量损失有：电离损失和辐射损失。</p>
+<p>（1）电离能量损失率Se，是入射粒子在在物质中穿过单位长度的路程时由于电离、激发过程损失的能量。Se随入射粒子速度增加而减小，呈平方比关系；电离能量损失率与入射粒子电荷平方数成正比。</p>
+<p>（2）轫致辐射：高速运动的带电粒子受到突然加速或减速会发射出具有连续能量的电磁辐射。</p>
+<p>（3）射程：一定能量的带电粒子它入射方向所能穿透的最大距离；实际轨迹的长度称作路程。</p>
+<p>（4）穿透能力：α粒子&lt;β粒子&lt;中子。所以，α粒子防止内照射，β粒子、中子要防止外照射。</p>
+<p>5.γ射线与物质相互作用能量损失有：光电效应、康普顿效应、电子对效应。</p>
+<p>（1）光电效应：γ光子把全部能量传递给原子核的核外电子，电子摆脱原子核束缚并发射出去，γ光子消失。</p>
+<p>（2）康普顿效应：γ光子把一部分能量传递给核外电子，电子摆脱原子核束缚并发射出去，γ光子能量降低变成一个新的光子。</p>
+<p>（5）电子对效应：γ光子在原子核库仑力作用下转化为一对正负电子，γ光子消失。只有当入射γ光子能量 $E &#x3D; h\nu \geq 1.02$ MeV 时才有可能发生电子对效应。</p>
+<p>6.介质对 X、γ 射线的衰减规律：$I &#x3D; I_0 e^{-\mu x}$，即射线穿过物质时其注量率随穿过的厚度 $x$ 的增加而指数衰减。其中，$I$ 为射线注量率，$I_0$ 为入射时射线注量率，$\mu$ 叫做线性吸收系数，单位是 cm$^{-1}$，表示射线穿过单位厚度物质时发生相互作用的概率（或者被吸收的概率）。</p>
+<p>7.中子与物质的相互作用：中子与原子核作用产生的次级产物能使物质原子发生电离和激发，因此中子与物质相互作用也可以称为电离辐射。</p>
+<p>（1）中子的散射：中子与原子核发生弹性散射与非弹性散射，并产生反冲核；</p>
+<p>（2）中子的俘获：中子与原子核形成复合核，处于激发态的复合核可能发射一个或多个光子，这一过程叫“辐射俘获”；也可能发射一个或多个粒子而回到基态，这一过程称为中子核反应。</p>
+<h2 id="1-4-原子核反应"><a href="#1-4-原子核反应" class="headerlink" title="1.4 原子核反应"></a>1.4 原子核反应</h2><p>1.核反应是产生不稳定核的最重要的手段，当入射粒子与核的距离接近到$10^{-15}m$时，两者之间的相互作用就会引起原子核的各种变化。</p>
+<h3 id="1-4-1-核反应的一般描述"><a href="#1-4-1-核反应的一般描述" class="headerlink" title="1.4.1 核反应的一般描述"></a>1.4.1 核反应的一般描述</h3><p>2.核反应分类：</p>
+<p>（1）按出射粒子分类：</p>
+<ul>
+<li>①对出射粒子和入射粒子相同的核反应称为散射，又可以分为弹性散射与非弹性散射。</li>
+<li>②对出射粒子和入射粒子不相同的核反应，当出射粒子为γ射线时称为辐射俘获。</li>
+</ul>
+<p>（2）按入射粒子分类：</p>
+<ul>
+<li>①中子核反应：最重要的是热中子辐射俘获(n,γ)，很多人工放射性核素由此反应制备，如60Co源。</li>
+<li>②带电粒子核反应：质子引起的核反应；氘核引起的核反应；α粒子引起的核反应；重离子引起的核反应。</li>
+<li>③光核反应：γ光子引起的核反应，常见的是(γ,n)；</li>
+<li>④电子也能引起核反应。</li>
+</ul>
+<p>（3）按照入射粒子能量分类：①入射粒子100MeV以下，称低能核反应；②100MeV～1GeV，称中能核反应；③1GeV以上，称高能核反应。</p>
+<h3 id="1-4-2-核反应能及其阈能"><a href="#1-4-2-核反应能及其阈能" class="headerlink" title="1.4.2 核反应能及其阈能"></a>1.4.2 核反应能及其阈能</h3><p>3.核反应及其阈能</p>
+<ul>
+<li>反应能$Q&#x3D;（B_b+B_B）-（B_a+B_A）$</li>
+<li>核反应阈能$T_{th}$：对吸能反应而言，能发生核反应的最小入射粒子动能$T_α$称为核反应阈能$T_{th}$。</li>
+<li>阈能$T_{th}$与反应能Q的关系：$T_{th}&#x3D;(m_α+m_A)&#x2F;m_A×|Q|$</li>
+</ul>
+<h3 id="1-4-3-核反应截面和产额"><a href="#1-4-3-核反应截面和产额" class="headerlink" title="1.4.3 核反应截面和产额"></a>1.4.3 核反应截面和产额</h3><p>4.核反应截面和产额</p>
+<ul>
+<li>①核反应截面：一个入射粒子入射到单位面积内只含有一个靶核的靶子上所发生反应的概率。其量纲为面积，常用单位为”巴”，$1b&#x3D;10^{-28}m^2&#x3D;10^{-24}cm^2$</li>
+<li>②核反应中各种截面均与入射粒子的能量有关。</li>
+<li>③已知截面即可求核反应的产额，入射粒子在靶体引起的核反应数与入射粒子数之比称为核反应的产额。$Y&#x3D;N&#x2F;I_0$，Y与反应截面、靶的厚度、组成有关。</li>
+</ul>
+<h2 id="1-5核裂变及核能的利用"><a href="#1-5核裂变及核能的利用" class="headerlink" title="1. 5核裂变及核能的利用"></a>1. 5核裂变及核能的利用</h2><h3 id="1-5-1-自发裂变与诱发裂变"><a href="#1-5-1-自发裂变与诱发裂变" class="headerlink" title="1.5.1 自发裂变与诱发裂变"></a>1.5.1 自发裂变与诱发裂变</h3><p>1.自发裂变：在没有外来粒子轰击下原子核自行发生裂变的现象；自发裂变：$Q_{f,s} &#x3D; B(Z_1,A_1) + B(Z_2,A_2) - B(Z,A)$</p>
+<ul>
+<li>自发裂变发生的条件：$Q_{f,s}&gt;0$，即两裂变碎片的结合能大于裂变核的结合能。</li>
+<li>自发裂变核是一种很强的中子源。有 $^{244}\text{Cm}$、$^{249}\text{Bk}$、$^{252}\text{Cf}$、$^{255}\text{Fm}$ 元素。</li>
+</ul>
+<p>2.诱发裂变：在外来粒子轰击下原子核才发生裂变的现象。</p>
+<ul>
+<li>热中子核裂变：易裂变核 $^{235}\text{U}$、$^{233}\text{U}$、$^{239}\text{Pu}$</li>
+<li>阈能核裂变：不易裂变核 $^{238}\text{U}$、$^{232}\text{Th}$</li>
+</ul>
+<h3 id="1-5-2-裂变后现象"><a href="#1-5-2-裂变后现象" class="headerlink" title="1.5.2 裂变后现象"></a>1.5.2 裂变后现象</h3><p>3.裂变中子包含瞬发中子和缓发中子两部分，缓发中子约占总数的1%（为0.65%），瞬发中子的能谱 $N(E)$ 和每次裂变放出的平均中子数 $\bar{\nu}$，是重要的物理量。以$^{235}\text{U}$ 诱发裂变为例，释放能量约208 MeV。 </p>
+<h1 id="二、核反应堆工程基础"><a href="#二、核反应堆工程基础" class="headerlink" title="二、核反应堆工程基础"></a>二、核反应堆工程基础</h1><ul>
+<li>熟悉核裂变及核能的利用、核反应堆的基本工作原理、反应性与反应性的控制、堆内的释热与传热。</li>
+</ul>
+<h2 id="2-1-核反应堆的基本工作原理"><a href="#2-1-核反应堆的基本工作原理" class="headerlink" title="2.1 核反应堆的基本工作原理"></a>2.1 核反应堆的基本工作原理</h2><p>1.1942年12月1日，美国科学家费米，石墨堆，首次实现原子核链式反应。</p>
+<h3 id="2-1-1-中子与原子核的相互作用"><a href="#2-1-1-中子与原子核的相互作用" class="headerlink" title="2.1.1 中子与原子核的相互作用"></a>2.1.1 中子与原子核的相互作用</h3><p>2.中子与原子核的相互作用：中子与原子核反应有散射（无新核素生成）和吸收（有新核素生成）两种。</p>
+<ul>
+<li>散射-分弹性散射（慢化）和非弹性散射（非弹性散射具有阈能的特点）。</li>
+<li>吸收（n,a）又包括辐射俘获（n,c）、裂变反应（n,f）。常见的中子俘获（n,c）反应是辐射俘获（n,γ）反应。</li>
+<li>铀238→铀239（n,γ），对核燃料增殖和原子能的利用具有重大意义。<br>$^{238}<em>{92}\text{U} + ^1_0\text{n} \to ^{239}</em>{92}\text{U} + \gamma$<br>$^{239}<em>{92}\text{U} \xrightarrow {\beta^-} ^{239}</em>{93}\text{Np} \xrightarrow{\beta^-} ^{239}_{94}\text{Pu}$</li>
+<li>硼10→锂7(n,α)，硼作为反应性控制材料，用来制作中子探测器。<br>$^{10}_5\text{B} + ^1_0\text{n} \to ^7_3\text{Li} + ^4_2\text{He}$</li>
+<li>氧16→氮16(n,p)，$^{16}_7\text{N}$ 衰变产生3种高能γ射线，是水中放射性主要来源。<br>$^{16}_8\text{O} + ^1_0\text{n} \to ^{16}_7\text{N} + ^1_1\text{H}$</li>
+<li>铀235核裂变反应(n,f)，产生两个裂变碎片，平均2.5个中子，约200 MeV能量。<br>$^{235}<em>{92}\text{U} + ^1_0\text{n} \to (^{236}</em>{92}\text{U})^* \to ^{A_1}<em>{Z_1}\text{X} + ^{A_2}</em>{Z_2}\text{X} + 2.5 ^1_0\text{n} + 200 \text{ MeV}$</li>
+</ul>
+<p>3.易裂变核素：$^{233}\text{U}$、$^{235}\text{U}$、$^{239}\text{Pu}$、$^{241}\text{Pu}$。可裂变核素：$^{232}\text{Th}$、$^{238}\text{U}$。</p>
+<h3 id="2-1-2-核反应截面和核反应率密度"><a href="#2-1-2-核反应截面和核反应率密度" class="headerlink" title="2.1.2 核反应截面和核反应率密度"></a>2.1.2 核反应截面和核反应率密度</h3><p>4.微观截面 $\sigma$：一个原子核与入射的一个中子发生核反应的概率（与核素种类、中子能量有关），b &#x3D; 10$^{-24}$ cm$^2$。</p>
+<p>5.宏观截面 $\Sigma$：一个中子与单位体积内所有原子核发生核反应的概率，也表示一个中子在介质中穿过单位距离与靶核发生核反应的概率大小（与核素种类、中子能量、燃料富集度有关）。其单位是长度的倒数，常用 1&#x2F;cm。如：宏观吸收截面 $\Sigma_a &#x3D; 0.25$&#x2F;cm 表示一个中子在介质中穿过1 cm被吸收的概率是25%。</p>
+<p>6.平均自由程：粒子在靶物质中连续两次相互作用之间穿行的平均距离，是散射宏观截面的倒数。</p>
+<p>7.中子通量（也叫中子注量率）$\Phi$：单位体积内中子数与中子速度 $V$（常采用中子的平均速度）之积，表示在单位时间内穿过与其速度矢量方向垂直的单位面积的中子总数。</p>
+<p>8.中子密度 $n$：任一时刻在1 cm$^3$ 的物质中所包含的中子数。</p>
+<p>9.中子通量密度：这些中子在每秒钟所穿行的总距离。</p>
+<p>10.中子核反应率 $R$：在单位时间、单位体积靶核内 $n$ 个中子与原子核发生核反应的总次数。$R &#x3D; \Sigma \cdot \Phi &#x3D; \Sigma \cdot n \cdot V$</p>
+<p>11.核截面随中子能量变化的规律：</p>
+<ul>
+<li>低能区（$E &lt; 1$ eV），吸收截面 $\sigma_a$ 随中子能量减小而增大，大致与中子速度成反比，也称 1&#x2F;V 区；</li>
+<li>中能区（$1$ eV $&lt; E &lt; 10^4$ eV），重元素出现很多共振峰值；</li>
+<li>高能区（$E &gt; 10^4$ eV），也称快中子区，吸收截面小于10靶，且截面随能量的变化也趋于平滑。</li>
+</ul>
+<h3 id="2-1-3-中子的慢化"><a href="#2-1-3-中子的慢化" class="headerlink" title="2.1.3 中子的慢化"></a>2.1.3 中子的慢化</h3><p>12.中子的慢化：核燃料原子核裂变时放出的中子都是高能中子，平均能量达到2MeV，最大达到10MeV。为提高中子与235U核发生裂变的几率，必须把快中子减速到热中子能量的过程。</p>
+<p>13.慢化剂：使中子慢化的物质。</p>
+<p>14.慢化比是评价慢化剂优劣的一个重要参数，慢化能力（能降ξ与散射截面Σs的乘积）越小，堆要求越大；慢化比（慢化能力除以吸收截面）越低，富集度要求越高。</p>
+<p>15.热中子：介质原子核处于热平衡状态的中子为热中子，在20℃时热中子的最可几速率是2200m&#x2F;s，相应的能量是0.0253eV。</p>
+<h3 id="2-1-4-核反应堆临界条件"><a href="#2-1-4-核反应堆临界条件" class="headerlink" title="2.1.4 核反应堆临界条件"></a>2.1.4 核反应堆临界条件</h3><p>16.有效增值系数：$K_{eff} &#x3D; \frac{\text{新一代中子数}}{\text{老一代裂变中子数}} &#x3D; \frac{\text{中子产生率}}{\text{中子消失率}}$，必须 $K_{eff} &gt; 1$ 裂变反应才能继续下去。</p>
+<p>17.核反应堆临界条件：$K_{eff} &#x3D; 1$</p>
+<p>18.无限介质增值系数：K∞</p>
+<p>19.裂变机率&#x3D;宏观裂变截面&#x2F;宏观吸收截面</p>
+<h3 id="2-1-5-核燃料的消耗、转化与增殖"><a href="#2-1-5-核燃料的消耗、转化与增殖" class="headerlink" title="2.1.5 核燃料的消耗、转化与增殖"></a>2.1.5 核燃料的消耗、转化与增殖</h3><p>20.燃耗深度：表示核燃料燃烧的充分程度，在动力堆中定义为每吨初始装载的铀放出的能量，即单位质量的铀所发出的能量，单位是MWd&#x2F;tU。需注意的是，这里指的铀，包括$^{235}\text{U}$ 和$^{238}\text{U}$，并非只是$^{235}\text{U}$。</p>
+<p>21.卸料燃耗深度：堆芯卸料时所达到的燃耗深度。它受反应堆核特性（剩余反应性）和燃料元件本身的性能（元件的机械性能）两方面影响。</p>
+<p>22.转化比$CR &#x3D; \frac{\text{易裂变核的平均生成率}}{\text{易裂变核的平均消耗率}}$；</p>
+<p>23.增值比BR，即CR大于1，目前主流的增值堆是钠冷快堆，$^{239}\text{Pu}$ 作为燃料（CR~1.2）。</p>
+<h3 id="2-1-6-堆内中子注量率分布与功率展平"><a href="#2-1-6-堆内中子注量率分布与功率展平" class="headerlink" title="2.1.6 堆内中子注量率分布与功率展平"></a>2.1.6 堆内中子注量率分布与功率展平</h3><p>24.反应堆的中子注量分布的形状只取决于反应堆的几何形状，而与反应堆的功率大小无关。</p>
+<p>25.同等体积的堆，球形的中子泄漏最小，圆柱次之，长方体泄漏最大。</p>
+<p>26.目前大部分采用圆柱形堆芯，其热中子注量率分布在高度方向上为余弦函数分布，在半径方向上为零阶贝塞尔函数分布。</p>
+<p>27.带反射层的反应堆中子分布：<br>①堆芯外围加上反射层，把泄漏到堆芯外面的中子通过散射再返回堆芯，以减少堆内中子的泄漏，使得同样成分的反应堆堆芯的尺寸可以减小。<br>②原来在堆芯边缘地区的中子通量密度将会增加，使得中子通量密度分布更为平坦。</p>
+<p>28.控制棒分为三类：（1）用于紧急停堆控制的停堆棒；（2）用于功率调节和温度调节的调节棒；（3）用于补偿反应性缓慢变化的补偿棒。</p>
+<p>29.功率密度分布展平的重要性：<br>（1）提高堆功率水平的有效措施应是在保证最高热负荷不变的情况下，提高整个堆的平均功率水平；<br>（2）要提高堆的平均功率水平，就必须采取措施改善堆内功率密度的分布使之更为均匀平坦，即功率密度分布的展平，如果是单一燃料情况，功率密度分布的展平实际上就是中子通量的展平。</p>
+<p>30.功率密度分布的展平方法：<br>（1）堆芯径向分区装载；（2）合理布置控制棒；（3）引入合理分布的可燃毒物。</p>
+<h2 id="2-2-反应性与反应性的控制"><a href="#2-2-反应性与反应性的控制" class="headerlink" title="2.2 反应性与反应性的控制"></a>2.2 反应性与反应性的控制</h2><h3 id="2-2-1-反应性的概述"><a href="#2-2-1-反应性的概述" class="headerlink" title="2.2.1 反应性的概述"></a>2.2.1 反应性的概述</h3><p>1.反应性 $\rho$：是指上一代与下一代中子数的相对变化，表示系统偏离临界的程度。$\rho &#x3D; \frac{k_{eff}-1}{k_{eff}}$，三种状态：超临界、临界、次临界状态。反应性以 pcm（percent mille）作为单位，$1 \text{ pcm} &#x3D; 10^{-5}$。</p>
+<p>2.反应堆中重要的反应性值有：剩余反应性、控制毒物的价值、停堆深度等。</p>
+<p>3.剩余反应性：在反应堆中没有任何毒物（如控制棒、可燃毒物、化学补偿毒物等）的条件下，反应堆的反应性称为剩余反应性。也可理解为在任何时刻通过对控制元件和其它用于控制反应性的毒物的调节所能获得的最大反应性。剩余反应性的大小与反应堆的运行时间和工况有关。</p>
+<p>4.停堆深度：是指反应堆处于次临界状态下，堆芯所达到的负反应性，就是次临界度。</p>
+<p>5.停堆裕度：安全分析中使用的一种概念，当所有的控制棒都投入堆芯（假设价值最大的一束控制棒卡在堆外），反应堆所达到的负反应性。停堆裕度与反应堆运行时间（燃耗）和工况（硼浓度）有关，与反应堆的功率水平和控制棒的位置无关。</p>
+<p>6.在任何时候，反应堆都有停堆裕度，而在反应堆临界状态下，没有停堆深度可言。</p>
+<p>7.紧急停堆后反应堆的停堆深度（次临界度）必须大于所规定的停堆裕度。对于换料堆芯，寿期末、热态零功率状态的停堆裕度不得低于2300pcm。</p>
+<h3 id="2-2-2-反应性系数"><a href="#2-2-2-反应性系数" class="headerlink" title="2.2.2 反应性系数"></a>2.2.2 反应性系数</h3><p>8.反应性系数：</p>
+<p>（1）温度系数 $\alpha_T$：温度变化1℃或1 K引起的反应性的变化。包括：</p>
+<ul>
+<li>燃料温度系数 $\alpha_{T_f}$：燃料温度变化1℃或1 K引起的反应性的变化。（瞬时效应，一般 $\alpha_{T_f}$ 必须为负）</li>
+<li>慢化剂温度系数 $\alpha_{T_m}$：慢化剂温度变化1℃或1 K引起的反应性的变化。（滞后效应，欠慢化时，$\alpha_{T_m}$ 为负）</li>
+</ul>
+<p>（2）压力系数 $\alpha_p$：冷却剂压力变化引起的反应性变化，主要是因为压力会引起慢化剂密度变化。（欠慢化时，$\alpha_p$ 为正，对于压水堆而言 $\alpha_p$ 很小，可以忽略）</p>
+<p>（3）空泡系数 $\alpha_V$：冷却剂内的空泡份额变化百分之一所引起的反应性变化。一般来说，会导致慢化能力下降，对压水堆是负效应，对快堆可能是正效应。</p>
+<p>（4）功率系数 $\alpha_p$：反应性功率系数是单位功率变化引起的反应性变化，也称反应性微分功率系数。主要是因为反应堆功率变化时，堆内燃料温度、慢化剂温度、空泡份额都会变化，所以：$\alpha_p &#x3D; \alpha_T + \alpha_V$整个堆芯寿期中，要求αp为负，通常它在寿期末的负值的绝对值更大。</p>
+<p>9.水铀比：慢化剂和燃料的核密度之比，在水堆中为水铀比，这个值对于分析慢化剂的温度效应十分重要；增大水铀比，中子的泄露会降低，但是慢化剂里中子的吸收会增加；降低水铀比，中子的慢化时间增大，使得快中子的共振吸收增加，同时也会引起中子泄漏；水铀比过小称为欠慢化，水铀比过大称为过慢化，轻水堆一般设计成欠慢化的，以保证慢化剂的负的温度效应。</p>
+<h3 id="2-2-3-影响反应性变化的因素"><a href="#2-2-3-影响反应性变化的因素" class="headerlink" title="2.2.3 影响反应性变化的因素"></a>2.2.3 影响反应性变化的因素</h3><p>10.影响反应性变化的因素：<br>（1）燃料和重同位素成分的变化；<br>（2）氙毒、碘坑和结渣。</p>
+<p>11.毒物效应：毒物对反应性的作用称为毒物效应。以氙效应最为重要，一是其引入的负反应性大（约2900 pcm），二是其变化快，不易控制。平衡钐约引入600 pcm的负反应性，其变化相对氙慢得多。</p>
+<p>12.氙效应：</p>
+<ul>
+<li>生成：（1）裂变直接产生（可忽略）；（2）$^{135}\text{I}$ 衰变形成（$^{135}\text{Te}$ 半衰期极短）。</li>
+<li>消失：（1）形成 $^{136}\text{Xe}$（俘获中子）；（2）放射性衰变生成 $^{135}\text{Cs}$；</li>
+<li>功率的影响：功率越大（中子通量密度越高），其平衡氙浓度越大（正相关）。</li>
+<li>升功率：功率↑—→中子通量↑—→氙吸收中子↑—→氙浓度↓—→碘浓度↑—→（碘衰变生成氙&gt;消失的氙）—→氙浓度↑—→平衡。</li>
+<li>停堆：来自裂变直接产生的氙和由于吸收中子而消耗的氙都几乎停止，氙主要来自于碘衰变，通过自身衰变消失。氙浓度最初将增加。峰值大约在停堆后8-9h出现（停堆死区、死时间），最大值约为停堆前功率运行的平衡氙浓度的2倍，大约3天后氙几乎完全消失。</li>
+<li>碘坑：反应堆在某一功率下运行较长时间后停堆或降功率，此时$^{135}\text{Xe}$ 的生成量大于消耗量，由此引起 $^{135}\text{Xe}$ 的浓度逐步增大，达到最大值后又逐步衰减，直至浓度降到零。$^{135}\text{Xe}$ 浓度达到最大值时所对应的负反应性，我们称之为”碘坑”。</li>
+<li>变化规律：稳态随功，升谷降峰，停堆三日、难觅其踪。</li>
+<li>氙振荡的周期大约是15-30小时，是可以被控制的，如可利用控制棒进行抑制。</li>
+</ul>
+<p>13.钐效应：</p>
+<ul>
+<li>生成：由$^{149}\text{Pm}$（钷）衰变而成</li>
+<li>消失：俘获中子消失</li>
+<li>在长期稳定功率运行时，$^{149}\text{Sm}$ 的平衡浓度与通量无关，是一个恒定值。$^{149}\text{Pm}$ 与中子通量有关。<br>当反应堆停堆后，所有的 $^{149}\text{Pm}$ 将转变为 $^{149}\text{Sm}$，所以 $^{149}\text{Sm}$ 浓度变成了 $^{149}\text{Pm} + ^{149}\text{Sm}$。故停堆后 $^{149}\text{Sm}$ 的平衡浓度与停堆前的功率（停堆前功率越高，Pm越多）有关。</li>
+<li>变化规律：稳态不随功（600pcm），升谷降峰，停堆累积。</li>
+</ul>
+<p>14.结渣：除了氙毒、钐毒之外的其他裂变产物。</p>
+<h3 id="2-2-4-反应性的控制"><a href="#2-2-4-反应性的控制" class="headerlink" title="2.2.4 反应性的控制"></a>2.2.4 反应性的控制</h3><p>15.根据控制毒物在调节过程中的作用和要求，可把反应性控制分为三种类型：<br>（1）紧急停堆控制。当反应堆出现异常工况需要紧急停堆时，要求控制系统能迅速引入一个大的负反应性，快速停堆，并达到一定深度。<br>（2）功率调节控制。当外界负荷或堆芯温度发生变化时，要求控制系统必须引入一个适当反应性，以满足反应堆功率调节的需要。在操作上要求既简单又灵活。<br>（3）补偿控制。用于补偿燃耗、裂变产物积累所需的剩余反应性，所要控制的反应性当量是大的，但由于这些反应性的变化是很缓慢的，所以相应的控制毒物的过程也是十分缓慢的。</p>
+<p>16.向堆芯加入或提出控制毒物有三种方式：<br>（1）控制棒：在堆芯内插入可移动的含有中子吸收材料的控制棒；<br>（2）可燃毒物：堆芯寿期的长短通常取决于反应堆初始燃料装载量，用以补偿堆芯寿命初期的剩余反应性的物质叫可燃毒物。<br>（3）可溶毒物：可溶毒物是一种吸收中子能力很强的可以溶解在冷却剂中的物质。</p>
+<p>17.反应性控制手段：化学补偿、控制棒、可燃毒物控制。</p>
+<table>
+<thead>
+<tr>
+<th>控制方式</th>
+<th>控制的反应性变化</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>控制棒控制</td>
+<td>燃料的多普勒效应，慢化剂的温度和空泡效工况变化时的瞬态氙效应，硼稀释效应，热态停堆深度</td>
+<td>调节速度快方便、可靠。</td>
+<td>引起轴向中子畸变</td>
+</tr>
+<tr>
+<td>可燃毒物控制</td>
+<td>补偿初期的剩余反应性</td>
+<td>展平堆芯的径向功率</td>
+<td>寿期末的残渣(放射性)</td>
+</tr>
+<tr>
+<td>化学补偿控制</td>
+<td>反应堆从冷态到热态(零功率)时慢化剂的温度效应，易裂变核素燃耗和长寿期裂变产物积累的反应性变化，平衡氙和平衡钐效应</td>
+<td>调节均匀，不产生畸变</td>
+<td>调节作用慢，对温度系数有影响</td>
+</tr>
+</tbody></table>
+<h2 id="2-3-核反应堆内的释热与传热"><a href="#2-3-核反应堆内的释热与传热" class="headerlink" title="2.3 核反应堆内的释热与传热"></a>2.3 核反应堆内的释热与传热</h2><h3 id="2-3-1-核反应堆热源及其分布"><a href="#2-3-1-核反应堆热源及其分布" class="headerlink" title="2.3.1 核反应堆热源及其分布"></a>2.3.1 核反应堆热源及其分布</h3><p>1.一般认为每一个235U，233U或239Pu的原子核，裂变时大约要释放出200 MeV的能量。不包括裂变过程释放出由中微子带走无法利用的约12MeV能量。</p>
+<p>2.在压水动力堆工程设计中，通常取燃料元件的释热量占堆芯总释热量的97.4%。</p>
+<h3 id="2-3-2-传热的基本方式"><a href="#2-3-2-传热的基本方式" class="headerlink" title="2.3.2 传热的基本方式"></a>2.3.2 传热的基本方式</h3><p>3.三种基本的热传递方式：热传导、对流和热辐射。</p>
+<p>4.热传导：热量从物体中温度较高的部分传递到温度较低的部分，或者从温度较高的物体传递到与之接触的温度较低的另一物体的过程称为热传导。</p>
+<p>4.傅里叶定律：$Q &#x3D; -kF\frac{dt}{dx}$<br>其中，$Q$ 为热量，单位是焦耳（J）；$k$ 为导热系数（也称热导率），单位 W&#x2F;(m·℃)；$t$ 为温度；$x$ 为厚度；负号表示热量传递的方向同温度升高的方向相反；$F$ 为传热面积。</p>
+<p>5.对流和对流换热：对流是指流体各部分之间发生相对位移，从而把热量从一处带到另一处的热传递现象。对流仅能发生在流体中，而且必然伴随有载热现象。工程上常遇到的不是单纯的对流方式，而是流体流过另一固体表面时对流和导热联合起作用的热量传递，称为对流换热。</p>
+<ul>
+<li>对流换热的基本计算式为牛顿冷却公式：$q &#x3D; h(T_w - T_b)$</li>
+<li>其中，$F$ 为与流体接触的壁面面积，m$^2$；$T_w$ 是固体的壁面温度；</li>
+<li>$T_b$ 是流体的平均温度；$h$ 是对流换热系数，单位为 W&#x2F;(m$^2$·℃)</li>
+</ul>
+<p>6.影响对流换热的因素有五个方面：<br>（1）流体流动的原因:强迫、自然；（2）流体的流态：层流、紊流；（3）流体有无相变发生：沸腾、凝结、两相流；（4）流体的物理性质：流体工质；（5）换热面的几何因素：尺寸、形状、换热表面。</p>
+<p>7.热辐射：一切物体都有辐射粒子（光子）的能力，辐射粒子具有的能量称为辐射能。物体通过电磁波来传递能量的方式称为辐射。物体会因各种原因发出辐射能，其中因热的原因而发出辐射能的现象就是热辐射。</p>
+<p>8.热辐射可以在真空中传播，而热传导和对流传热这两种热传递方式只能在有介质的条件下才会发生。</p>
+<p>9.在压水堆稳态工况，堆内温度不高，辐射换热相对于导热和对流小得多，一般不考虑。但是在事故工况下，堆内温度可达到相当高的温度，就要考虑热辐射。</p>
+<h3 id="2-3-3-沸腾传热"><a href="#2-3-3-沸腾传热" class="headerlink" title="2.3.3 沸腾传热"></a>2.3.3 沸腾传热</h3><p>10.沸腾传热：通常是最有效的传热机理，在压水堆中它存在于蒸汽发生器、稳压器的电加热器表面等传热设备之中。</p>
+<p>11.沸腾可以分为池式沸腾和流动沸腾。池式沸腾就是流体在一个大容积的容器内被加热实现的沸腾。流动沸腾是液体流过传热面时产生的沸腾。在沸水堆的堆芯和蒸汽发生器传热管二次侧出现的都是流动沸腾，稳压器中则是池式沸腾。</p>
+<p>12.沸腾危机：由于沸腾机理的变化引起传热系数陡降，导致传热壁面湿度骤然升高的现象称为沸腾危机，发生沸腾危机时的热流密度称为临界热流密度。</p>
+<p>13.两种沸腾危机:<br>(1)偏离泡核沸腾（DNB），其机理是泡核沸腾在热流密度足够大时突然转变成膜态沸腾，它发生在含汽率很低或者欠热的液体中；<br>(2)干涸（Dryout），其机理是环状流的液膜由于不断蒸发而破裂甚至蒸干，传热面由于失去液膜覆盖而传热性能变差，这种沸腾危机发生在含汽率很高的环状两相流中。</p>
+<h3 id="2-3-4-临界热流密度和偏离炮和沸腾比"><a href="#2-3-4-临界热流密度和偏离炮和沸腾比" class="headerlink" title="2.3.4 临界热流密度和偏离炮和沸腾比"></a>2.3.4 临界热流密度和偏离炮和沸腾比</h3><p>14.在堆芯中传热恶化的危险主要来自偏离泡核沸腾，但在一回路大破口失水事故中的堆芯裸露阶段，也有可能出现干涸。</p>
+<p>15.由于下列两种原因，堆芯中发生偏离泡核沸腾的后果比发生干涸时严重很多：<br>（1）发生偏离泡核沸腾的时热流密度特别大。<br>（2）在从泡核沸腾转变成膜态沸腾时，传热系数降低的幅度很大。</p>
+<p>16.根据W-3公式，压水堆稳态额定工况时一般可取DNBR限值为1.8～2.2，对于可预见的事故工况，要求DNBR的双95%限值为1.3。</p>
+<p>17.发生偏离泡核沸腾时热流密度的成为临界热流密度记作qDNB。qDNB的大小主要受下列因素影响：<br>（1）质量流速。流速大，流体的扰动强，加热面上难以形成稳定的汽膜，因而使qDNB增大；<br>（2）通道进口处水的欠热度。欠热度越大qDNB越大；<br>（3）工作压力。压力增加会使饱和温度上升，因而两相流中的含汽率减小，这使qDNB增加；<br>（4）发生DNB处冷却剂的焓。冷却剂的焓越大，越易产生气泡，故qDNB越小；<br>（5）加热表面的粗糙度。粗糙度大，流体搅动加强，使气泡容易脱离壁面，qDNB有所增大。
+ </p>
+<h1 id="三、核反应堆与核动力厂"><a href="#三、核反应堆与核动力厂" class="headerlink" title="三、核反应堆与核动力厂"></a>三、核反应堆与核动力厂</h1><ul>
+<li>了解核反应堆的主要类型以及核动力厂使用的其他核反应堆堆型；国内外新型压水反应堆（AP1000、CAP1400、EPR、华龙一号等）；研究堆的基本概念、应用领域以及国内外典型研究堆；反应堆及核动力装置的功率控制、核反应堆保护系统。</li>
+<li>熟悉压水堆核电厂的基本特点、系统及设备组成。</li>
+</ul>
+<h2 id="3-0-引言"><a href="#3-0-引言" class="headerlink" title="3.0 引言"></a>3.0 引言</h2><p>1.民用核设施包括：<br>（1）核电厂、核热电厂、核供汽供热厂等核动力厂；<br>（2）核动力厂以外的研究堆、实验堆、临界装置等其他反应堆；<br>（3）核燃料生产、加工、贮存和后处理设施等核燃料循环设施；<br>（4）放射性废物的处理、贮存、处置设施；<br>（5）其他需要严格监督管理的核设施。</p>
+<p>2.核设施主要存在临界安全和辐射安全问题。</p>
+<h2 id="3-1-核反应堆的主要类型"><a href="#3-1-核反应堆的主要类型" class="headerlink" title="3.1 核反应堆的主要类型"></a>3.1 核反应堆的主要类型</h2><p>1.按照功能分类：<br>（1）研究堆，用来研究中子特性；<br>（2）生产堆，主要是生产新的易裂变核素233U，239Pu和各种不同用途的同位素；<br>（3）动力堆，包括军用动力堆和民用动力堆。</p>
+<p>2.按照中子能谱分类<br>（1）快中子堆中，裂变是由快中子（平均能量达0.1MeV左右）引起的，因此堆内不能存有中子慢化剂材料。<br>（2）中能中子堆，存有一定数量的慢化剂，裂变主要是由中能中子引起的。在快中子堆或中能中子堆中，堆内都必须使用高富集度的核燃料。<br>（3）热中子堆，裂变是由热中子引起的，因此堆内必须有足够的慢化剂。天然铀、低富集铀燃料、$^{233}\text{U}$、$^{239}\text{Pu}$ 都可用作热中子堆的核燃料。世界上已建的堆绝大多数属于这种类型。</p>
+<p>3.按照慢化剂分类：轻水堆、重水堆、石墨慢化反应堆、铍或铍化合物堆。</p>
+<p>4.按照冷却剂分类：<br>（1）气冷反应堆：包括CO$_2$冷却和He气冷却反应堆；<br>（2）液体冷却反应堆：主要包括轻水冷却的压水堆和沸水堆，以及重水冷却的重水反应堆，还可以用有机化合物冷却的液体冷却堆；<br>（3）液态金属冷却的反应堆：主要有钠、钠-钾合金、铋冷、锂冷、铅铋合金等冷却的反应堆。</p>
+<p>5.按照核燃料分类：天然铀燃料堆、低富集铀燃料堆、高富集铀燃料堆、钍增殖堆。</p>
+<p>6.按照核燃料的形态划分：固体燃料堆、流态燃料堆、半流态燃料堆等。</p>
+<p>7.在以发电为目的的核能动力领域：主要有压水堆（PWR）、沸水堆（BWR）、重水堆（PHWR）、高温气冷堆（HTGR）、快中子堆（LMFBR）这5种堆型。</p>
+<h2 id="3-2-压水堆核电厂"><a href="#3-2-压水堆核电厂" class="headerlink" title="3.2 压水堆核电厂"></a>3.2 压水堆核电厂</h2><p>1.压水堆核电厂采用低富集铀作核燃料，燃料芯块中$^{235}\text{U}$ 的富集度约3%～5%左右。核燃料是高温烧结的圆柱形二氧化铀陶瓷燃料芯块；</p>
+<p>2.压水堆的冷却剂是轻水。轻水不仅价格便宜，而且具有优良的热传输性能。所以在压水堆中，轻水不仅作为中子的慢化剂，同时也用作冷却剂。</p>
+<p>3.轻水有一个明显的缺点，就是沸点低。</p>
+<p>4.压水堆是一种使冷却剂处于高压状态的轻水堆。压水堆冷却剂入口水温一般在290℃左右，出口水温330℃左右，堆内压力15.5MPa。二回路的水280℃、6-7Mpa。</p>
+<p>5.压水堆核电厂最显著的特点是：<br>（1）结构紧凑；（2）堆芯的功率密度大；（3）基建费用低；（4）建设周期短。</p>
+<p>6.压水堆核电厂的主要缺点有两个：<br>（1）必须采用高压的压力容器；<br>（2）必须采用有一定富集度的核燃料。</p>
+<p>7.压水堆反应堆本体：<br>（1）压水堆核电厂主要由核岛和常规岛组成。<br>（2）核岛中的四大部件是反应堆本体、蒸汽发生器（简称蒸发器）、稳压器和主泵。在核岛中的设备系统主要有压水堆本体、一回路系统，以及为支持一回路系统正常运行和保证反应堆安全而设置的辅助系统。<br>（3）常规岛主要包括汽轮机组及二回路等系统，其形式与常规火电厂类似。<br>（4）压水堆本体包括堆芯、压力容器与堆内构件。</p>
+<p>8.压水堆核电厂使用的反应堆本体由堆芯、压力容器、上部堆内构件和下部堆内构件等部分组成。</p>
+<p>9.燃料组件由燃料元件(也称燃料棒)、定位格架和组件骨架等部件组成。大亚湾核电厂压水堆的燃料组件通常17×17正方形排列的燃料元件组成。其燃料元件活性区部分的高度目前主要有3.66 m（12英尺），每根燃料元件中装有271块二氧化铀燃料芯块，每个燃料芯块直径约8.2 mm，高13.5 mm。燃料芯块的区域称为活性区。燃料芯块叠放在壁厚0.57 mm的Zr-4合金包壳中。</p>
+<p>10.Zr作燃料包壳的优点：<br>（1）中子吸收截面小；（2）在高温下有较高的机械强度和抗腐蚀性能；<br>（3）只有少量氚穿过Zr管；（4）正常运行时，与水不发生反应；（5）熔点高（1800℃）。</p>
+<p>11.Zr作燃料包壳的主要缺点是在820℃下锆与水开始发生锆水反应产生氢气，会带来安全问题。</p>
+<p>12.反应堆压力容器：是压水堆核电厂中最关键的设备之一，工作在高压（15.5MPa左右）、高温含硼酸水环境和放射性辐照的条件下，寿命不少于40年。反应堆压力容器由筒体和顶盖两部分组成。反应堆压力容器本体材料属低碳钢，Mn-Ni-Mo低合金钢。与冷却剂接触表面堆焊一层5mm厚的不锈钢。在核动力厂整个寿期，它是不可更换的。</p>
+<p>13.压水堆堆内构件构件包括：<br>（1）下部支承构件；（2）上部支承构件；（3）堆芯仪表支承结构。</p>
+<p>14.堆内构件构件的功能是：<br>（1）支承和固定燃料组件，承受堆芯重量；<br>（2）确保控制棒的对中和导向；<br>（3）引导冷却剂流入和流出燃料组件，合理分配流量；<br>（4）为压力容器提供热屏蔽，减少中子和γ射线的照射；<br>（5）为堆芯内仪表提供导向和支承。</p>
+<p>15.反应堆换料：压水堆初次装料后，大约经过一两年要进行一次更换燃料组件的操作，我们称之为首次换料。这以后，就每隔一段时间换料一次。每次换料只需卸下三分之一的燃料组件。</p>
+<p>16.冷却剂在压力容器流动时，有一部分没有用来冷却燃料元件，此称为旁路流量。应该尽可能减少旁路流量。</p>
+<p>17.一座100万kW电功率的压水堆，堆芯冷却剂流量约为6万t&#x2F;h。</p>
+<p>18.反应堆冷却剂系统可分为冷却系统、压力调节系统和超压保护系统几个部分，包括压力容器、蒸汽发生器、主循环泵、稳压器等设备，由这些设备及相关管路组成整个一回路冷却剂系统，有其特定的压力边界，通常称为一回路压力边界。</p>
+<p>19.控制棒驱动机构的压力外壳也属于一回路压力边界。该压力边界构成了包容放射性物质的一道安全屏障。</p>
+<p>20.一回路压力边界内所有的设备是安全等级、质量等级和抗震等级最高的设备，即安全等级一级、质量保证等级一级和抗震一类的设备。</p>
+<p>21.压力容器、蒸汽发生器、主循环泵和稳压器等一回路系统和设备都被安置在安全壳内，称之为核岛。</p>
+<p>22.蒸汽发生器是压水堆核电厂一、二回路的枢纽，将反应堆产生的热量传递给蒸汽发生器二次侧，产生蒸汽推动汽轮机作功。又是分隔一、二次侧介质的屏障。管板和倒置U形管是冷却剂压力边界的组成部分。但传热管断裂事故在核动力厂设备事故中居首要地位。约占非计划停堆事故的四分之一，可靠性比较低。</p>
+<p>23.压水堆核电厂中的蒸汽发生器主要有下列三种：<br>（1）立式U形管蒸汽发生器；（2）卧式蒸汽发生器；（3）立式直流蒸汽发生器。</p>
+<p>24.田湾核电厂蒸汽发生器是卧式U形管自然循环蒸汽发生器。</p>
+<ul>
+<li>优点是：<br>（1）没有水平管板，取而代之的是立式圆柱形联箱。传热管根部具有一定的流速，杂质不会在这里沉积和浓缩，可避免传热管与联箱结合部位的腐蚀破裂。<br>（2）具有较大的蒸汽空间，单位蒸发面的负荷较立式蒸汽发生器的小，因而，采用较简单的汽水分离装置（百叶窗式）就能保证蒸汽质量满足标准。</li>
+<li>缺点是：<br>（1）出口蒸汽的湿度对水位波动比较敏感，对水位控制要求较高。<br>（2）卧式安放，不便于在安全壳内布置。</li>
+</ul>
+<p>25.反应堆冷却剂泵可分为两大类：<br>（1）全密封泵；（优点是密封性能好，运行安全可靠；缺点是效率相对较低，转动惯量小，维修不便；主要用于核动力舰艇上）<br>（2）轴封泵。（优点是效率较高，转动惯量大，维修方便，适用于大容量机组，目前核动力厂主要采用轴封泵）</p>
+<p>26.主循环泵，对核动力厂主泵有下列要求：<br>（1）长期无人维护下安全可靠运行；（2）结构简单，方便维修；（3）能提供足够大的转动惯量；<br>（4）过流部件表面材料耐腐蚀；（5）带放射性的冷却剂泄漏小。</p>
+<p>27.稳压器：在反应堆压力容器出口和蒸汽发生器之间的热管段安装有稳压器，只要在一条热管段上安装一台稳压器就可以满足稳定堆内压力的需要。<br>基本功能是建立并维持一回路系统的压力，避免冷却剂在反应堆内发生容积沸腾或超压。具体是：<br>（1）压力控制：稳态运行时，维持一回路恒定压力（15.5MPa），防止堆冷却剂汽化；<br>（2）系统瞬态时，将压力变化限制在允许值以内，避免紧急停堆；<br>（3）事故时，防止一回路系统超压，维护一回路的完整性，即在压力超过安全阀阈值时，安全阀开启，蒸汽排放到卸压箱。<br>（4）作为一回路冷却剂的缓冲箱，补偿反应堆冷却剂系统容积变化。<br>（5）在启动时使反应堆冷却剂系统升压，停堆时使反应堆冷却剂系统降压。</p>
+<p>28.安全壳：是包容反应堆冷却剂系统的气密承压构筑物，既承受内压又承受外压的坚固建筑物。安全壳用于保证：<br>（1）在发生失水事故和主蒸汽管道破裂事故时承受内压，容纳喷射出的汽水混合物，防止或减少放射性物质向环境的释放；<br>（2）承受外压以防安全壳外各种可能的冲击，对外部事件（如飞机撞击、龙卷风）进行防护；<br>（3）在正常运行期间，对反应堆冷却剂系统的放射性提供生物屏蔽，并限制污染气体的泄漏。安全作为放射性物质与环境之间的第三道屏障。</p>
+<p>29.安全壳可以是混凝土壳也可以是钢壳。混凝土安全壳也有多种形式，主要有：<br>（1）带密封钢衬的预应力混凝土安全壳；（2）双层安全壳；（3）负压安全壳。<br>从几何形状上有圆柱形的和球形的。</p>
+<p>30.我国秦山和大亚湾核电厂所采用的是带密封钢衬里的单层预应力混凝土安全壳。安全壳底部用钢筋混凝土底板封闭，顶部用准球形的预应力混凝土穹顶封闭，其内表面由一层6mm厚，由焊接钢板组件制成的金属衬里覆盖。</p>
+<p>31.大亚湾压水堆核电厂安全壳整体尺寸如下：筒体混凝土壁厚0.9m，衬里内径37m，高为56.68m。内部有效空间约49000m3。安全壳的设计（绝对）压力为0.52MPa，设计温度为145℃，允许每24小时的（质量）泄漏量为0.1%。</p>
+<p>32.核动力厂一回路辅助系统，按其作用，大致可分为以下几类：<br>（1）保证反应堆和一回路系统正常运行的系统有：化学和容积控制系统，硼和水补给系统，主循环泵轴密封水系统。<br>（2）为核动力厂一回路系统在运行和停堆时提供必要冷却的系统有：设备冷却水系统，重要厂用水系统，余热排出系统（也称为停堆冷却系统），通风系统。<br>（3）在发生重大失水事故时保证核动力厂反应堆及主厂房安全的系统有：安全注入系统，安全壳喷淋系统。<br>（4）控制和处理放射性物质，减少对自然环境放射性排放的系统有：疏排水系统，放射性废液处理系统，废气净化处理系统，废物处理系统，硼回收系统，取样分析系统。<br>（5）一回路其他辅助系统：补给水系统，乏燃料池冷却及净化去污清洗系统等。</p>
+<p>33.化学和容积控制系统，主要功能是：容积控制，化学控制，反应性控制；辅助功能：<br>（1）向反应堆冷却剂泵提供轴封水；<br>（2）为稳压器提供辅助喷淋水，当主喷淋管线不可用时，化容积控制系统提供的稳压器辅助喷淋管线代替主喷淋管线功能。<br>（3）在一回路满水时，稳压器不起作用时，可由化容系统的下泄阀进行压力控制。<br>（4）对于上充泵兼作高压安注泵的化容系统，事故时用上充泵向堆芯注入应急冷却水，从而具有核安全功能。</p>
+<p>34.设备冷却水系统：是一个闭式的冷却水回路，用以防止放射性物质在设备和热交换器发生泄漏时被直接排放到江水和海水中而污染环境。</p>
+<p>35.设备冷却水系统的功能是：<br>（1）冷却功能：为核动力厂一回路主、辅系统接触放射性介质的设备和热交换器提供冷却水，并将其热负荷通过重要厂用水系统传到海水中。<br>（2）隔离作用：该系统是核岛各热交换器与海水之间的一道屏障。它既可以避免放射性流体不可控地释放到海水中而污染环境，又可以防止海水对核岛各热交换器的腐蚀。<br>（3）在事故工况下作为专设安全设施的支持系统，将热量经重要厂用水系统排入环境。</p>
+<p>36.余热排出系统的主要功能是：<br>（1）在停堆后第二阶段，即在一回路温度降到180℃以下、绝对压力降到3.0MPa以下时，排出堆芯余热、一回路水和设备的显热以及运行的主泵在一回路中产生的热量，使反应堆进入冷停堆状态；<br>（2）反应堆在冷停期间，进行换料或维修操作时，排出堆内余热，维持一回路温度低于60℃；<br>（3）除了失水事故（LOCA）引起安全注入系统投入运行的情况以外，在其他事故引起的停堆事故中，余热排出系统也被用来排出热量。</p>
+<p>37.余热排出系统还可能有一些辅助功能，在反应堆从冷停堆开始加热过程中，控制一回路平均温度，保证升温速率在28℃&#x2F;h之内。</p>
+<p>38.安全注入系统的功能是：<br>（1）在一回路小破口失水事故时或在二回路蒸汽管道破裂造成一回路平均温度降低而引起冷却剂收缩时，安全注入系统用来向一回路补水，以重新建立稳压器水位；<br>（2）在一回路大破口失水事故时，安全注入系统向堆芯注水，以重新淹没并冷却堆芯，限制燃料元件温度的上升；<br>（3）在二回路蒸汽管道破裂时，向一回路注入高浓度硼酸溶液，以补偿由于一回路冷却剂连续过冷而引起的正反应性，防止堆芯重返临界。</p>
+<p>39.安全注入系统通常分三个子系统：</p>
+<ul>
+<li>高压安全注入系统；（能动系统，有时间延迟和流量限制）</li>
+<li>中压安全注入系统，即蓄压箱注入系统；（非能动系统，最先启动）</li>
+<li>低压安全注入系统。（能动系统，有时间延迟和流量限制）<br>安注过程包括：直接注入阶段（换料水箱吸水注入）和再循环注入阶段（安全壳地坑吸水注入）。</li>
+</ul>
+<p>40.安全壳喷淋系统主要功能是：从安全壳顶部喷洒冷却水，为安全壳气空间降温降压，限制事故后安全壳内的峰值压力，保证安全壳完整性。<br>安全壳喷淋系统的辅助功能是：<br>（1）喷淋水中加入NaOH，有除碘功能。<br>（2）在再循环安注模式下，安全壳地坑的水需要冷却时，由安全壳喷淋系统的热交换器冷却后再注入堆芯，安全壳喷淋系统是在设计基准事故下可排除安全壳内热量的唯一系统。<br>（3）当反应堆厂房发生火灾时，可手动喷淋灭火；<br>（4）在LOCA后15天，安全壳喷淋泵可作为低压安注泵的备用。</p>
+<p>41.其它一些核岛辅助系统<br>（1）主循环泵轴密封水系统；（2）硼回收系统；<br>（3）补给水系统：补给水系统是为一回路主、辅系统提供所需的除盐水、除氧水及硼回收再生水。<br>（4）取样系统及分析室；（5）去污清洗系统；</p>
+<p>42.二回路系统：<br>（1）核电厂常规岛可分为汽轮机回路、循环冷却水系统和电气系统三部分。<br>（2）压水堆核电厂汽轮机回路，也称为二回路系统，主要功能是将蒸汽发生器产生的饱和蒸汽供汽轮发电机组做功发电和供电站其他辅助设备使用。<br>（3）二回路系统主要由饱和蒸汽汽轮机、发电机、汽水分离再热器，冷凝器、凝结水泵、低压加热器、除氧器、给水泵、高压加热器、循环水泵、中间汽水分离再热器和相应的阀门、管道等组成。<br>（4）循环冷却水系统，亦称三回路。向凝汽器提供冷却水，确保汽轮机凝汽器的有效冷却。<br>（5）电气系统，主要设备为发电机、励磁机、主变压器、厂用变压器、辅助变压器、高压开关站和柴油发电机组等组成。将核动力厂发出的电能向电网输送，同时保证核动力厂内部设备的可靠供电。</p>
+<p>43.饱和蒸汽汽轮机组：大亚湾核电厂的汽轮机为饱和蒸汽、中间再热、多缸单轴系冲动式汽轮机。</p>
+<p>44.发电机组：核动力厂主发电机与火电站发电机不同点在于采用半速四级机组，是核动力厂饱和蒸汽汽轮机所要求的。</p>
+<p>45.根据反应堆事故停堆时安全冷却的需要，希望主发电机及其励磁系统应能带动冷却剂主循环泵进行不低于20～30s的运转。</p>
+<p>46.二回路的辅助系统包括：主蒸汽排放系统、循环冷却水系统、汽轮机再热与抽气系统、凝结水给水系统、化学水处理系统、事故(辅助)给水系统、蒸汽发生器排污系统、控制保护系统和润滑油系统等。</p>
+<h2 id="3-3-核动力厂使用的其他核反应堆堆型"><a href="#3-3-核动力厂使用的其他核反应堆堆型" class="headerlink" title="3.3 核动力厂使用的其他核反应堆堆型"></a>3.3 核动力厂使用的其他核反应堆堆型</h2><p>1.沸水堆：以沸腾水为中子慢化剂和冷却剂，并在反应堆压力容器内直接产生饱和蒸汽的动力堆。堆芯工作压力下降到7MPa左右。</p>
+<p>2.与压水堆相比，沸水堆有以下特点：<br>（1）直接循环，核反应堆产生的蒸汽被直接引入蒸汽轮机。<br>（2）工作压力可以降低，堆芯工作压力下降到沸水堆的7MPa左右。<br>（3）堆芯出现空泡，堆芯处于两相流动状态。<br>（4）沸水堆中采用十字形控制棒在燃料组件盒之间，从底部插入，水力驱动的控制棒传动机构较压水堆复杂。<br>（5）总反应性控制量比压水堆小，控制棒占15～17％Δk&#x2F;k，停堆深度4％Δk&#x2F;k。正常反应性控制由控制棒（为主）、可燃毒物和慢化剂空泡效应共同完成。<br>（6）在一回路水总量和压力控制方面，沸水堆是控制给水流量和通过卸压阀实现。<br>（7）在功率调节方面，在沸水堆可以利用空泡的负反应性效应，即可以通过控制冷却剂流量来改变反应堆功率。</p>
+<p>3.沸水堆主要缺点：<br>（1）辐射防护和废物处理较复杂。<br>（2）功率密度比压水堆小（水沸腾后慢化能力减弱）。</p>
+<p>4.重水堆是指用重水作慢化剂的反应堆，是核动力厂中发展较早的反应堆堆型之一。重水具有良好的中子物理特性，可直接利用天然铀作核燃料。</p>
+<p>5.重水堆与轻水堆核电站的区别：<br>（1）中子经济性好，可以采用天然铀作为核燃料；<br>（2）比轻水堆更节约天然铀，不但能使用天然铀实现链式反应，而且比轻水堆节约天然铀20%。<br>（3）可以不停堆更换核燃料。<br>（4）重水堆的功率密度低。<br>（5）重水费用占基建投资比重大。<br>（6）当发生失水事故时，轻水堆失水事故的后果可能会比重水堆严重。</p>
+<p>6.高温气冷堆：石墨为慢化剂，用气体作为冷却剂（CO2气体或者氦气）为冷却剂，金属天然铀为燃料。高温气冷堆主要优点是不会发生相变，但是气体的密度低，导热能力差，循环时消耗的功率大，为了提高气体的密度及导热能力，也需要加压。</p>
+<ul>
+<li>第一代高温气冷堆：以石墨为慢化剂，CO2气体为冷却剂，金属天然铀为燃料，镁诺克斯合金为燃料棒包壳材料。</li>
+<li>第二代高温气冷堆：以石墨为慢化剂，CO2气体为冷却剂，2%富集度的二氧化铀陶瓷燃料，不锈钢为燃料棒包壳材料。</li>
+<li>第三代高温气冷堆：以石墨为慢化剂，氦气为冷却剂（化学惰性和热工性能好），全陶瓷型包覆颗粒为燃料元件。高温气冷堆的燃料元件有两种：一种是与压水堆类似的棱柱形的（棱柱形高温气冷堆），另一种是球形的（球床高温气冷堆）。</li>
+</ul>
+<p>7.我国高温气冷堆：山东石岛湾20万千万模块式高温气冷堆示范工程（HTR-PM），是第三代高温气冷堆，它以石墨为慢化剂，氦气为冷却剂，全陶瓷型包覆颗粒球形燃料元件。电站由两座反应堆和相应的两个蒸汽发生器系统组成，两个反应堆设置在同一反应堆厂房内，采用的是两堆带一机的蒸汽透平循环方案，以一个堆配一个蒸汽发生器为一个标准模块，两个模块配一个汽轮机，共享电站辅助设施。</p>
+<p>8.模块式高温气冷堆采用纵深防御的安全原则，设置4道安全屏障：第一道：全陶瓷型包覆颗粒燃料的热解碳和碳化硅包覆层；第二道：燃料元件外层的石墨包壳；第三道：反应堆压力壳、蒸汽发生器压力壳和连接这两个压力壳的热气导管压力壳；第四道：一回路舱室（没有像压水堆安全壳那么高的气密性和承压要求，但它可以与排风系统配合保持一回路舱室的负压，防止放射性物质向反应堆建筑物内扩散）。</p>
+<p>9.快中子堆：简称快堆，是堆芯中核燃料裂变反应主要由平均能量为0.1MeV以上的快中子引起的反应堆。快堆堆芯与一般的热中子堆芯不同，它分为燃料区和增殖再生区两部分，燃料区由几百个六角形燃料组件盒组成，每个燃料盒的中部是混合物核燃料芯块制成的燃料棒，两端是由非裂变物质天然（或贫化）二氧化铀束棒组成的增殖再生区，核燃料区的四周是由二氧化铀棒束组成的增殖再生区。</p>
+<p>10.快堆是唯一较容易实现燃料增殖的堆型。主要优点是：<br>（1）可充分利用核燃料。快堆可以使铀资源的利用率从单发展轻水堆的1%左右提高到60%～70%。<br>（2）可实现核燃料的增值。在快堆中，增殖比可达1.2-1.3，在重水堆和轻水堆中，相应的值（称之为转化比）仅分别接近0.8-0.6。<br>（3）快堆的燃料区有几百个六角形燃料组件盒组成，快堆不需要慢化剂，冷却剂只能用液态金属或气体，例如液态钠或氦气，液态钠是一致的选择，早期的小实验堆曾用过汞和钠钾合金。</p>
+<p>11.钠冷快堆分为池式和回路式。</p>
+<p>12.快堆的主要优点：<br>（1）可充分利用核燃料。（2）可实现核燃料的增殖。（3）低压堆芯下的高热效率。</p>
+<p>13.快中子堆核电厂的安全性问题：<br>（1）在钠作冷却剂的快堆中，液态金属钠与水（或蒸汽）相遇就会产生剧烈的化学反应，并可能引起爆炸；<br>（2）钠与空气接触就会燃烧；<br>（3）钠中含氧量超过一定数量会造成系统内结构等材料的严重的腐蚀；<br>（4）堆内的液态钠由于沸腾所产生的气泡空腔可能会引入正的反应性；<br>（5）很高的温度、很深的燃耗以及数量很大的快中子的强烈轰击，使快堆内的燃料芯块及包壳碰到的问题比热堆复杂得多。</p>
+<h2 id="3-4-新型压水反应堆"><a href="#3-4-新型压水反应堆" class="headerlink" title="3.4 新型压水反应堆"></a>3.4 新型压水反应堆</h2><p>1.第三代是指以满足美国核电用户要求文件（URD）和欧洲核电用户要求文件（EUR）为设计要求的，具有预防和缓解严重事故措施，经济上能与天然气机组相竞争的核电机组，如ABWR、AP1000、EPR、APER、APR1400等。</p>
+<p>2.核电用户要求文件（URD）与（EUR）规定先进反应堆应该有下列基本特征：<br>（1）抗事故能力：所有工况下都具有负的功率反应性系数、改进的人机界面系统、采用成熟的诊断监测技术、须留给操纵员足够的时间（30min或更长时间)。<br>（2）防止堆芯损坏：专设安全系统应满足执照申请的设计基准要求，有大的安全裕量，堆芯损坏频率小于1×10-5&#x2F;堆·年。<br>（3）缓解事故能力：坚固而大容积的安全壳和相应的专设安全系统，采用现实源项分析，控制可燃氢气的浓度，在累积发生频率大于10-6／堆年的严重事故条件下，在厂址边界处(离开反应堆大约0.5英里)，公众个人的全身剂量小于25rem（1Sv&#x3D;100rem）等要求。</p>
+<p>3.AP1000的设计是一个两回路、百万级压水堆核电厂，采用非能动安全设施以及简化的电厂设计，从而使核电厂具有良好的可建造性、可运行性和可维修性。</p>
+<p>4.AP1000安全系统包括：<br>（1）非能动堆芯冷却系统(PXS，PassiveCoreCoolingSystem)；包括非能动余热排出系统和非能动安全注入系统；<br>（2）非能动安全壳冷却系统(PCS，PassiveContainmentCoolingSystem)；<br>（3）主控室应急可居留性系统(MCRHS，MainControlRoomHabitabilitySystem)；<br>（4）安全壳隔离系统(ContainmentIsolationSystem)；<br>（5）安全壳氢气控制系统（HydrogenControlSystem）。</p>
+<p>5.欧洲压水反应堆EPR<br>（1）EPR在堆芯的物理设计上，采用大堆芯，有241组燃料组件，降低了线功率密度，提供了大的裕度。堆芯尺寸的增加减少了中子的径向泄漏（2%～3%），适合采用低泄漏的燃料管理方式。核燃料利用率高，同等发电量下EPR比一般轻水堆节省17％的铀燃料，锕系元素的产生量降低了15％，减少了长寿命高放废物的产生量。<br>（2）在事故工况下当反应堆冷却剂温度低于180℃、压力小于3MPa时进行安注。安注&#x2F;余热导出系统有四列，按4×100％设计，每个安全系统有相互独立的厂房，每个安全系统都可以独立完成安全功能。每列包括：中压安注泵，低压安注泵、低压注入热交换器和安注箱。<br>（3）为了对付堆芯熔化的严重事故，EPR设计了堆芯捕集器，冷却堆芯熔融物，使用了耐特高温保护材料，保证混凝底板的密封性。</p>
+<p>6.华龙一号主要特征：<br>（1）以177组燃料组件堆芯和三个安全系列为基础，采用能动与非能动相结合的设计力量，具有完善的严重事故预防和缓解措施，具有很高的安全性和技术先进性，设计寿命60年，采用18个月换料方案，设计可用率大于90%，安全停堆地震0.3g。<br>（2）机组采用双层安全壳设计，内外层安全壳之间的环形空间通过通风系统使其保持负压。内层安全壳为预应力钢筋混泥土结构，由筒壁和穹顶组成；外层安全壳为钢筋混泥土结构，由筒体和穹顶组成，筒体上部绕安全壳一周设置有外挂水箱。<br>（3）堆芯采用177个燃料组件，每个燃料组件含有呈17*17方形排列的264根燃料组件，24个可放置控制棒、可燃毒物棒或中子源的导向管和1个仪表管。堆芯设置一次中子源组件和二次中子源组件各2个，一次中子源为锎源，二次中子源为锑-铍源。</p>
+<h2 id="3-5-研究堆"><a href="#3-5-研究堆" class="headerlink" title="3.5 研究堆"></a>3.5 研究堆</h2><p>1.研究堆是主要用来作为中子源的反应堆，也叫非动力堆。</p>
+<p>2.研究堆的类型：<br>（1）按中子通量密度的大小分为零功率堆、普通中子辐照反应堆和高通量堆。<br>（2）按中子产生的方式分为次临界装置、临界堆和脉冲堆。<br>（3）按慢化剂的不同分为重水堆、轻水堆、石墨堆等。<br>（4）按中子能谱分为热中子堆和快中子堆。<br>（5）按燃料的形状分为棒状燃料堆、板状燃料堆、圆环型燃料元件堆、各种形状的弥散体燃料堆和液体燃料堆。<br>（6）按堆的布置分为池式研究堆、罐式或壳式研究堆。<br>（7）按燃料的富集度分为高富集度铀（HEU）堆和低富集度铀（LEU）堆等。<br>（8）按燃料的不同分为固体燃料堆、溶液堆和熔盐堆等。</p>
+<p>3.研究堆的基本特点和应用领域，通常根据不同的需要，利用研究堆提供的中子源可以开展许多技术研究工作，主要包括：<br>（1）热中子散射实验；<br>（2）材料分析和辐照研究；<br>（3）同位素生产；<br>（4）堆中子活化分析；<br>（5）通过辐照改变材料特性；<br>（6）培训工作。</p>
+<p>4.我国建造的典型研究堆：<br>（1）中国先进研究堆CARR：为轻水冷却慢化、重水反射层的反中子阱池式反应堆，设计核功率为60MW。<br>（2）脉冲堆：铀氢锆脉冲堆在科学技术研究方面具有广泛的应用价值，是一种具有固有安全特性的中子源辐照反应堆。铀氢锆脉冲堆是一种小型均匀研究堆,采用氢化锆与铀均匀弥散混合作为固体燃料-慢化剂元件，采用轻水做冷却剂，构成一种池式反应堆，简称TRIGA堆。由于它结构简单，安全性和经济性好，能获得较强的功率脉冲和中子脉冲，因此在科学研究和应用技术上获得了较为广泛的重视。<br>（3）中国高通量工程试验堆（HFETR）：是一座压力壳反应堆，采用高浓铀多层套管型燃料元件，水作慢化剂和冷却剂，铍作反射层。<br>（4）游泳池式轻水反应堆是游泳池式、轻水慢化和冷却、铍和石墨作反射层的多用途试验堆。</p>
+<h2 id="3-6-反应堆及核动力装置的功率控制"><a href="#3-6-反应堆及核动力装置的功率控制" class="headerlink" title="3.6 反应堆及核动力装置的功率控制"></a>3.6 反应堆及核动力装置的功率控制</h2><p>1.缓发中子的作用：考虑缓发中子后，代中子平均寿命约为0.085s，与不考虑缓发中子时的中子平均寿命0.0001s相比约大850倍。反应堆控制成为可能，缓发中子在反应堆控制中起着很重要的作用。</p>
+<p>2.从安全运行角度考虑，反应堆设计中保证了反应堆有负的反应性温度系数（至少在额定温度工况下），以提高反应堆的自调自稳特性和安全性。</p>
+<p>3.核反应堆功率控制原理：<br>（1）启动，停堆以及改变反应堆的功率；（2）抵消过剩反应性，补偿燃耗；<br>（3）维持功率水平；（4）保证堆的安全。</p>
+<p>4.核动力厂功率控制系统：<br>（1）反应性控制和功率分布控制系统，或简称为反应堆功率控制系统；<br>（2）反应堆功率调节系统；（3）反应堆冷却剂平均温度调节系统；<br>（4）一回路压力即稳压器压力控制系统；（5）稳压器水位调节系统；<br>（6）蒸汽发生器水位调节系统；（7）蒸汽排放控制系统。</p>
+<p>5.核动力厂稳态运行方式大体上可以分为两大类型：<br>（1）一种是一回路冷却剂平均温度不变，而二回路蒸汽压力随负荷而变化。（核动力厂用）<br>（2）另一种是保持二回路蒸汽温度（即压力）不变。（船用核设施）</p>
+<p>6.核仪表系统的功能是：<br>（1）提供信号（显示）：通过连续监测反应堆功率，功率变化及功率分布，并对测得的各种信号加以显示记录，从而向操纵员提供反应堆装料、停堆、启动及功率运行时反应堆状态的信息。<br>（2）提供控制信号（控制）：向反应堆控制系统提供堆功率信号，移动控制棒。<br>（3）监测功能（监测）：通过功率通道信号的计算值，来监测反应堆径向功率倾斜和轴向功率偏差。此外，在主控制室和反应堆厂房内设计有视听计数通道，在停堆和启堆期间给出中子的视听计数。<br>（4）安全功能（保护）：防止反应堆发生超功率，向反应堆保护系统提供中子通量密度高和中子通量密度变化率高信号，触发反应堆紧急停堆。</p>
+<p>7.堆芯测量系统：包括堆芯温度测量、堆芯中子通量密度测量和压力容器内水位测量三部分，其总的功能是：提供反应堆燃料组件冷却剂出口温度信息、堆芯中子通量密度分布信息及压力容器内水位信息。</p>
+<h2 id="3-7-核反应堆保护系统"><a href="#3-7-核反应堆保护系统" class="headerlink" title="3.7 核反应堆保护系统"></a>3.7 核反应堆保护系统</h2><p>1.保护系统的功能：保护系统必须及时发出保护动作，目标是保持安全屏障（燃料包壳、一回路冷却剂压力边界和安全壳）的完整性，防止放射性物质释放，并且还必须能减轻这些屏障中的任何一个或更多个破坏所造成的后果。</p>
+<p>2.保护系统主要由下列两个触发系统组成：<br>（1）核反应堆停堆触发系统；<br>（2）专设安全设施（应急堆芯冷却、蒸汽和给水管道隔离、辅助给水、安全壳隔离、安全壳喷淋和氢气复合等）触发系统。</p>
+<p>3.保护系统必须与其所执行的安全功能相适应，因此其设计必须遵循下列安全准则：<br>（1）单一故障准则；（2）冗余性和独立性；（3）多样性；<br>（4）故障安全；（5）逻辑符合；（6）可试验性和可维修性。</p>
+<p>4.核反应堆停堆触发系统组成：<br>（1）启动保护；（2）核功率保护；（3）堆芯保护；（4）冷却剂压力和液位保护；<br>（5）冷却剂低流量保护；（6）蒸汽发生器保护；（7）高能管道破裂保护。</p>
+<p>5.专设安全设施触发系统组成：<br>（1）应急堆芯冷却触发系统；（2）安全壳喷淋触发系统；<br>（3）蒸汽和给水管道隔离触发系统；（4）安全壳隔离触发系统；<br>（5）辅助给水触发系统；（6）氢气复合触发系统。 </p>
+<h1 id="四、民用核安全设备基础知识"><a href="#四、民用核安全设备基础知识" class="headerlink" title="四、民用核安全设备基础知识"></a>四、民用核安全设备基础知识</h1><ul>
+<li>了解民用核安全设备标准规范、民用核安全设备常用金属结构材料、主要民用核安全设备。</li>
+<li>熟悉民用核安全设备的特殊性、民用核安全设备的核安全分级要求。</li>
+<li>民用核安全设备是指在民用核设施中使用的执行核安全功能的设备，包括核安全机械设备和核安全电气设备。民用核安全设备是民用核设施安全防护实体屏障的核心，其质量和可靠性直接关系到核设施的安全稳定运行。</li>
+</ul>
+<h2 id="4-1-民用核安全设备的特殊性"><a href="#4-1-民用核安全设备的特殊性" class="headerlink" title="4.1 民用核安全设备的特殊性"></a>4.1 民用核安全设备的特殊性</h2><p>1.设计基准的确定原则不同。必须考虑在设计基准事故工况下仍能可靠地执行其规定的安全功能。</p>
+<p>2.所有应用于设计和验证的计算分析软件和验证设施（试验台架、回路等）需通过国家核安全监管部门的认可。</p>
+<p>3.设备必须根据相关要求进行设备鉴定。在事故工况下，设备的可运行性和功能能够满足预定的要求。</p>
+<p>4.设备的设计、制造、安装、焊接和无损检验等,必须采用成熟的且经过验证的技术或工艺。</p>
+<p>5.设备的设计、制造、安装和无损检验的单位，必须通过HAF601或HAF604资格审查。</p>
+<p>6.设备的设计、制造、安装和无损检验的单位，必须建立满足HAF003的要求的质量保证体系，并在有效控制之下。</p>
+<p>7.设备的相关活动，包括设计、制造、安装、试验、运行、在役检查、维修和退役等，必须在国家核安全监管部门的监督下，处于严格受控状态。</p>
+<p>8.涉及核安全基本原则和技术要求的民用核安全设备国家标准，由国务院核安全监管部门组织拟定，由国务院标准化主管部门和国务院核安全监管部门联合发布；其他的民用核安全设备国家标准，由国务院核行业主管部门组织拟定，经国务院核安全监管部门认可，由国务院标准化主管部门发布。</p>
+<p>9.民用核安全设备行业标准由国务院核行业主管部门组织拟定，经国务院核安全监管部门认可，由国务院核行业主管部门发布，并报国务院标准化主管部门备案。</p>
+<h2 id="4-2-民用核安全设备的核安全分级要求"><a href="#4-2-民用核安全设备的核安全分级要求" class="headerlink" title="4.2 民用核安全设备的核安全分级要求"></a>4.2 民用核安全设备的核安全分级要求</h2><p>1.《核动力厂设计安全规定》（HAF102）中明确规定了：必须识别所有安全重要物项，并根据其功能和安全重要性进行分级。划分安全重要物项的安全重要性的方法，必须主要基于确定论方法，并适当辅以概率论方法。</p>
+<p>2.核电厂营运单位必须根据核安全设备在民用核设施中所负担的核安全功能，确定相应的核安全级别。</p>
+<p>3.核电厂的机械设备分为核安全1级、核安全2级、核安全3级和非核安全级。<br>（1）核安全1级：主要包括组成反应堆冷却剂系统压力边界的所有设备（反应堆压力容器、反应堆冷却剂泵、稳压器、蒸汽发生器的一次侧、控制棒驱动机构的壳体、主管道等）。理解：一回路主设备、主管道。<br>（2）核安全2级：主要指反应堆冷却剂系统承压边界内不属于核安全1级的各种设备（冷却剂压力边界的小直径(DN&lt;10.4mm)的高能管道和阀门、安全壳隔离阀门、余热排出系统部件、喷淋系统的主要部件、安全注射系统部件、安全壳贯穿件、氢气控制和监测系统等）。理解：主要是专设安全设施。<br>（3）核安全3级：主要是指下述一些系统的设备（提供硼酸的部件；给水系统处于安全壳外的部分；乏燃料贮存池冷却水系统中的重要部件；重要厂用水系统和设备冷却水系统的管道、阀门、泵等；为控制室可居留性服务的冷冻水系统）。理解：主要是核辅助系统。</p>
+<p>4.核安全电气设备根据支持功能的安全重要性将电气设备分为1E级（安全级）和非1E级（非安全级）。<br>（1）1E级（安全级）：凡是在事故处理过程中（包括事故工况后）参与公众保护的电气系统的设备和部件均定义为安全级，即1E级。比如：反应堆保护系统、应急供电系统、紧急停堆执行机构、专设安全设施、专设安全设施支持系统等。<br>（2）非1E级（非安全级）：凡是不执行上述安全功能的电气设备，均分类为非1E级。</p>
+<h2 id="4-3-民用核安全设备标准"><a href="#4-3-民用核安全设备标准" class="headerlink" title="4.3 民用核安全设备标准"></a>4.3 民用核安全设备标准</h2><p>1.国内核安全设备标准<br>我国秦山和在建的山东海阳等核电厂执行的是美国ASME规范；大亚湾、岭澳和辽宁红沿河、广东阳江等核电厂执行的是法国《压水堆核岛机械设计建造规则》（RCC-M规则），连云港田湾核电厂执行俄罗斯的ΠΗΑЭΓ标准。</p>
+<p>2.美国ASME规范体系<br>机械工程师协会（ASME三年修订一次）、材料与试验协会（ASTM）、电气和电子工程师协会（IEEE）、核学会（ANS）等。</p>
+<p>3.法国RCC规范体系<br>法国核电厂RCC规范系列包括RCC-P、RCC-G、RCC-M、RSEM、RCC-E、RCC-I和RCC-C等，覆盖了核电厂系统、构筑物、机械设备、在役检查、电气设备、防火、燃料组件等几乎全部的核电厂领域。</p>
+<p>4.俄罗斯核电厂标准法规<br>包括三个级别：法律法令、核安全法规及导则、专业技术标准。</p>
+<h2 id="4-4-民用核安全设备常用金属结构材料"><a href="#4-4-民用核安全设备常用金属结构材料" class="headerlink" title="4.4 民用核安全设备常用金属结构材料"></a>4.4 民用核安全设备常用金属结构材料</h2><p>1.金属材料：<br>（1）黑色金属是指铁和铁的合金。如钢、生铁、铁合金、铸铁等。<br>（2）有色金属又称非铁金属，是指除黑色金属外的金属和合金，如铜、锡、铅、锌、铝等。</p>
+<p>2.金属结构材料：指符合特定强度和可成型性等级的钢或合金等结构用材。其力学性能包括：强度、塑性、硬度、冲击韧度和疲劳强度等。力学性能是选择、使用、评价金属结构材料的重要依据。</p>
+<p>3.钢材的主要化学成分是铁和少量的碳，另外还有一些非铁元素。其中，碳元素对钢材的强度、塑性、韧性和焊接性能有决定性的影响。</p>
+<p>4.结构钢分为分为碳素结构钢和合金结构钢：<br>（1）碳素结构钢中往往添加碳、硅、锰、硫、磷。<br>（2）合金结构钢中添加一定量的合金元素，如硅、锰、钼、镍、硌、矾、钛、铌、硼、铅、稀土等其中的一种或几种。<br>（3）碳元素对钢材的强度、塑性、韧性和焊接性能有决定性的影响，随着碳含量的增加，钢材的抗拉强度和屈服强度增加，但塑性、冷弯性能和冲击韧性特别是低温冲击韧性降低，焊接性能降低，所以钢材中碳含量不能过高。<br>（4）硫元素（热脆）、氧元素、磷元素（冷脆）：降低钢材的韧性，使钢材的塑性变差。<br>（5）硅元素：适量的硅可以提高钢的强度，而对钢材的塑性、冷弯性能和冲击韧性无显著影响，但是过量的硅会降低钢材的塑性和冲击韧性，恶化钢材的抗腐蚀性和焊接性。<br>（6）在结构钢中，铬元素能显著提高钢材的强度、硬度和耐磨性，但同时降低塑性和韧性。铬又能提高钢的抗氧化性和耐腐蚀性，因而是不锈钢和耐热钢的重要合金元素。<br>（7）镍元素能提高钢的强度，而又保持良好的塑性和韧性，对酸碱有较高的耐腐蚀能力，在高温下有防锈和耐热能力。<br>（8）钼元素能使钢的晶粒细化，提高钢的淬透性和热强性能，在高温时保持足够的强度和抗蠕变能力。结构钢中加入钼，能提高机械能能，还可以抑制合金钢由于淬火而引起的脆性。<br>（9）钛元素是钢中强脱氧剂，在奥氏体不锈钢中加入适量的钛，可避免晶间腐蚀。</p>
+<p>5.辐照对金属材料的影响：<br>（1）辐照生长：能在一定晶面上聚集，从而造成某些材料沿一定方向的尺寸随辐照而显著变化。辐照生长对各向异性的核燃料(如铀、钚)和结构材料（如石墨、锆）是一个很重要的问题。<br>（2）辐照肿胀：空位和惰性气体原子的聚集可以造成辐照肿胀。它表现为材料的体积和密度随辐照发生变化。核燃料在较高温度时以及快中子堆中的不锈钢都有肿胀问题。<br>（3）辐照蠕变：可以导致蠕变或加速热蠕变。辐照蠕变和辐照剂量或辐照通量有关。<br>（4）辐照硬化和辐照脆化:使金属硬化屈服强度提高等，对反应堆压力壳体钢有重要威胁</p>
+<h2 id="4-5主要民用核安全设备举例"><a href="#4-5主要民用核安全设备举例" class="headerlink" title="4.5主要民用核安全设备举例"></a>4.5主要民用核安全设备举例</h2><p>1.核反应堆主要由反应堆压力容器、燃料组件、堆内构件和控制棒驱动机构等构成。</p>
+<p>2.反应堆压力容器既属于反应堆又属于一回路主设备。一回路主设备还包括蒸汽发生器、稳压器、主泵和主管道等。</p>
+<p>3.反应堆压力容器：<br>（1）长期工作在高温（320℃左右）、高压（15.5MPa左右）、含硼酸水介质和高放射性辐照的条件下，属于在核电厂整个寿期内（一般40年至60年）不可更换的设备。压力容器材料要求有较高的机械性能、抗辐照性能和热稳定性，常用材料一般为低碳低合金高强度Mn-Ni-Mo合金钢。<br>（2）反应堆压力容器一般由上封头、下封头、筒体、接管和贯穿件等部件组成，上封头为用法兰螺栓连接的可拆卸半球形封头，封头和法兰一般为焊接而成，反应堆压力容器上封头和本体主螺栓及上下法兰间的两道镍制“O”形环紧固密封。<br>（3）反应堆压力容器筒体由4-5个筒节拼焊而成，并于下封头焊接构成压力容器本体。筒节为整体锻件，无焊缝，4-8个冷却剂出入口管道一般是通过马鞍形焊缝连接到相应的筒节。</p>
+<p>4.反应堆堆内构件：由不锈钢型的高合金钢制成，包括上部堆内构件和下部堆内构件两大部分。</p>
+<p>5.控制棒驱动机构：包括钩爪组件、驱动轴组件、耐压壳组件、磁轭线圈组件和位置指示组件。其中，耐压壳组件是驱动轴和销爪组件的包壳，由圆长管密封承压壳及其上部位置传送器套管组成，圆长管密封承压壳由分段壳体通过Ω密封环焊接而成。耐压壳安装在反应堆压力容器管座上，它与管座采用梯形螺纹连接和小Ω密封环焊接密封。耐压壳是承压边界，该承压边界的破损将产生放射性冷却剂外溢，因此，该组件的3道Ω密封环焊接工艺和质量非常关键，一般在安装现场进行焊接。</p>
+<p>6.蒸汽发生器（SG）是压水堆核电站一回路和二回路之间的枢纽，它将反应堆产生的热量传递给二回路，将二回路的给水变成蒸汽，推动汽轮机做功。主要是：立式U形管自然循环蒸汽发生器和卧式自然循环蒸汽发生器。</p>
+<p>7.稳压器是对一回路冷却剂系统压力进行控制和超压保护的重要设备，基本功能是建立并维持一回路系统的压力，避免冷却剂在反应堆内发生容积沸腾。稳压器分为气罐式和电加热式两种。</p>
+<p>8.反应堆冷却剂泵（简称主泵）是压水堆冷却剂回路系统中唯一高速运转的机械设备，又是十分精密功率强大的设备，属于压水堆电站的关键设备之一。主泵多是立式、单级轴密封泵：立式冷却剂泵从底部到顶部可分为三个部分，即水力机械部分、轴密封组件部分和电动机部分。</p>
+<p>9.每条环路包括一台蒸汽发生器、一台主泵和将这些设备与反应堆压力容器连接起来的反应堆冷却剂管道，也称主管道。主管道属于厚壁大口径奥氏体不锈钢管道，对焊接过程要求极为严格，焊缝内不得存在任何宏观或微观焊接缺陷。</p>
+<p>10.安全壳附件：<br>（1）安全壳钢衬里：在预应力混凝土安全壳内，一般有一层起密封作用钢衬里。安全壳钢衬里一般由底板、截锥体、圆柱形筒体和穹顶组成，形成整体压力“容器”。<br>（2）钢制安全壳：是安全壳容器式反应堆厂房的一道重要安全屏障，也是非能动安全系统中的重要设备之一。<br>（3）人员闸门：是供工作人员经与辅助厂房连接的专用通道以出入安全壳。设有一个应急用人员闸门，供工作人员在应急情况通过更衣室厂房出入安全壳。<br>（4）设备闸门：贯穿筒节预埋在安全壳混凝土内，并与安全壳钢衬里焊接。<br>（5）安全壳贯穿件：包括机械贯穿件和电气贯穿件两类。贯穿件是由一个穿过安全壳混凝土壁面并锚固在混凝土上的钢套管及两个接头构成。</p>
+<p>11.硼注箱：位于高压安注泵出口，高压安注水经硼注箱进入一回路冷段。</p>
+<p>12.安注箱：安全壳内每个环路的冷管段上都接着一个安注箱。安注箱是一直立式筒体结构，总容积约50m3，内充2000ppm的含硼水，用加压40～60公斤的氮气覆盖。中压安注为非能动安全系统，不用安注信号启动。当RCP系统压力降到安注箱内压力以下时，由氮气将含硼水压入RCP系统冷段。</p>
+<p>13.核2、3级泵：<br>（1）上充泵（高压安注泵）：是化学与容积控制系统的一个重要设备。<br>（2）辅助给水泵属于专设安全设施，作为主给水系统的后备，当主给水丧失时，一直处于热备用状态的辅助给水泵立即启动向蒸汽发生器二次侧提供给水。</p>
+<p>14.核级热交换器：核2级的主要有余热排出热交换器、安全壳喷淋热交换器、化容热交换器，核3级的主要有再生热交换器、下泄热交换器、设冷水热交换器等。（主要是专设安全设施、一回路辅助系统的热交换器）</p>
+<p>15.余热排出热交换器为立式U型管壳式热交换器。</p>
+<p>16.再生热交换器：以管内的上充流为冷源进行热量回收，完成下泄流降压前首次冷却降温。</p>
+<p>17.板式换热器结构紧凑、单位体积设备提供的传热面积大，传热系数高、检修和清洗方便。
+ </p>
+<h1 id="五、核燃料循环设施"><a href="#五、核燃料循环设施" class="headerlink" title="五、核燃料循环设施"></a>五、核燃料循环设施</h1><ul>
+<li>了解铀矿开采和加工、铀化合物转化、铀浓缩、燃料组件制造、乏燃料及其后处理。</li>
+</ul>
+<h2 id="5-0-引言"><a href="#5-0-引言" class="headerlink" title="5.0 引言"></a>5.0 引言</h2><p>1.核燃料是指含有易裂变核素，在反应堆内使自持核裂变链式反应得以实现的材料。它主要有易裂变核素和可转换核素两种成分组成。所谓易裂变核素是指能与慢中子作用而产生裂变的核素，主要是$^{233}\text{U}$、$^{235}\text{U}$、$^{239}\text{Pu}$、$^{241}\text{Pu}$（质量数相差2、4、2）。可转换核素是指俘获中子后能直接或间接地转变为易裂变核素的核素，主要是$^{232}\text{Th}$、$^{234}\text{U}$、$^{238}\text{U}$、$^{240}\text{Pu}$（质量数相差2、4、2）。</p>
+<p>2.核燃料循环以反应堆为中心，包括前段、反应堆段、后段。</p>
+<p>3.核燃料进入核反应堆前的加工过程称为核燃料循环的前段，包括铀矿勘探、开采、提取、精制（纯化）、转化、浓缩、燃料元（组）件制造等过程。</p>
+<p>4.核燃料循环分为闭路式和开路式两大模式（两大技术路线）。区别在于：闭路式循环回收利用乏燃料和新产生的燃料且可以获取武器级别的钚装料，而开路式不可以。</p>
+<h2 id="5-1-铀矿地质勘探"><a href="#5-1-铀矿地质勘探" class="headerlink" title="5.1 铀矿地质勘探"></a>5.1 铀矿地质勘探</h2><p>1.铀矿勘探根据铀矿成矿理论及已知成矿规律，根据工作地区地质特点，采用地质学、地球化学、放射性测量等方法进行找矿。<br>铀矿找矿程序分为三个阶段：地质调查阶段（查明成矿条件、矿点等，比如航空γ测量和步行γ测量）、地质详查阶段（探矿）、地质揭露勘探阶段（探明储量等）。</p>
+<h2 id="5-2-铀矿开采"><a href="#5-2-铀矿开采" class="headerlink" title="5.2 铀矿开采"></a>5.2 铀矿开采</h2><p>1.根据矿床地质构造、形态、埋藏深度和赋存状况，矿山地质和水文地质条件，合理选择开拓方案、采矿方法。矿山开采一般采用地下开采、露天开采，或是原地爆破浸出、原地浸出采矿工艺。</p>
+<p>2.开采方式选择的目的是安全、环保、合理、经济、最大限度地将铀矿资源从地下回采出来。</p>
+<p>3.选择开采方法的具体要求：<br>（1）技术方面：适应矿床赋存的具体条件、勘探程度、开采技术条件和设备条件。<br>（2）经济方面。（3）安全和环境保护方面。</p>
+<p>4.铀矿的常规开采方法有地下开采和露天开采。</p>
+<p>5.地下开采一般在矿床离地表较深，采掘比极大的条件下采用。这种方法的工艺过程比较复杂。</p>
+<p>6.地下开采的缺点是：采矿劳动强度大，井下防护条件差，通风要求高，生产效率低，损失、贫化率比较高，同时存在较大的安全风险。</p>
+<p>7.露天开采：通常认为适用于矿体大、埋藏较浅、覆盖层不厚的矿床。<br>（1）露天开采与地下开采相比具有如下优点：机械化程度高，生产能力大，劳动生产效率高，生产成本低，劳动条件好，矿石损失小。<br>（2）露天开采的缺点是：需要剥离排弃大量废石，压占土地较多，受天气影响大，生态环境问题较多。</p>
+<p>8.化学采矿：包括原地浸出和原地爆破浸出。两种技术是向矿体注入化学溶浸剂，通过化学反应选择性地溶解矿石中的铀，并将浸出液抽至地表水冶厂进行铀的提出。主要区别是前者是地表钻孔注入，后者是原地爆破后向松动的矿体注入化学溶浸剂。</p>
+<ul>
+<li>（1）化学采矿与常规采矿相比的优点：<br>①投资和经营费用低；②劳动强度小；③生产劳动环境较好，矿工的职业受照剂量较低；④对地表环境的污染少：生产工艺过程产生的废水、废渣量较少，对地表影响较小。</li>
+<li>（2）化学采矿的缺点是：<br>①应用有一定的局限性：只适用于具有一定地质、水文地质条件的矿床：矿床需大致呈水平状，底板不渗漏，矿层位于静止水位之上，且具有较好的渗透性。<br>②存在对地下环境造成污染的问题：可使地下水中某些化学元素增高，因此，必须加强对地下水污染控制措施及退役后地下水修复。</li>
+<li>（3）原地浸出采铀具有明显的优点：<br>①建设投资少、周期短，生产能耗和成本低。②劳动强度小、劳动条件好。<br>③能最大限度的回收铀资源，大大的提高了劳动生产效率，与常规采矿相比，生产效率提高5～10倍。<br>④对地表环境的污染少，基本上不破坏农田、土地和山林。</li>
+<li>（4）原地浸出采铀具有明显的缺点：<br>①受地质条件限制。②地下水受到一定污染，修复难度大。</li>
+<li>（5）原地爆破浸出采铀优点：<br>省去或减少了采场管理、采空区处理、矿石运输、破碎等多道工序。其工艺简单、效率高、成本低，放射性固体废物排放量少，综合经济效益及地表环境效益好。</li>
+<li>（6）原地爆破浸出缺点：<br>资源回收率较低。②爆破后井下存留70～80％的铀矿，会产生高浓度氡和氡的衰变子体，对矿井大气污染较高。③井下布液浸出及终采后堆积废渣对地下水可能产生影响。</li>
+</ul>
+<h2 id="5-3-铀的提取和精制（纯化）"><a href="#5-3-铀的提取和精制（纯化）" class="headerlink" title="5.3 铀的提取和精制（纯化）"></a>5.3 铀的提取和精制（纯化）</h2><p>1.天然铀产品：铀的提取是用化学试剂从矿石中得到铀的化学浓缩物——重铀酸盐（俗称黄饼）的过程。主要的重铀酸盐：重铀酸铵［$(NH_4)_2U_2O_7$］、重铀酸钠［$Na_2U_2O_7$］，也可由重铀酸盐煅烧生产得到八氧化三铀［$U_3O_8$］统称“黄饼”。八氧化三铀［$U_3O_8$］是最稳定的铀的氧化物，最易长期保存，是当今世界铀交易的主要形式。</p>
+<p>2.常规铀水冶过程铀的浸出率大约在98%以上，铀的总回收率大约在95%以上。 </p>
+<p>3.铀精制（纯化）流程图如下，铀精制（纯化）是对铀水冶产品铀化学浓缩物或八氧化三铀进一步加工提纯的工艺过程。（铀化学浓缩物的铀品位达60%，八氧化三铀的铀品位达85%）</p>
+<ul>
+<li>轴化学浓缩物&#x2F;八氧化三轴 → 硝酸溶解→过滤→萃取→反萃取→浓缩及脱硝→沉淀→固液分离→转化结晶→过滤→煅烧(800~900℃)→冷却(40℃)→包装→二氧化铀</li>
+</ul>
+<p>4.核产品二氧化铀国家质量标准：严格控制产品中吸收中子能力较强的镉、钼、钛、钨、钽、矾等元素含量不超过 $10^{-3}% －10^{-4}%$ ；控制产品中吸收中子能力较弱的锂、硅、铁、铝、碳等元素含量不超过 $10^{-2}%－10^{-3}%$ 。</p>
+<h2 id="5-4-铀化合物的转化"><a href="#5-4-铀化合物的转化" class="headerlink" title="5.4 铀化合物的转化"></a>5.4 铀化合物的转化</h2><p>1.这里所指的铀转化是指由天然铀精炼制得的铀氧化物制备成四氟化铀（UF4），再转化成六氟化铀（UF6）及其还原的主要工艺过程。</p>
+<p>2.铀转化过程大多属于气-固相反应。</p>
+<p>3.四氟化铀（UF4）的生产：<br>（1）湿法工艺：UF4是制备UF6和金属铀的原料，湿法工艺（氢氟酸沉淀法）以核纯级的UO2为原料，先将其溶解制备四价铀料液，然后加入氢氟酸溶液，生成的沉淀经过滤、干燥和煅烧，得到无水UF4产品。湿法工艺的突出优点是沉淀过程铀纯化作用，但是所需工序较多，产生的废液量大，生产成本高。<br>（2）干法工艺：高温下用气态无水氟化氢（HF）与UO2发生气-固相反应直接制得几乎不含水的UF4。该方法在工业领域占首要地位。</p>
+<p>4.干法工艺与湿法工艺相比：</p>
+<ul>
+<li>主要优点：（1）铀的直接回收率高；（2）所产生的工艺废液量仅为湿法的1&#x2F;10；（3）工艺过程简化，设备数约减少一半；（4）基建和生产成本较低。</li>
+<li>主要缺点：（1）对原料的要求严格，适应性较差；（2）生产中无水HF的过剩量较大；（3）由于设备磨损和腐蚀会给产品带来杂质，而且纯化作用较差。（4）UO2生产UF4所使用的设备主要有卧式搅拌床反应器、流化床反应器、移动床反应器。（5）工业上采用的流化床反应器是两级串联系统，可以得到高质量的UF4产品，同时将FH的过剩率由单级反应器的10%降低至5%左右。</li>
+</ul>
+<p>5.六氟化铀（UF6）是唯一一种既稳定又具有高度挥发性的铀化合物，一直被用于铀同位素浓缩厂的供料。</p>
+<p>6.生产六氟化铀（UF6）的工业方法几乎都是用核纯级的UF4在高温下与F2发生作用生产。为了最大限度地提高UF6的转化率和氟气的利用率，要使用过量的氟气，以确保铀的直接回收率大于98%。而过量的氟气需要再循环，使其总利用率不低于99%。</p>
+<p>7.六氟化铀（UF6）生产过程主要由氟化、六氟化铀（UF6）冷凝收集、氟气回收、尾气处理四部分组成。<br>（1）UF4氟化反应器：火焰炉反应器、流化床反应器、立式氟化器、卧式搅拌炉。<br>（2）六氟化铀（UF6）冷凝收集：方法是凝华法（两级冷凝器串联间歇操作）、液化法（将含UF6的混合气体压缩至151.7kPa以上导入水冷却的冷凝器中，UF6被液化）。<br>（3）氟气回收。<br>（4）尾气处理：回收铀并防止铀和氟对环境的污染。包括①固体化学阱法，主要用有活性的AL2O3、CASO4、活性炭和碱石灰等；②UF4吸收法，经济上最合理；③碱液洗涤法，这是尾气排放前的最终处理步骤。</p>
+<p>8.六氟化铀（UF6）的还原<br>（1）氢气还原法：用氢气还原UF6制备UF4是目前应用最广的方法，其特点是堆密度大、生产能力大而且操作特性好。工业上有两种提供初始反应所需能量的方法，一种是热壁法（经约650℃高温反应器壁提供），另一种是冷壁法（由引入F2与H2燃烧释放的反应热提供），冷壁法有明显优势。<br>（2）四氯化碳还原法：①还原小批量的高富集度UF6时，控制温度在150℃以上并且让CCL4大量过剩，UF6即可氟化CCL4，被还原成UF4；②转化大批量的低富集度或贫化的UF6时，可在350-400℃下用回转炉处理。与氢气还原法相比，此方法操作裕度小、工艺条件严格、CCL4消耗量大、尾气处理困难。<br>（3）氨还原法：UF6与NH3在300-400℃发生反应，生成NH4UF5，再在大于450℃的温度下，于惰性气体中分解可得UF4。</p>
+<h2 id="5-5-铀浓缩"><a href="#5-5-铀浓缩" class="headerlink" title="5.5 铀浓缩"></a>5.5 铀浓缩</h2><p>1.铀浓缩：用人工方法使$^{235}\text{U}$ 丰度增加的过程。</p>
+<p>2.$^{235}\text{U}$ 是唯一天然存在的易裂变核素，它在天然铀中的丰度为0.710%，而$^{238}\text{U}$ 占99.285%，$^{234}\text{U}$ 占0.005%。轻水堆需要使用$^{235}\text{U}$ 的富集度为2%-5%。</p>
+<p>3.分离功：一种仅用于浓缩铀的度量单位，是指把一定的铀富集到一定的铀-235丰度所需投入的工作量叫分离功（SWU）。生产1 t丰度为3%的浓缩铀约4.3 t SWU以及5.5 t天然铀原料。浓缩过程中剩下4.5 t贫化铀。其铀-235丰度下降到0.2%左右，一般无工业应用价值。</p>
+<p>4.分离系数：表示分离效果，是在分离级前后所需同位素（$^{235}\text{U}$）的相对丰度比（分离后丰度&#x2F;分离前丰度），理论上扩散分离系数最大值等于两种组分的分子量比的平方根。</p>
+<p>5.浓缩铀生产法：<br>（1）气体扩散法：利用不同分子量的气体混合物在热运动平衡时的速度不相同，工作介质是六氟化铀。扩散分离级的主要组成包括：压缩机、热交换器、分离器。缺点：气体扩散法比电耗大，缺乏经济性。<br>（2）气体离心法：高速旋转的离心机中，较重的分子靠近外周富集，较轻的分子靠近轴线富集。与气体扩散法相比，其主要优点是：</p>
+<ul>
+<li>比能耗低，为气体扩散法的4%-10%。</li>
+<li>单机浓缩系数（分离系数与1之差）大，气体离心机单机离心系数约0.2，而气体扩散法仅0.002。要得到丰度为3%的低浓缩铀，气体离心法只需要十几级级联，而气体扩散法需要近千级的级联。</li>
+<li>技术发展潜力大。<br>（3）激光法：激光化学法、分子激光法、原子蒸汽激光法。激光法的突出优点是分离系数大，一次分离即可获得适于制造核武器级别的高浓缩铀，但技术难度较大，目前离工业应用尚有较大距离。<br>（4）分离喷嘴法（气体动力学法）。</li>
+</ul>
+<p>6.分离级是级联的组成单位，而级联是分离级之间串联形成的组合，分离级可以是一个分离单元，也可以是并联的数个分离单元。</p>
+<p>7.浓缩铀生产工艺流程：原料UF6——压热罐加热——UF6气体进入级联进行分离浓缩达到所需丰度——冷冻的产品容器——液化均匀——取样合格后存入成品库房。此外，贫化料UF6装入冷冻的贫料容器，固化后送往贫料场暂存。</p>
+<p>8.浓缩铀生产工艺系统：级联系统、供取料系统、产品液化倒料系统、物料贮存运输系统、沾污设备清洗系统、废液处理系统、主要沾污设备检修系统等。</p>
+<p>9.铀浓缩工厂的基本特点：<br>（1）工作介质为六氟化铀：化学性质活泼，腐蚀性强，需要在设备和材料选型、人员健康防护、工艺过程管控方面特别关注。<br>（2）工艺系统的高度密封性和清洁度：主要工艺回路在负压下工作，因此应严格保证真空密封。<br>（3）长期运行的安全性与可靠性：级联装置一旦启动，就要求常年连续运行，所以必须有可靠供电，必须配置备用电源。</p>
+<h2 id="5-6-燃料组件制造"><a href="#5-6-燃料组件制造" class="headerlink" title="5.6 燃料组件制造"></a>5.6 燃料组件制造</h2><p>1.核燃料组件主要由上下管座、格架、控制棒导向管、燃料元件棒组成。</p>
+<p>2.燃料元件通常考虑以下技术要求：<br>（1）燃料芯块和包壳的温度：任何情况下绝不允许超过其熔点，并且要留有足够的安全裕度。<br>（2）包壳的应力和应变范围：应有足够的机械强度和刚度，包壳的最大容许应变量不超过1%。<br>（3）包壳的腐蚀：组件寿期终了时，包壳的最大腐蚀深度应低于壁厚的10%。<br>（4）壳内的气体压力：在组件寿期终了时，包壳内部的气体压力值应和外部压力值相近。<br>（5）包壳的吸氢：过量的氢会使锆合金包壳脆化破损，在寿期终了时包壳含氢量一般不允许超过 $2.5 \times 10^{-2}%$ 至 $3 \times 10^{-2}%$。</p>
+<p>3.核燃料组件的制造工艺：<br>（1）UF6化工转化制备可烧结UO2粉末；（2）UO2芯块制备；<br>（3）组件零部件制造（元件棒端塞、上下管座、定位格架、控制棒导向管等）；<br>（4）燃料元件棒制备（合金管准备、端塞焊接、装入芯块、弹簧和隔离块、充氦气和堵孔焊接）；<br>（5）组件组装（主要包括骨架组装、拉棒或推棒；一般压水堆燃料组件全长4至5米，重量550至670kg）。</p>
+<h2 id="5-7乏燃料及其后处理"><a href="#5-7乏燃料及其后处理" class="headerlink" title="5.7乏燃料及其后处理"></a>5.7乏燃料及其后处理</h2><p>1.后处理的意义：</p>
+<p>（1）是充分利用铀资源的重要途径；（2）可以减少放射性废物量；<br>（3）可以降低长寿命核素的危害；（4）是增强综合国力的需要。</p>
+<p>2.后处理的特点：</p>
+<p>（1）产品回收率高（大于99%）（2）产品纯度极高（3）远距离操作与控制（因为有极强的γ放射性）<br>（4）免维修与少维修；（5）十分严格的安全要求（具体做法：几何控制、质量控制、溶液浓度或体积控制、毒物控制，确保不发生临界事故或者超过次临界限值）；<br>（6）安全风险（核风险、非核风险）；（7）物项安全分级管理。</p>
+<p>3.乏燃料：在核反应堆内使用（辐照）达到计划的卸料比燃耗后，自反应堆内卸出不再在该堆中使用的核燃料称为“乏燃料”。</p>
+<p>4.乏燃料本身会发出各种极强的射线和中子，并由此伴随放出热量。</p>
+<p>5.乏燃料贮存：技术路线分为湿法和干法贮存，目前绝大多数采用湿法贮存，即将乏燃料存放于水池内的格架或吊篮内。池水既可起到放射性屏蔽隔离作用，又可带走乏燃料的热量。</p>
+<p>6.湿法贮存时间长达20-30年，干法贮存时间更长为50-100年。</p>
+<p>7.干法贮存基本上有三种：贮存室、容器贮存、干井贮存。干法贮存的关键是乏燃料衰变热导出的问题，许多干法贮存系统都使用高纯度的惰性气体，如氩气、氮气等进行冷却。</p>
+<p>8.乏燃料贮存的安全主要考虑：</p>
+<p>（1）水池结构的完整性；（2）确保乏燃料处于次临界状态；<br>（3）卸出的乏燃料必须先冷却；（4）除此之外，还要兼顾贮存装置的容量、经济性影响、适宜的时机。</p>
+<p>9.乏燃料运输方式：<br>（1）公路运输：具有门到门的优点，适用于不太长的距离和车站码头接驳时采用，对沿途影响大、效率低、成本高。<br>（2）铁路运输：适于中长距离，对沿途影响小、费用适中，需要汽车接驳。<br>（3）水路运输：适用于中长距离，一次也可运多个容器，成本低，效率高。<br>常需要以上三种方式联合使用。</p>
+<p>10.后处理工艺分为湿法（又称水法）和干法两大类；湿法主要是溶剂萃取法，干法的优点是强辐照条件对其影响不大。</p>
+<p>11.当今世界主要是采取以溶剂萃取法为核心的水冶后处理工艺，分为三段：<br>（1）首端过程：将乏燃料制备成可供溶剂萃取分离用的合格进料液的全过程，分为机械首端和化学首端。<br>（2）溶剂萃取过程：最普遍最成功的是以30%磷酸三丁酯（TBP）为萃取剂、以硝酸为盐析剂的（PUREX）流程，经过去污、分离循环（第一循环）、铀&#x2F;钚纯化第二循环、铀&#x2F;钚第三纯化循环，得到铀和钚的硝酸盐溶液$\text{UO}_2(\text{NO}_3)_2$ 溶液、$\text{Pu}(\text{NO}_3)_4$ 溶液。<br>（3）尾端处理：将铀和钚的硝酸盐溶液浓缩并转形为固体产品，此过程通常还具有补充净化作用。</p>
+<p>12.放射性废物处理：<br>（1）高放废液：其放射性占核燃料循环废物量的95%；高放废液经过6年和10年的衰变后，其热功率仍能分别保持在20W&#x2F;L和3.5W&#x2F;L，通常采用玻璃固化处理。<br>（2）中放废物（分为非α废物和低放α废物）；<br>（3）低放废物（分为非α废物和低放α废物）。</p>
+<p>13.根据放射性废物的物理性质分为废气、废液和固体废物。</p>
+<h1 id="七、辐射防护基础"><a href="#七、辐射防护基础" class="headerlink" title="七、辐射防护基础"></a>七、辐射防护基础</h1><ul>
+<li>了解辐射防护限值、外照射防护与内照射防护的基本方法和技术；辐射防护监测、辐射防护大纲。</li>
+<li>熟悉辐射防护的目的与任务；熟悉辐射源种类、来源与水平；熟悉辐射照射的分类、电离辐射的生物效应；熟悉辐射防护中使用的量及其单位；熟悉实践与干预、辐射防护的基本原则。</li>
+</ul>
+<h2 id="7-1-辐射防护的目的与任务"><a href="#7-1-辐射防护的目的与任务" class="headerlink" title="7.1 辐射防护的目的与任务"></a>7.1 辐射防护的目的与任务</h2><p>1.辐射防护的目的：是防止有害的确定性效应，并限制随机性效应的发生概率，使它们达到被认为可以接受的水平。</p>
+<p>2.辐射防护的任务：既要保护从事放射工作者本人和后代以及广大公众乃至全人类的安全；保护好环境；又要允许进行那些可能会产生辐射的必要实践以造福于人类。</p>
+<h2 id="7-2-辐射源种类、来源与水平"><a href="#7-2-辐射源种类、来源与水平" class="headerlink" title="7.2 辐射源种类、来源与水平"></a>7.2 辐射源种类、来源与水平</h2><p>1.人体受到照射的辐照源分为两大类：天然辐射源、人工辐射源。天然本底照射是迄今人类受到电离辐射照射的最主要来源。</p>
+<p>2.天然辐射源按其起因分为三类：<br>（1） 宇宙射线（宇宙空间的高能粒子，包括质子、α粒子、中子、电子、介子、光子等）；<br>（2） 宇生核素（宇宙射线与大气中的原子核相互作用产生，如3H、14C、7Be等）；<br>（3） 原生核素（存在于地壳中的天然放射性核素）。</p>
+<p>3.当前世界范围平均年有效剂量约为2.4mSv，引起内照射的各种辐射源中，222Rn的短寿命子体最为重要，由它们造成的有效剂量约为所有内照射辐射源贡献的70%。</p>
+<p>4.外照射中宇宙射线的贡献略低于原生核素。在年有效剂量中238U系起着重要作用，约占全部天然本底照射水平的48%。</p>
+<p>5.天然辐射源所引起的全球居民的年集体有效剂量的近似值为$10^7人·SV$。</p>
+<p>6.当今世界使人类收到照射的主要人工辐射源是：医疗照射、核动力生产、核爆炸（核试验）。</p>
+<h2 id="7-3-辐射照射的分类"><a href="#7-3-辐射照射的分类" class="headerlink" title="7.3 辐射照射的分类"></a>7.3 辐射照射的分类</h2><p>1.照射可以分外照射和内照射；可以分为正常照射或潜在照射；也可以分为职业照射、医疗照射和公众照射；在干预情况下，还可以分为应急照射或持续照射。</p>
+<p>2.职业照射：工作人员在其工作过程中所受的所有照射。两种情况排除在外：一是国家有关法规和标准所排除的照射，二是根据国家有关法规和标准予以豁免的实践或辐射源所产生的照射。</p>
+<p>3.通常情况下将天然源照射视为一种持续照射，但是喷气式飞机飞行过程中机组人员所受到的天然源照射，列入工作人员的职业照射。</p>
+<p>4.公众照射：是指公众成员所受到的辐射源的照射。包括获准的辐射源和实践产生的照射和在干预情况下受到的照射，但是不包括职业照射、医疗照射、当地正常的天然本底辐射照射。所以，也有两类照射是被排除在外的：被排除的照射、被豁免的实践或辐射源引起的照射。</p>
+<p>5.医疗照射：是指患者（包括不一定患病的受检者）因自身医学诊断或治疗所受的照射、知情但自愿帮助和安慰患者的人员（不包括施行诊断或治疗的医护人员）所受的照射，以及生物医学研究计划中的志愿者所受到的照射。</p>
+<p>6.医疗照射的辐射防护体系基本原则：<br>（1） 医疗照射的正当性判断（收益大于危害）；（2） 医疗照射的防护和安全最优化；<br>（3） 医疗照射的指导水平与剂量约束。</p>
+<p>7.潜在照射：是指有一定把握预期不会受到照射，但可能会因为辐射源的事故或偶然性事件（包括设备故障和误操作）所引起的照射。实质上，对潜在照射的控制，就是对辐射源的安全性的控制。</p>
+<h2 id="7-4-电离辐射的生物效应"><a href="#7-4-电离辐射的生物效应" class="headerlink" title="7.4 电离辐射的生物效应"></a>7.4 电离辐射的生物效应</h2><p>1.辐射损伤的机理是各种射线通过电离作用引起组织细胞中原子及由原子构成的分子的变化，这些变化也是原子激发的结果。细胞的脱氧核糖核酸（DNA）是主要靶。</p>
+<p>2.影响辐射效应的主要因素有两个方面：物理因素（与辐射有关）、生物因素（与机体有关）。</p>
+<p>3.物理因素（与辐射有关）：<br>（1） 辐射类型：外照射危害γ＞β＞α，内照射危害γ＜β＜α。<br>（2） 剂量率及分次照射：剂量率越大生物效应越显著；分次越多，每次间隔时间越长，生物效应越小。<br>（3） 照射部位和面积：照射剂量相同，受照面积越大，产生的效应也越严重。<br>（4） 照射的几何条件：与入射辐射的角分布、空间分布和辐射能谱等，人体受照时的姿势及其在辐射场内的取向有关。<br>（5） 在内照射情况下，生物效应还取决于放射性核素的种类、数量等。</p>
+<p>4.生物因素（与机体有关）：<br>（1） 不同生物种系的辐射敏感性；<br>（2） 个体不同发育阶段的辐射敏感性；<br>（3） 不同细胞、组织或器官的辐射敏感性：①高度敏感：淋巴组织、胸腺、骨髓、胃肠上皮、性腺、胚胎组织；②中度敏感：感觉器官、内皮细胞、皮肤上皮、唾液腺、肾、肝、肺组织的上皮细胞；③轻度敏感：中枢神经系统、内分泌腺、心脏；④不敏感：肌肉组织、软骨和骨组织、结缔组织。</p>
+<p>5.根据辐射效应的发生与剂量之间的关系，可以把辐射对人体的危害分为随机性效应和确定性效应两类。</p>
+<p>6.随机性效应：是指效应的发生概率（不是严重程度）与剂量大小有关的那些效应。在辐射防护中把随机性效应与剂量的关系简化地假设为“线性”、“无阈”。线性是指随机性效应的发生概率与所受剂量之间呈线性关系，无阈是指任何微小的剂量都可能诱发随机性效应。随机性效应发生概率P与剂量D的关系为P&#x3D;aD，其中a为常数。</p>
+<p>7.确定性效应是一种有“阈值”的效应，受到的剂量大于阈值，这种效应就会发生，而且其严重程度与所受的剂量大小有关，剂量越大后果越严重。</p>
+<p>8.根据辐射效应发生的时间分为躯体效应和遗传效应。<br>（1） 急性躯体效应：短时间内发生在受照者本人身上，属于确定性效应。<br>（2） 遗传效应和远期效应：表现为受照者后代的身体缺陷，属于随机性效应。<br>（3） 突变倍增剂量：使突变几率增加一倍的剂量，大约0.1-1Gy，代表值0.7 Gy。<br>（4） 辐射的远期效应：是一种需要经过很长时间潜伏期才显现在受照者身上的效应，主要表现为白血病和癌症，属于随机性效应。</p>
+<h2 id="7-5-辐射防护中使用的量及其单位"><a href="#7-5-辐射防护中使用的量及其单位" class="headerlink" title="7.5 辐射防护中使用的量及其单位"></a>7.5 辐射防护中使用的量及其单位</h2><p>1.照射量X：是个历史悠久，变化较大的一个辐射量。$X&#x3D;dQ&#x2F;dm$，单位：C&#x2F;kg，过去照射量的单位是伦琴，符号为R，$1R&#x3D;2.58×10^{-4}C&#x2F;kg$。现有的技术条件下，能被精确测量照射量的光子的能量限于10kev-3MeV范围以内。在辐射防护中上限可扩大到8MeV。</p>
+<p>2.比释动能$K$：$K&#x3D;dε_{tr}&#x2F;dm$。$dε_{tr}$是不带电粒子在质量为dm的物质中释放出的全部带电粒子的初始动能总和的平均值，它既包括这些带电粒子在韧致辐射过程中辐射出来的能量，也包括在该体积元内发生的次级过程所产生的任何带电粒子的能量。单位是J&#x2F;kg，专门名称是Gray，1Gy&#x3D;1J&#x2F;kg。比释动能K只适用于不带电粒子，适用于任何物质。</p>
+<p>3.吸收剂量$D$：单位质量受照物质中所吸收的平均辐射能量。$D&#x3D;dε&#x2F;dm$，dε是电离辐射授予质量为dm物质的平均能量。</p>
+<p>4.器官剂量$D_T$：某一器官或组织的平均吸收剂量。$D_T&#x3D;dε_T&#x2F;dm$，dεT是电离辐射授予质量为dm组织或器官的平均能量。</p>
+<p>5.当量剂量{H_t}：相同的吸收剂量未必产生同等程度的生物效应。为了用同一尺度表示不同类型和能量的辐射照射对人体造成的生物效应的严重程度或发生几率的大小，辐射防护中用了当量剂量这个词。$H_t&#x3D;∑W_r×D_{t,r}$</p>
+<ul>
+<li>$W_r$是辐射权重因子</li>
+<li>$D_{t,r}$是辐射R在器官或组织T内产生的平均吸收量。</li>
+</ul>
+<p>6.有效剂量$E&#x3D;ΣW_t×H_t$，Ht是器官或组织T的当量剂量，$W_t$是器官或组织T的组织权重因子$W_t&#x3D;T$器官或组织接受1Sv照射时危险度除以全身接受1Sv均匀照射时总危险度。</p>
+<p>7.待积当量剂量$H_t(τ)$：某一特定器官或组织接受当量剂量率在时间t内的积分。</p>
+<p>8.待积有效剂量$E(τ)$：待积当量剂量经Wt加权处理后的总和。</p>
+<p>9.集体当量剂量：表示一组人群指定的器官或组织所受的总辐射照射的量，单位是人·希，即为人·Sv。<br>10.集体有效剂量：表示一组人群所受的总的有效量，单位是人·希，即为人·Sv。</p>
+<h2 id="7-6实践与干预"><a href="#7-6实践与干预" class="headerlink" title="7.6实践与干预"></a>7.6实践与干预</h2><p>1.实践：它是指任何引入新的照射源或照射途径、或扩大受照人员范围、或改变现在照射源的照射途径网络，从而使人们受到的照射或受到照射可能性或受到照射的人数增加的人类活动。</p>
+<p>2.干预：是指任何旨在减少或避免不属于受控实践的或因事故而失控的照射源所致的照射或照射可能性的行动。</p>
+<p>3.实践的主要要求：<br>（1） 凡是没有被排除及豁免的实践全部受审管部门管理，按有关管理要求接受管理；<br>（2） 对实践的辐射防护要求，应全面而完整地、严格地执行辐射防护基本原则；<br>（3） 全面的科学管理。</p>
+<p>4.干预的适用范围：（1） 要求采取防护行动的应急照射；（2） 要求采取补救行动的持续照射。</p>
+<p>5.干预的基本原则：<br>（1） 尽可能防止严重的确定性健康效应；（2） 干预应是正当的，即收益大于危害；<br>（3） 应对引入干预和撤销干预所依据的水平进行最优化，以使防护措施产生最大的净利益。</p>
+<p>6.从事干预的工作人员所受到的照射不得超过GB 18871所规定的职业照射的最大单一年份的剂量限值，以下三种情况除外：<br>（1） 为抢救生命或避免严重损伤；（2） 为避免大的集体剂量；（3） 为防止演变成灾难性情况。</p>
+<p>7.辐射照射分为三类：<br>（1） 计划照射：计划引入或操作辐射源的照射，包括正常照射和潜在照射。对工作人员的潜在照射，ICRP推荐的危险约束值为$2×10^{-4}&#x2F;a$，对公众的推荐约束值为$1×10^{-5}&#x2F;a$。<br>（2） 应急照射：指需要采取应急措施的照射，包括应急准备和应急响应。<br>（3） 现存照射：在采取应急决策前就已经存在的照射，包括天然照射和来自过去事件和事故的遗留照射，比如住宅和工作场所的氡及天然本地辐射等。对现存照射的参考水平通常设在1-20mSv，个人剂量参考水平的上限为10 mSv。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/images/wechatpay.png" alt="yoyo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/NSE/" rel="tag"># NSE</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/04/NSE/shiwu/" rel="prev" title="注册核安全工程师-专业实务">
+                  <i class="fa fa-angle-left"></i> 注册核安全工程师-专业实务
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/30/sci/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-scipy%E6%8F%92%E5%80%BC/" rel="next" title="数据处理-scipy插值">
+                  数据处理-scipy插值 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/2024/09/04/NSE/zonghe/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

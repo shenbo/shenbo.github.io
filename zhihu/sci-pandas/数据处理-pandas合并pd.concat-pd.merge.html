@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="pandas 合并数据常用的两个函数：  pd.concat https:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;reference&#x2F;api&#x2F;pandas.concat.html  pd.merge https:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;reference&#x2F;api&#x2F;pandas.merge.html   刚好">
+<meta property="og:type" content="website">
+<meta property="og:title" content="pandas合并pd.concat-pd.merge">
+<meta property="og:url" content="https://shenbo.github.io/zhihu/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas%E5%90%88%E5%B9%B6pd.concat-pd.merge.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="pandas 合并数据常用的两个函数：  pd.concat https:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;reference&#x2F;api&#x2F;pandas.concat.html  pd.merge https:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;reference&#x2F;api&#x2F;pandas.merge.html   刚好">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-01T11:55:14.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.285Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="zhihu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/zhihu/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas%E5%90%88%E5%B9%B6pd.concat-pd.merge">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/zhihu/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas%E5%90%88%E5%B9%B6pd.concat-pd.merge.html","path":"zhihu/sci-pandas/数据处理-pandas合并pd.concat-pd.merge.html","title":"pandas合并pd.concat-pd.merge"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pandas合并pd.concat-pd.merge | yoyo
+</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">pandas合并pd.concat-pd.merge
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/sci-pandas/">SCI-PANDAS</a></li>
+            <li>数据处理-PANDAS合并PD.CONCAT-PD.MERGE</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>pandas 合并数据常用的两个函数：</p>
+<ul>
+<li><p>pd.concat <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html</a></p>
+</li>
+<li><p>pd.merge <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.merge.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.merge.html</a></p>
+</li>
+</ul>
+<p>刚好有一个对比 RNN 和 LSTM 神经网络运行结果的场景分别用到了这两个函数：</p>
+<ul>
+<li>采用 concat 合并两个csv表； csv表为两次运行结果的，列名基本一致。</li>
+<li>采用 merge 合并模型运行条件类似的表， 用于对比数据</li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#%%</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">&#x27;display.width&#x27;</span>, <span class="number">1000</span>)</span><br><span class="line">pd.set_option(<span class="string">&#x27;display.max_rows&#x27;</span>, <span class="number">500</span>)</span><br><span class="line">pd.set_option(<span class="string">&#x27;display.max_columns&#x27;</span>, <span class="number">500</span>)</span><br><span class="line"><span class="comment"># -------------</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;*** 基础数据 ***&#x27;</span>)</span><br><span class="line">res1_csv = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">model,steps,out_size,seed,epochs,rmse1p,r_2_1p,rmse2p,r_2_2p,rmse3p,r_2_3p</span></span><br><span class="line"><span class="string">RNN,24,2,0,0,0.1131,0.8846,0.1681,0.7449,,</span></span><br><span class="line"><span class="string">RNN,48,2,0,0,0.1119,0.8871,0.1694,0.7412,,</span></span><br><span class="line"><span class="string">LSTM,24,2,0,0,0.1108,0.8894,0.166,0.7514,,</span></span><br><span class="line"><span class="string">LSTM,48,2,0,0,0.1109,0.8892,0.1661,0.7511,,</span></span><br><span class="line"><span class="string">RNN,24,3,0,0,0.1157,0.8797,0.1629,0.76,0.1978,0.6471</span></span><br><span class="line"><span class="string">RNN,48,3,0,0,0.1159,0.8792,0.162,0.7628,0.1982,0.6455</span></span><br><span class="line"><span class="string">LSTM,24,3,0,0,0.1126,0.886,0.1584,0.7732,0.1926,0.6653</span></span><br><span class="line"><span class="string">LSTM,48,3,0,0,0.1125,0.8863,0.1587,0.7723,0.1933,0.6629</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">df_res1 = pd.read_csv(io.StringIO(res1_csv))</span><br><span class="line"><span class="built_in">print</span>(df_res1)</span><br><span class="line"></span><br><span class="line"><span class="comment">#%%</span></span><br><span class="line"><span class="comment"># -------------</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n*** 对比数据 ***&#x27;</span>)</span><br><span class="line">res2_csv = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">model,steps,seed,epochs,rmse1,r_2_1,rmse2,r_2_2</span></span><br><span class="line"><span class="string">LSTM,24,1,50,0.1110,0.8890,0.1661,0.7512</span></span><br><span class="line"><span class="string">LSTM,24,2,50,0.1109,0.8892,0.1658,0.7520</span></span><br><span class="line"><span class="string">LSTM,24,3,50,0.1118,0.8874,0.1667,0.7494</span></span><br><span class="line"><span class="string">LSTM,24,4,50,0.1109,0.8891,0.1666,0.7496</span></span><br><span class="line"><span class="string">LSTM,24,5,50,0.1127,0.8855,0.1662,0.7507</span></span><br><span class="line"><span class="string">LSTM,24,6,50,0.1107,0.8896,0.1659,0.7518</span></span><br><span class="line"><span class="string">LSTM,24,7,50,0.1110,0.8889,0.1659,0.7516</span></span><br><span class="line"><span class="string">LSTM,24,8,50,0.1119,0.8872,0.1667,0.7493</span></span><br><span class="line"><span class="string">LSTM,24,9,50,0.1109,0.8892,0.1657,0.7523</span></span><br><span class="line"><span class="string">LSTM,48,1,50,0.1110,0.8891,0.1663,0.7504</span></span><br><span class="line"><span class="string">LSTM,48,2,50,0.1106,0.8897,0.1658,0.7520</span></span><br><span class="line"><span class="string">LSTM,48,3,50,0.1120,0.8869,0.1671,0.7481</span></span><br><span class="line"><span class="string">LSTM,48,4,50,0.1117,0.8876,0.1677,0.7464</span></span><br><span class="line"><span class="string">LSTM,48,5,50,0.1110,0.8890,0.1662,0.7508</span></span><br><span class="line"><span class="string">LSTM,48,6,50,0.1145,0.8819,0.1683,0.7445</span></span><br><span class="line"><span class="string">LSTM,48,7,50,0.1113,0.8883,0.1676,0.7467</span></span><br><span class="line"><span class="string">LSTM,48,8,50,0.1106,0.8898,0.1665,0.7499</span></span><br><span class="line"><span class="string">LSTM,48,9,50,0.1107,0.8896,0.1657,0.7524</span></span><br><span class="line"><span class="string">RNN,24,1,50,0.1219,0.8660,0.1723,0.7321</span></span><br><span class="line"><span class="string">RNN,24,2,50,0.1114,0.8882,0.1674,0.7471</span></span><br><span class="line"><span class="string">RNN,24,3,50,0.1139,0.8830,0.1675,0.7468</span></span><br><span class="line"><span class="string">RNN,24,4,50,0.1106,0.8898,0.1678,0.7461</span></span><br><span class="line"><span class="string">RNN,24,5,50,0.1145,0.8818,0.1738,0.7275</span></span><br><span class="line"><span class="string">RNN,24,6,50,0.1134,0.8842,0.1677,0.7463</span></span><br><span class="line"><span class="string">RNN,24,7,50,0.1164,0.8778,0.1694,0.7412</span></span><br><span class="line"><span class="string">RNN,24,8,50,0.1121,0.8867,0.1711,0.7358</span></span><br><span class="line"><span class="string">RNN,24,9,50,0.1104,0.8901,0.1668,0.7490</span></span><br><span class="line"><span class="string">RNN,48,1,50,0.1121,0.8868,0.1682,0.7447</span></span><br><span class="line"><span class="string">RNN,48,2,50,0.1134,0.8842,0.1657,0.7524</span></span><br><span class="line"><span class="string">RNN,48,3,50,0.1122,0.8865,0.1678,0.7459</span></span><br><span class="line"><span class="string">RNN,48,4,50,0.1123,0.8864,0.1673,0.7476</span></span><br><span class="line"><span class="string">RNN,48,5,50,0.1146,0.8817,0.1694,0.7411</span></span><br><span class="line"><span class="string">RNN,48,6,50,0.1185,0.8735,0.1722,0.7325</span></span><br><span class="line"><span class="string">RNN,48,7,50,0.1122,0.8865,0.1725,0.7317</span></span><br><span class="line"><span class="string">RNN,48,8,50,0.1175,0.8756,0.1752,0.7231</span></span><br><span class="line"><span class="string">RNN,48,9,50,0.1130,0.8849,0.1662,0.7509</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">df_res2 = pd.read_csv(io.StringIO(res2_csv))</span><br><span class="line">df_res2[<span class="string">&#x27;out_size&#x27;</span>] = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">res3_csv = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">model,steps,seed,epochs,rmse1,r_2_1,rmse2,r_2_2,rmse3,r_2_3</span></span><br><span class="line"><span class="string">LSTM,24,1,50,0.114,0.8833,0.1588,0.7721,0.1937,0.6615</span></span><br><span class="line"><span class="string">LSTM,24,2,50,0.1126,0.8861,0.1588,0.7721,0.1928,0.6648</span></span><br><span class="line"><span class="string">LSTM,24,3,50,0.1138,0.8835,0.1585,0.7728,0.1931,0.6637</span></span><br><span class="line"><span class="string">LSTM,24,4,50,0.1124,0.8864,0.1583,0.7735,0.1925,0.6657</span></span><br><span class="line"><span class="string">LSTM,24,5,50,0.1131,0.8851,0.1581,0.7741,0.1922,0.6667</span></span><br><span class="line"><span class="string">LSTM,24,6,50,0.1126,0.886,0.159,0.7715,0.1931,0.6636</span></span><br><span class="line"><span class="string">LSTM,24,7,50,0.1129,0.8854,0.16,0.7684,0.1942,0.6599</span></span><br><span class="line"><span class="string">LSTM,24,8,50,0.1121,0.887,0.1583,0.7734,0.1931,0.6635</span></span><br><span class="line"><span class="string">LSTM,24,9,50,0.1126,0.8861,0.1584,0.7732,0.193,0.6639</span></span><br><span class="line"><span class="string">LSTM,48,1,50,0.1119,0.8874,0.1578,0.7748,0.1928,0.6646</span></span><br><span class="line"><span class="string">LSTM,48,2,50,0.1124,0.8865,0.1592,0.771,0.1948,0.6577</span></span><br><span class="line"><span class="string">LSTM,48,3,50,0.1131,0.8851,0.1588,0.772,0.1932,0.6634</span></span><br><span class="line"><span class="string">LSTM,48,4,50,0.1127,0.8858,0.158,0.7742,0.193,0.6639</span></span><br><span class="line"><span class="string">LSTM,48,5,50,0.1124,0.8865,0.1583,0.7735,0.1932,0.6632</span></span><br><span class="line"><span class="string">LSTM,48,6,50,0.1122,0.8869,0.1585,0.773,0.1933,0.663</span></span><br><span class="line"><span class="string">LSTM,48,7,50,0.1135,0.8842,0.1599,0.7688,0.1934,0.6626</span></span><br><span class="line"><span class="string">LSTM,48,8,50,0.1121,0.887,0.158,0.7744,0.1932,0.6632</span></span><br><span class="line"><span class="string">LSTM,48,9,50,0.1132,0.8848,0.1591,0.7711,0.193,0.6639</span></span><br><span class="line"><span class="string">RNN,24,1,50,0.1175,0.876,0.1597,0.7694,0.195,0.657</span></span><br><span class="line"><span class="string">RNN,24,2,50,0.1153,0.8804,0.1597,0.7693,0.1946,0.6584</span></span><br><span class="line"><span class="string">RNN,24,3,50,0.1176,0.8757,0.159,0.7714,0.1951,0.6567</span></span><br><span class="line"><span class="string">RNN,24,4,50,0.1144,0.8823,0.159,0.7715,0.1949,0.6572</span></span><br><span class="line"><span class="string">RNN,24,5,50,0.1146,0.8819,0.1599,0.769,0.196,0.6533</span></span><br><span class="line"><span class="string">RNN,24,6,50,0.1168,0.8774,0.1611,0.7653,0.1954,0.6556</span></span><br><span class="line"><span class="string">RNN,24,7,50,0.1192,0.8723,0.1594,0.7702,0.194,0.6604</span></span><br><span class="line"><span class="string">RNN,24,8,50,0.1154,0.8803,0.1591,0.7712,0.1942,0.6599</span></span><br><span class="line"><span class="string">RNN,24,9,50,0.1152,0.8806,0.1609,0.7659,0.1955,0.6551</span></span><br><span class="line"><span class="string">RNN,48,1,50,0.116,0.879,0.1611,0.7653,0.1985,0.6445</span></span><br><span class="line"><span class="string">RNN,48,2,50,0.113,0.8853,0.161,0.7657,0.1957,0.6544</span></span><br><span class="line"><span class="string">RNN,48,3,50,0.115,0.8812,0.1589,0.7716,0.195,0.6568</span></span><br><span class="line"><span class="string">RNN,48,4,50,0.1131,0.8851,0.159,0.7715,0.1945,0.6589</span></span><br><span class="line"><span class="string">RNN,48,5,50,0.1141,0.883,0.1599,0.769,0.1953,0.6558</span></span><br><span class="line"><span class="string">RNN,48,6,50,0.1156,0.8799,0.1596,0.7698,0.1952,0.6561</span></span><br><span class="line"><span class="string">RNN,48,7,50,0.1169,0.8773,0.1626,0.761,0.1967,0.6508</span></span><br><span class="line"><span class="string">RNN,48,8,50,0.1213,0.8678,0.1605,0.7672,0.1946,0.6583</span></span><br><span class="line"><span class="string">RNN,48,9,50,0.1132,0.8848,0.1587,0.7723,0.1943,0.6594</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">df_res3 = pd.read_csv(io.StringIO(res3_csv))</span><br><span class="line">df_res3[<span class="string">&#x27;out_size&#x27;</span>] = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(df_res2)</span><br><span class="line"><span class="built_in">print</span>(df_res3)</span><br><span class="line"></span><br><span class="line"><span class="comment">#%%</span></span><br><span class="line"><span class="comment"># concat</span></span><br><span class="line"><span class="comment"># res2、res3 分别为两次运行结果的</span></span><br><span class="line"><span class="comment"># 由于res3 比 res2 多两列， 合并后 res2 会有两列缺失的数据。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n*** 合并对比数据 Nx2 Nx3 ***&#x27;</span>)</span><br><span class="line">df_res = pd.concat((df_res2, df_res3)).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">df_res</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将列重新排序</span></span><br><span class="line">df_res = df_res[[<span class="string">&#x27;model&#x27;</span>, <span class="string">&#x27;steps&#x27;</span>, <span class="string">&#x27;out_size&#x27;</span>, <span class="string">&#x27;seed&#x27;</span>, <span class="string">&#x27;epochs&#x27;</span>, </span><br><span class="line">                 <span class="string">&#x27;rmse1&#x27;</span>, <span class="string">&#x27;r_2_1&#x27;</span>, <span class="string">&#x27;rmse2&#x27;</span>, <span class="string">&#x27;r_2_2&#x27;</span>, <span class="string">&#x27;rmse3&#x27;</span>, <span class="string">&#x27;r_2_3&#x27;</span>]]</span><br><span class="line"><span class="comment"># print(df_res.columns)</span></span><br><span class="line">df_res</span><br><span class="line"></span><br><span class="line"><span class="comment">#%%</span></span><br><span class="line"><span class="comment"># merge</span></span><br><span class="line"><span class="comment"># 这里将res 与 res1 按照模型、步长、输出等条件进行合并</span></span><br><span class="line"><span class="comment"># 会产生扩展的列，不需要的列一并删掉</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n*** 拼接结果 ***&#x27;</span>)</span><br><span class="line">df = pd.merge(df_res, df_res1, how=<span class="string">&#x27;outer&#x27;</span>, </span><br><span class="line">              on=[<span class="string">&#x27;model&#x27;</span>, <span class="string">&#x27;steps&#x27;</span>, <span class="string">&#x27;out_size&#x27;</span>], </span><br><span class="line">              suffixes=(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;_DROP&#x27;</span>)).<span class="built_in">filter</span>(regex=<span class="string">&#x27;^(?!.*_DROP)&#x27;</span>)</span><br><span class="line">df.info()</span><br><span class="line">df = df.fillna(<span class="number">0</span>)</span><br><span class="line">df.head(<span class="number">10</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/zhihu/">ZHIHU</a></li>
+            <li><a href="/zhihu/sci-pandas/">SCI-PANDAS</a></li>
+            <li>数据处理-PANDAS合并PD.CONCAT-PD.MERGE</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/zhihu/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas%E5%90%88%E5%B9%B6pd.concat-pd.merge.html"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

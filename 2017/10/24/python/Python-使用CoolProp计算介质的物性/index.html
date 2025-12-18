@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="之前常用的物性计算软件是 Nist Refprop，在 Excel 中计算时调用起来非常好使。但是计算方程组求解时 Excel 就不太好用了。。 发现了一个开源软件：CoolProp，它支持多种程序或语言的调用，接口比较好；对 python 的支持也非常方便。 1. 安装 CoolProp 直接使用 pip 安装：  1pip install CoolProp   或者安装开发版（稳定版偶尔有编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 调用 CoolProp 计算介质的物性">
+<meta property="og:url" content="https://shenbo.github.io/2017/10/24/python/Python-%E4%BD%BF%E7%94%A8CoolProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="之前常用的物性计算软件是 Nist Refprop，在 Excel 中计算时调用起来非常好使。但是计算方程组求解时 Excel 就不太好用了。。 发现了一个开源软件：CoolProp，它支持多种程序或语言的调用，接口比较好；对 python 的支持也非常方便。 1. 安装 CoolProp 直接使用 pip 安装：  1pip install CoolProp   或者安装开发版（稳定版偶尔有编译">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-10-24T15:55:20.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.167Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="coolprop">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2017/10/24/python/Python-%E4%BD%BF%E7%94%A8CoolProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2017/10/24/python/Python-%E4%BD%BF%E7%94%A8CoolProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/","path":"2017/10/24/python/Python-使用CoolProp计算介质的物性/","title":"python 调用 CoolProp 计算介质的物性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python 调用 CoolProp 计算介质的物性 | yoyo</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-CoolProp"><span class="nav-text">1. 安装 CoolProp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-text">2. 基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-text">2.1 参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E7%9B%B4%E6%8E%A5%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E7%B1%BB%EF%BC%8C%E6%96%B9%E4%BE%BF%E8%B0%83%E7%94%A8"><span class="nav-text">2.2 直接定义一个类，方便调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B9%BF%E7%A9%BA%E6%B0%94%E8%AE%A1%E7%AE%97"><span class="nav-text">3. 湿空气计算</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2017/10/24/python/Python-%E4%BD%BF%E7%94%A8CoolProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yoyo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yoyo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="python 调用 CoolProp 计算介质的物性 | yoyo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python 调用 CoolProp 计算介质的物性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-10-24 23:55:20" itemprop="dateCreated datePublished" datetime="2017-10-24T23:55:20+08:00">2017-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/10/24/python/Python-%E4%BD%BF%E7%94%A8CoolProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/" class="post-meta-item leancloud_visitors" data-flag-title="python 调用 CoolProp 计算介质的物性" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>909</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>之前常用的物性计算软件是 Nist Refprop，在 Excel 中计算时调用起来非常好使。<br>但是计算方程组求解时 Excel 就不太好用了。。</p>
+<p>发现了一个开源软件：CoolProp，它支持多种程序或语言的调用，接口比较好；<br>对 python 的支持也非常方便。</p>
+<h2 id="1-安装-CoolProp"><a href="#1-安装-CoolProp" class="headerlink" title="1. 安装 CoolProp"></a>1. 安装 CoolProp</h2><ul>
+<li>直接使用 pip 安装：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install CoolProp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>或者安装开发版（稳定版偶尔有编译问题，导致安装失败）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install the latest nightly release version</span></span><br><span class="line">pip install -vvv --pre --trusted-host www.coolprop.dreamhosters.com --find-links http://www.coolprop.dreamhosters.com/binaries/Python/ -U --force-reinstall CoolProp</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2. 基本使用"></a>2. 基本使用</h2><h3 id="2-1-参数说明"><a href="#2-1-参数说明" class="headerlink" title="2.1 参数说明"></a>2.1 参数说明</h3><blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="http://www.coolprop.org/coolprop/HighLevelAPI.html">http://www.coolprop.org/coolprop/HighLevelAPI.html</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D, DMASS</td>
+<td>kg&#x2F;m^3</td>
+<td>Mass density</td>
+<td>密度</td>
+</tr>
+<tr>
+<td>H, HMASS</td>
+<td>J&#x2F;kg</td>
+<td>Enthalpy</td>
+<td>焓</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Pa</td>
+<td>Pressure</td>
+<td>压力</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>mol&#x2F;mol</td>
+<td>Mass vapor quality</td>
+<td>气体占比</td>
+</tr>
+<tr>
+<td>T</td>
+<td>K</td>
+<td>Temp</td>
+<td>温度</td>
+</tr>
+<tr>
+<td>A, SPEED_OF_SOUND</td>
+<td>m&#x2F;s</td>
+<td>Speed of sound</td>
+<td>声速</td>
+</tr>
+<tr>
+<td>CONDUCTIVITY, L</td>
+<td>W&#x2F;m&#x2F;K</td>
+<td>Thermal conductivity</td>
+<td>热导率</td>
+</tr>
+<tr>
+<td>CVMASS, O</td>
+<td>J&#x2F;kg&#x2F;K</td>
+<td>Mass specific constant volume specific heat</td>
+<td>定容比热容</td>
+</tr>
+<tr>
+<td>C, CPMASS</td>
+<td>J&#x2F;kg&#x2F;K</td>
+<td>Mass specific constant pressure specific heat</td>
+<td>定压比热容</td>
+</tr>
+<tr>
+<td>I, SURFACE_TENSION</td>
+<td>N&#x2F;m</td>
+<td>Surface tension</td>
+<td>表面张力</td>
+</tr>
+<tr>
+<td>M, MOLARMASS</td>
+<td>kg&#x2F;mol</td>
+<td>Molar mass</td>
+<td>摩尔质量</td>
+</tr>
+<tr>
+<td>PCRIT</td>
+<td>Pa</td>
+<td>Pressure at the critical point</td>
+<td>临界压力</td>
+</tr>
+<tr>
+<td>TCRIT</td>
+<td>K</td>
+<td>Temperature at the critical point</td>
+<td>临界温度</td>
+</tr>
+<tr>
+<td>V, VISCOSITY</td>
+<td>Pa·s</td>
+<td>Viscosity</td>
+<td>粘度</td>
+</tr>
+<tr>
+<td>Z</td>
+<td></td>
+<td>Compressibility factor</td>
+<td>压缩系数</td>
+</tr>
+</tbody></table>
+<ul>
+<li>示例1：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> CoolProp.HumidAirProp <span class="keyword">import</span> HAPropsSI</span><br><span class="line"><span class="keyword">from</span> CoolProp.CoolProp <span class="keyword">import</span> PropsSI</span><br><span class="line"></span><br><span class="line">p = <span class="number">101325</span></span><br><span class="line">t = PropsSI(<span class="string">&#x27;T&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n-------------CoolProp-------------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- 在 &#123;&#125; Pa(abs) 时，水的饱和温度: &#123;:.2f&#125; K \n&#x27;</span>.<span class="built_in">format</span>(p, t))    <span class="comment"># 373.12 K</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>示例2：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> CoolProp.HumidAirProp <span class="keyword">import</span> HAPropsSI</span><br><span class="line"><span class="keyword">from</span> CoolProp.CoolProp <span class="keyword">import</span> PropsSI</span><br><span class="line">paras = &#123;<span class="string">&#x27;D&#x27;</span>: <span class="string">&#x27;kg/m^3&#x27;</span>, </span><br><span class="line">         <span class="string">&#x27;H&#x27;</span>: <span class="string">&#x27;J/kg&#x27;</span>, </span><br><span class="line">         <span class="string">&#x27;A&#x27;</span>: <span class="string">&#x27;J/kg/K&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;L&#x27;</span>: <span class="string">&#x27;W/m/K&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;O&#x27;</span>: <span class="string">&#x27;J/kg/K&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;C&#x27;</span>: <span class="string">&#x27;J/kg/K&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;M&#x27;</span>: <span class="string">&#x27;kg/mol&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;V&#x27;</span>: <span class="string">&#x27;Pa.S&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;Z&#x27;</span>: <span class="string">&#x27;-&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (k, v) <span class="keyword">in</span> paras.items():    </span><br><span class="line">    v1 = CP.PropsSI(k, <span class="string">&#x27;T&#x27;</span>, <span class="number">273.15</span>+<span class="number">20</span>, <span class="string">&#x27;P&#x27;</span>, <span class="number">101325</span>, <span class="string">&#x27;water&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;  <span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v1:<span class="number">10.4</span>f&#125;</span> <span class="subst">&#123;v&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="2-2-直接定义一个类，方便调用"><a href="#2-2-直接定义一个类，方便调用" class="headerlink" title="2.2 直接定义一个类，方便调用"></a>2.2 直接定义一个类，方便调用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> CoolProp.CoolProp <span class="keyword">import</span> PropsSI</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WaterProp</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="comment"># 求特定压力下的物性</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, p=<span class="number">101325</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.T = PropsSI(<span class="string">&#x27;T&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)          <span class="comment"># 饱和温度</span></span><br><span class="line">        <span class="variable language_">self</span>.C = PropsSI(<span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)          <span class="comment"># 比热容</span></span><br><span class="line">        <span class="variable language_">self</span>.D_l = PropsSI(<span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)        <span class="comment"># 液体密度</span></span><br><span class="line">        <span class="variable language_">self</span>.D_v = PropsSI(<span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;Water&#x27;</span>)        <span class="comment"># 蒸汽密度</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.H_l = PropsSI(<span class="string">&#x27;H&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.H_v = PropsSI(<span class="string">&#x27;H&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;Water&#x27;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.H = <span class="variable language_">self</span>.H_v - <span class="variable language_">self</span>.H_l                            <span class="comment"># 汽化潜热</span></span><br><span class="line">        <span class="variable language_">self</span>.L_l = PropsSI(<span class="string">&#x27;L&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)        <span class="comment"># 导热系数</span></span><br><span class="line">        <span class="variable language_">self</span>.I_l = PropsSI(<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)        <span class="comment"># 表面张力</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.U_l = PropsSI(<span class="string">&#x27;V&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)        <span class="comment"># 动力粘度</span></span><br><span class="line">        <span class="variable language_">self</span>.V_l = <span class="variable language_">self</span>.U_l / <span class="variable language_">self</span>.D_l                          <span class="comment"># 运动粘度</span></span><br><span class="line">        <span class="variable language_">self</span>.Prl = PropsSI(<span class="string">&#x27;Prandtl&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, p, <span class="string">&#x27;Q&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;Water&#x27;</span>)  <span class="comment"># 普朗特数</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.print_prop()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">print_prop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n-------------CoolProp-------------&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10s&#125;      &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;介质名称&#x27;</span>, <span class="string">&#x27;Water&#x27;</span>,    <span class="string">&#x27;单位&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.2f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;计算压力&#x27;</span>, p,          <span class="string">&#x27;Pa&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.2f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;饱和温度&#x27;</span>, <span class="variable language_">self</span>.T,     <span class="string">&#x27;K&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.2f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;液体密度&#x27;</span>, <span class="variable language_">self</span>.D_l,   <span class="string">&#x27;kg/m3&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.4f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;蒸汽密度&#x27;</span>, <span class="variable language_">self</span>.D_v,   <span class="string">&#x27;kg/m3&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.2f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;汽化潜热&#x27;</span>, <span class="variable language_">self</span>.H,     <span class="string">&#x27;J/kg&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.4f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;导热系数&#x27;</span>, <span class="variable language_">self</span>.L_l,   <span class="string">&#x27;W/m.K&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.4e&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;运动粘度&#x27;</span>, <span class="variable language_">self</span>.V_l,   <span class="string">&#x27;m2/s&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;- &#123;&#125;: &#123;:&gt;10.4f&#125;    &#123;:&lt;10&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;普朗特数&#x27;</span>, <span class="variable language_">self</span>.Prl,   <span class="string">&#x27;-&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WaterProp(p=<span class="number">101325</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">- 介质名称:      Water      单位</span></span><br><span class="line"><span class="string">- 计算压力:  101325.00    Pa</span></span><br><span class="line"><span class="string">- 饱和温度:     373.12    K</span></span><br><span class="line"><span class="string">- 液体密度:     958.37    kg/m3</span></span><br><span class="line"><span class="string">- 蒸汽密度:     0.5977    kg/m3</span></span><br><span class="line"><span class="string">- 汽化潜热: 2256471.59    J/kg</span></span><br><span class="line"><span class="string">- 导热系数:     0.6772    W/m.K</span></span><br><span class="line"><span class="string">- 运动粘度: 2.9389e-07    m2/s</span></span><br><span class="line"><span class="string">- 普朗特数:     1.7533    </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-湿空气计算"><a href="#3-湿空气计算" class="headerlink" title="3. 湿空气计算"></a>3. 湿空气计算</h2><p>CoolProp 可以直接计算 湿空气的物性。</p>
+<ul>
+<li>参数说明：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P</td>
+<td>Pa</td>
+<td>Pressure</td>
+<td>压力</td>
+</tr>
+<tr>
+<td>T</td>
+<td>K</td>
+<td>Dry-Bulb Temp</td>
+<td>干球温度</td>
+</tr>
+<tr>
+<td>Twb</td>
+<td>K</td>
+<td>Wet-Bulb Temp</td>
+<td>湿球温度</td>
+</tr>
+<tr>
+<td>Tdp</td>
+<td>K</td>
+<td>Dew-Point Temp</td>
+<td>露点温度</td>
+</tr>
+<tr>
+<td>R</td>
+<td></td>
+<td>Relative humidity</td>
+<td>相对湿度</td>
+</tr>
+<tr>
+<td>W</td>
+<td>kg&#x2F;kga</td>
+<td>Humidity Ratio</td>
+<td>含湿量</td>
+</tr>
+<tr>
+<td>H</td>
+<td>J&#x2F;kga</td>
+<td>Mixture Enthalpy</td>
+<td>比焓</td>
+</tr>
+</tbody></table>
+<ul>
+<li>示例：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> CoolProp.HumidAirProp <span class="keyword">import</span> HAPropsSI</span><br><span class="line"></span><br><span class="line">w = HAPropsSI(<span class="string">&#x27;W&#x27;</span>, <span class="string">&#x27;T&#x27;</span>, <span class="number">273.15</span>+<span class="number">25</span>, <span class="string">&#x27;P&#x27;</span>, <span class="number">101325</span>, <span class="string">&#x27;R&#x27;</span>, <span class="number">0.5</span>)</span><br><span class="line">t_dp = HAPropsSI(<span class="string">&#x27;Tdp&#x27;</span>, <span class="string">&#x27;T&#x27;</span>, <span class="number">273.15</span>+<span class="number">25</span>, <span class="string">&#x27;P&#x27;</span>, <span class="number">101325</span>, <span class="string">&#x27;R&#x27;</span>, <span class="number">0.5</span>)</span><br><span class="line">h = HAPropsSI(<span class="string">&#x27;H&#x27;</span>, <span class="string">&#x27;T&#x27;</span>, <span class="number">273.15</span>+<span class="number">25</span>, <span class="string">&#x27;P&#x27;</span>, <span class="number">101325</span>, <span class="string">&#x27;R&#x27;</span>, <span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n-------------CoolProp-------------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;在 25℃ , 101325Pa 时，相对湿度为 50% 的湿空气, &#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- 含湿量为 &#123;:&gt;8.2%&#125;  kg/kga&#x27;</span>.<span class="built_in">format</span>(w))               <span class="comment"># 0.99%</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- 露点为   &#123;:&gt;8.2f&#125;  ℃&#x27;</span>.<span class="built_in">format</span>(t_dp-<span class="number">273.15</span>))         <span class="comment"># 13.87</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- 比焓为   &#123;:&gt;8.2f&#125;  kJ/kg&#x27;</span>.<span class="built_in">format</span>(h/<span class="number">1000</span>))          <span class="comment"># 50.42</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>更多用法见官网 : <a target="_blank" rel="noopener" href="http://www.coolprop.org/coolprop/wrappers/Python/index.html#python">http://www.coolprop.org/coolprop/wrappers/Python/index.html#python</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/images/wechatpay.png" alt="yoyo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/coolprop/" rel="tag"># coolprop</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/09/09/office/excel-%E8%B0%83%E7%94%A8Nist-RefProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/" rel="prev" title="excel调用 Nist RefProp 计算介质的物性">
+                  <i class="fa fa-angle-left"></i> excel调用 Nist RefProp 计算介质的物性
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/11/12/office/excel-%E8%B0%83%E7%94%A8%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91/" rel="next" title="excel调用有道翻译api">
+                  excel调用有道翻译api <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/2017/10/24/python/Python-%E4%BD%BF%E7%94%A8CoolProp%E8%AE%A1%E7%AE%97%E4%BB%8B%E8%B4%A8%E7%9A%84%E7%89%A9%E6%80%A7/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

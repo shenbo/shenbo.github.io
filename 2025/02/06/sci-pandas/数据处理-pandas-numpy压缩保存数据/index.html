@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="numpy的保存 https:&#x2F;&#x2F;numpy.org&#x2F;doc&#x2F;stable&#x2F;reference&#x2F;generated&#x2F;numpy.save.html  numpy保存数组比较简单。 123456789101112131415161718192021# 1. 保存单个数组numpy.save(file, arr, allow_pickle&#x3D;True)# 2. 保存多个数组numpy.savez(fil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas-numpy压缩保存数据">
+<meta property="og:url" content="https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="numpy的保存 https:&#x2F;&#x2F;numpy.org&#x2F;doc&#x2F;stable&#x2F;reference&#x2F;generated&#x2F;numpy.save.html  numpy保存数组比较简单。 123456789101112131415161718192021# 1. 保存单个数组numpy.save(file, arr, allow_pickle&#x3D;True)# 2. 保存多个数组numpy.savez(fil">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/pandas_save_test_10000.png">
+<meta property="og:image" content="https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/pandas_save_test_100000.png">
+<meta property="article:published_time" content="2025-02-06T05:15:51.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.214Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="numpy">
+<meta property="article:tag" content="pandas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/pandas_save_test_10000.png">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/","path":"2025/02/06/sci-pandas/数据处理-pandas-numpy压缩保存数据/","title":"pandas-numpy压缩保存数据"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pandas-numpy压缩保存数据 | yoyo</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy%E7%9A%84%E4%BF%9D%E5%AD%98"><span class="nav-text">numpy的保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E7%9A%84%E4%BF%9D%E5%AD%98"><span class="nav-text">pandas的保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%AF%BB%E5%86%99%E9%80%9F%E5%BA%A6%E5%92%8C%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF"><span class="nav-text">对比读写速度和文件体积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feather%E3%80%81parquet-%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E9%A2%84%E8%A7%88"><span class="nav-text">feather、parquet 在vscode中的预览</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yoyo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yoyo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="pandas-numpy压缩保存数据 | yoyo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pandas-numpy压缩保存数据
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-06 13:15:51" itemprop="dateCreated datePublished" datetime="2025-02-06T13:15:51+08:00">2025-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/sci/" itemprop="url" rel="index"><span itemprop="name">sci</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/" class="post-meta-item leancloud_visitors" data-flag-title="pandas-numpy压缩保存数据" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>671</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="numpy的保存"><a href="#numpy的保存" class="headerlink" title="numpy的保存"></a>numpy的保存</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.save.html">https://numpy.org/doc/stable/reference/generated/numpy.save.html</a></p>
+</blockquote>
+<p>numpy保存数组比较简单。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 保存单个数组</span></span><br><span class="line">numpy.save(file, arr, allow_pickle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 保存多个数组</span></span><br><span class="line">numpy.savez(file, *args, allow_pickle=<span class="literal">True</span>, **kwds)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存时如果不指定数组名字， 默认按照 arr_0, arr_1 编号</span></span><br><span class="line">numpy.savez(file, a1, a2) <span class="comment">#  Arrays will be named: arr_0, arr_1 ...</span></span><br><span class="line"><span class="comment"># 保存时指定数组名字</span></span><br><span class="line">numpy.savez(file, a1=a1, a2=a2) <span class="comment">#  Arrays will be named: a1, a2 ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取 npz</span></span><br><span class="line">npzfile = np.load(<span class="string">&#x27;file.npz&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(npzfile.files)</span><br><span class="line"></span><br><span class="line">a1, a2 = [npzfile[key] <span class="keyword">for</span> key <span class="keyword">in</span> npzfile.files]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 保存多个数组, 保存时进行数据压缩，用法与 numpy.savez() 一样</span></span><br><span class="line"><span class="comment"># 压缩率一般在 10 倍以上，相应牺牲的是读取、保存时间，时间消耗大概是同样的倍率。</span></span><br><span class="line">numpy.savez_compressed(file, *args, allow_pickle=<span class="literal">True</span>, **kwds)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="pandas的保存"><a href="#pandas的保存" class="headerlink" title="pandas的保存"></a>pandas的保存</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pandas.pydata.org/docs/user_guide/io.html">https://pandas.pydata.org/docs/user_guide/io.html</a></p>
+</blockquote>
+<p>pandas保存复杂得多，提供了非常多的格式，常见的：csv，xlsx，h5等。</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Data Description</th>
+<th>Format</th>
+<th>Reader</th>
+<th>Writer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text</td>
+<td>CSV</td>
+<td>.csv</td>
+<td>read_csv</td>
+<td>to_csv</td>
+</tr>
+<tr>
+<td>text</td>
+<td>Fixed-Width Text File</td>
+<td>.csv</td>
+<td>read_fwf</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>text</td>
+<td>JSON</td>
+<td>.json</td>
+<td>read_json</td>
+<td>to_json</td>
+</tr>
+<tr>
+<td>text</td>
+<td>HTML</td>
+<td>.html</td>
+<td>read_html</td>
+<td>to_html</td>
+</tr>
+<tr>
+<td>text</td>
+<td>LaTeX</td>
+<td>.tex</td>
+<td>Styler.to_latex</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>text</td>
+<td>XML</td>
+<td>.xml</td>
+<td>read_xml</td>
+<td>to_xml</td>
+</tr>
+<tr>
+<td>text</td>
+<td>Local clipboard</td>
+<td>&#x2F;</td>
+<td>read_clipboard</td>
+<td>to_clipboard</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>MS Excel</td>
+<td>.xlsx</td>
+<td>read_excel</td>
+<td>to_excel</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>OpenDocument</td>
+<td>.ods</td>
+<td>read_excel</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>HDF5 Format</td>
+<td>.hdf</td>
+<td>read_hdf</td>
+<td>to_hdf</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>Feather Format</td>
+<td>.feather</td>
+<td>read_feather</td>
+<td>to_feather</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>Parquet Format</td>
+<td>.parquet</td>
+<td>read_parquet</td>
+<td>to_parquet</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>ORC Format</td>
+<td>.orc</td>
+<td>read_orc</td>
+<td>to_orc</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>Stata</td>
+<td>.dta</td>
+<td>read_stata</td>
+<td>to_stata</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>SAS</td>
+<td>.sas7bdat</td>
+<td>read_sas</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>SPSS</td>
+<td>.sav</td>
+<td>read_spss</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>Python Pickle Format</td>
+<td>.pkl</td>
+<td>read_pickle</td>
+<td>to_pickle</td>
+</tr>
+<tr>
+<td>SQL</td>
+<td>SQL</td>
+<td>&#x2F;</td>
+<td>read_sql</td>
+<td>to_sql</td>
+</tr>
+</tbody></table>
+<h3 id="对比读写速度和文件体积"><a href="#对比读写速度和文件体积" class="headerlink" title="对比读写速度和文件体积"></a>对比读写速度和文件体积</h3><span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># %%</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> rich.pretty <span class="keyword">import</span> pprint  </span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#%%</span></span><br><span class="line">size = <span class="number">10000</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame()</span><br><span class="line">df[<span class="string">&quot;A&quot;</span>] = np.random.rand(size)</span><br><span class="line">df[<span class="string">&quot;B&quot;</span>] = np.random.randint(<span class="number">0</span>, <span class="number">10000</span>, size)</span><br><span class="line">df[<span class="string">&quot;sin&quot;</span>] = df[<span class="string">&quot;A&quot;</span>].apply(<span class="keyword">lambda</span> x: np.sin(x))</span><br><span class="line">df[<span class="string">&quot;datetime&quot;</span>] = pd.date_range(<span class="string">&quot;20240101&quot;</span>, periods=size, freq=<span class="string">&quot;s&quot;</span>)</span><br><span class="line">df[<span class="string">&quot;array&quot;</span>] = df[<span class="string">&quot;B&quot;</span>].apply(<span class="keyword">lambda</span> x: np.sin(x) * np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))</span><br><span class="line">df[<span class="string">&quot;string&quot;</span>] = df[<span class="string">&quot;array&quot;</span>].apply(<span class="keyword">lambda</span> x: hashlib.md5(<span class="built_in">str</span>(x).encode(<span class="string">&quot;utf8&quot;</span>)).hexdigest())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"><span class="built_in">print</span>(df.dtypes)</span><br><span class="line"></span><br><span class="line"><span class="comment"># %%</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line">XLSX = <span class="string">&quot;test.xlsx&quot;</span></span><br><span class="line">CSV = <span class="string">&quot;test.csv&quot;</span></span><br><span class="line">PKL = <span class="string">&quot;test.pkl&quot;</span></span><br><span class="line">PKLZ = <span class="string">&quot;test.pklz&quot;</span></span><br><span class="line">HDF = <span class="string">&quot;test.hdf&quot;</span></span><br><span class="line">HDFZ = <span class="string">&quot;test.hdfz&quot;</span></span><br><span class="line">FTH = <span class="string">&quot;test.feather&quot;</span></span><br><span class="line">PQT = <span class="string">&quot;test.parquet&quot;</span></span><br><span class="line"></span><br><span class="line">funcs = [</span><br><span class="line">    <span class="comment"># xls</span></span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_excel(XLSX),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_excel(XLSX, index_col=<span class="number">0</span>),</span><br><span class="line">    <span class="comment"># csv</span></span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_csv(CSV, mode=<span class="string">&quot;w&quot;</span>),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_csv(CSV, index_col=<span class="number">0</span>),</span><br><span class="line">    <span class="comment"># pkl</span></span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_pickle(PKL),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_pickle(PKL),</span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_pickle(PKLZ, compression=<span class="string">&quot;xz&quot;</span>),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_pickle(PKLZ, compression=<span class="string">&quot;xz&quot;</span>),</span><br><span class="line">    <span class="comment"># hdf</span></span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_hdf(HDF, key=<span class="string">&quot;test&quot;</span>, mode=<span class="string">&quot;w&quot;</span>),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_hdf(HDF, <span class="string">&quot;test&quot;</span>),</span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_hdf(HDFZ, key=<span class="string">&quot;test&quot;</span>, mode=<span class="string">&quot;w&quot;</span>, complib=<span class="string">&quot;blosc&quot;</span>),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_hdf(HDFZ, <span class="string">&quot;test&quot;</span>),</span><br><span class="line">    <span class="comment"># feather</span></span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_feather(FTH),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_feather(FTH),</span><br><span class="line">    <span class="comment"># parquet</span></span><br><span class="line">    <span class="keyword">lambda</span> x: df.to_parquet(PQT),</span><br><span class="line">    <span class="keyword">lambda</span> x: pd.read_parquet(PQT)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># %%</span></span><br><span class="line"><span class="comment"># 定义测试参数</span></span><br><span class="line">runs_number = <span class="number">1</span></span><br><span class="line">runs_result = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, name <span class="keyword">in</span> <span class="built_in">enumerate</span>([XLSX, CSV, PKL, PKLZ, HDF, HDFZ, FTH, PQT]):</span><br><span class="line">    func = name.replace(<span class="string">&quot;test.&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">    w_speed = timeit.timeit(<span class="keyword">lambda</span>: funcs[<span class="number">2</span> * i](df), number=runs_number)</span><br><span class="line">    r_speed = timeit.timeit(<span class="keyword">lambda</span>: funcs[<span class="number">2</span> * i + <span class="number">1</span>](df), number=runs_number)</span><br><span class="line">    filesize = os.path.getsize(name) / <span class="number">1024</span> / <span class="number">1024</span></span><br><span class="line">    runs_result.append([func, w_speed, r_speed, filesize])</span><br><span class="line"></span><br><span class="line">pprint(runs_result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># %%</span></span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line"></span><br><span class="line">df_rst = pd.DataFrame(runs_result, columns=[<span class="string">&quot;func&quot;</span>, <span class="string">&quot;write [s]&quot;</span>, <span class="string">&quot;read [s]&quot;</span>, <span class="string">&quot;filesize [M]&quot;</span>])</span><br><span class="line">pprint(df_rst)</span><br><span class="line"></span><br><span class="line"><span class="comment"># %%</span></span><br><span class="line"></span><br><span class="line">df_rst.plot(x=<span class="string">&#x27;func&#x27;</span>, y=[<span class="string">&#x27;write [s]&#x27;</span>, <span class="string">&#x27;read [s]&#x27;</span>, <span class="string">&#x27;filesize [M]&#x27;</span>], kind=<span class="string">&#x27;bar&#x27;</span>, title=<span class="string">f&#x27;datasize = <span class="subst">&#123;size&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># %%</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/pandas_save_test_10000.png" class="">
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/pandas_save_test_100000.png" class="">
+
+<p>经过对比发现 feather 、 parquet 格式的压缩率、读写速度通常比其他格式更好一些。</p>
+<h3 id="feather、parquet-在vscode中的预览"><a href="#feather、parquet-在vscode中的预览" class="headerlink" title="feather、parquet 在vscode中的预览"></a>feather、parquet 在vscode中的预览</h3><p>这两种格式可以直接在VSCode中预览：</p>
+<ul>
+<li>feather ：安装 Feather Viewer 插件；</li>
+<li>parquet ：安装 Python Data Science (包含 Data Wrangler) 插件。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/images/wechatpay.png" alt="yoyo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/pandas/" rel="tag"># pandas</a>
+              <a href="/tags/numpy/" rel="tag"># numpy</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/04/apps/windows%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5mklink/" rel="prev" title="windows创建文件链接mklink">
+                  <i class="fa fa-angle-left"></i> windows创建文件链接mklink
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/22/wsl/wsl-ubuntu-openmc-model/" rel="next" title="openmc.model 复合面命令">
+                  openmc.model 复合面命令 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/2025/02/06/sci-pandas/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-pandas-numpy%E5%8E%8B%E7%BC%A9%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

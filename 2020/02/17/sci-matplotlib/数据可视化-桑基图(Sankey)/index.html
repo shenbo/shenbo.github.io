@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="EC96631319D9B4BAA4B314D857E3EFAE">
+  <meta name="baidu-site-verification" content="2Ws4rQvwqH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenbo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"monokai","dark":"monokai"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="matplotlib绘制等高线ref: https:&#x2F;&#x2F;matplotlib.org&#x2F;api&#x2F;_as_gen&#x2F;matplotlib.pyplot.contour.html 1234567891011121314import numpy as npimport matplotlib.pyplot as pltx &#x3D; np.arange(0, 10.0, 0.1)y &#x3D; np.arange(0, 10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey)">
+<meta property="og:url" content="https://shenbo.github.io/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E6%A1%91%E5%9F%BA%E5%9B%BE(Sankey)/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="matplotlib绘制等高线ref: https:&#x2F;&#x2F;matplotlib.org&#x2F;api&#x2F;_as_gen&#x2F;matplotlib.pyplot.contour.html 1234567891011121314import numpy as npimport matplotlib.pyplot as pltx &#x3D; np.arange(0, 10.0, 0.1)y &#x3D; np.arange(0, 10">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-17T11:42:11.000Z">
+<meta property="article:modified_time" content="2025-12-18T07:34:56.212Z">
+<meta property="article:author" content="yoyo">
+<meta property="article:tag" content="pandas">
+<meta property="article:tag" content="seaborn">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://shenbo.github.io/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E6%A1%91%E5%9F%BA%E5%9B%BE(Sankey)/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenbo.github.io/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E6%A1%91%E5%9F%BA%E5%9B%BE(Sankey)/","path":"2020/02/17/sci-matplotlib/数据可视化-桑基图(Sankey)/","title":"数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey) | yoyo</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SPWHMME3NF","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="yoyo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yoyo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#matplotlib%E7%BB%98%E5%88%B6%E7%AD%89%E9%AB%98%E7%BA%BF"><span class="nav-text">matplotlib绘制等高线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pandas%E9%80%8F%E8%A7%86%E5%9B%BE"><span class="nav-text">pandas透视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E9%9C%80%E8%A6%81%E5%B1%95%E7%A4%BA%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-text">1. 创建需要展示的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BB%98%E5%88%B6%E5%B8%A6%E8%AF%AF%E5%B7%AE%E7%9A%84%E6%8A%98%E7%BA%BF%E5%9B%BE%E5%B1%95%E7%A4%BA%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C"><span class="nav-text">2. 绘制带误差的折线图展示训练结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8pandas%E9%80%8F%E8%A7%86%E5%9B%BE%E3%80%81seaborn%E7%83%AD%E5%8A%9B%E5%9B%BE%E6%9D%A5%E5%B1%95%E7%A4%BA"><span class="nav-text">3. 使用pandas透视图、seaborn热力图来展示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%91%E5%9F%BA%E5%9B%BE-Sankey"><span class="nav-text">桑基图(Sankey)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A1%91%E5%9F%BA%E5%9B%BE-Sankey-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1. 桑基图(Sankey)介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BB%98%E5%88%B6%E6%A1%91%E5%9F%BA%E5%9B%BE%EF%BC%88%E4%BD%BF%E7%94%A8pyecharts%EF%BC%89"><span class="nav-text">2. 绘制桑基图（使用pyecharts）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-D3-%E7%BB%98%E5%88%B6"><span class="nav-text">使用 D3 绘制</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yoyo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenbo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shenbo.github.io/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E6%A1%91%E5%9F%BA%E5%9B%BE(Sankey)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yoyo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yoyo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey) | yoyo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-17 19:42:11" itemprop="dateCreated datePublished" datetime="2020-02-17T19:42:11+08:00">2020-02-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/sci/" itemprop="url" rel="index"><span itemprop="name">sci</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E6%A1%91%E5%9F%BA%E5%9B%BE(Sankey)/" class="post-meta-item leancloud_visitors" data-flag-title="数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey)" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="matplotlib绘制等高线"><a href="#matplotlib绘制等高线" class="headerlink" title="matplotlib绘制等高线"></a>matplotlib绘制等高线</h1><p>ref: <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.contour.html">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.contour.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">10.0</span>, <span class="number">0.1</span>)</span><br><span class="line">y = np.arange(<span class="number">0</span>, <span class="number">10.0</span>, <span class="number">0.1</span>)</span><br><span class="line">X, Y = np.meshgrid(x, y)    <span class="comment"># 生成x-y网格图</span></span><br><span class="line">Z = X**<span class="number">1.5</span> + Y**<span class="number">1.5</span></span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line">CS = plt.contour(X, Y, Z, levels=<span class="number">6</span>)                   <span class="comment"># 设置距离</span></span><br><span class="line">plt.clabel(CS, inline=<span class="number">1</span>, fontsize=<span class="number">10</span>, fmt=<span class="string">&#x27;%d ℃&#x27;</span>)   <span class="comment"># 设置标签</span></span><br><span class="line">plt.savefig(<span class="string">&#x27;Temp.png&#x27;</span>, dpi=<span class="number">300</span>, bbox_inches=<span class="string">&#x27;tight&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+ 
+
+
+
+<h1 id="pandas透视图"><a href="#pandas透视图" class="headerlink" title="pandas透视图"></a>pandas透视图</h1><h3 id="1-创建需要展示的数据"><a href="#1-创建需要展示的数据" class="headerlink" title="1. 创建需要展示的数据"></a>1. 创建需要展示的数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># === define paras ==================</span></span><br><span class="line">para_names = [<span class="string">&#x27;layer_n&#x27;</span>, <span class="string">&#x27;activition&#x27;</span>, <span class="string">&#x27;seed&#x27;</span>]</span><br><span class="line"></span><br><span class="line">layer_n = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">activition = [<span class="string">&#x27;tanh&#x27;</span>, <span class="string">&#x27;sigmod&#x27;</span>, <span class="string">&#x27;relu&#x27;</span>]</span><br><span class="line">seed = [<span class="number">11</span>, <span class="number">17</span>, <span class="number">19</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 dataframe</span></span><br><span class="line">df =  pd.DataFrame([], columns=para_names)</span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> itertools.product(layer_n, activition, seed):</span><br><span class="line">    newline = pd.DataFrame(<span class="built_in">list</span>(values), index=para_names)</span><br><span class="line">    df = df.append(newline.T, ignore_index=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 伪造一些训练结果，方便展示</span></span><br><span class="line"><span class="comment"># activ_2_num = pd.factorize(df[&#x27;activition&#x27;])[0].astype(&#x27;int&#x27;)  # 激活函数是字符类型，将其映射成整数形</span></span><br><span class="line">activ_dict = &#123;<span class="string">&#x27;tanh&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;sigmod&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;relu&#x27;</span>: <span class="number">6</span>&#125;  <span class="comment"># 也可以直接定义字典，然后replace</span></span><br><span class="line">df[<span class="string">&#x27;results&#x27;</span>] = df[<span class="string">&#x27;layer_n&#x27;</span>] + df[<span class="string">&#x27;activition&#x27;</span>].replace(activ_dict) + df[<span class="string">&#x27;seed&#x27;</span>] * <span class="number">0.1</span> + np.random.random((<span class="number">54</span>,))</span><br><span class="line">df[<span class="string">&#x27;results&#x27;</span>] = df[<span class="string">&#x27;results&#x27;</span>].astype(<span class="string">&#x27;float&#x27;</span>)  <span class="comment"># 转换成浮点类型</span></span><br><span class="line"><span class="built_in">print</span>(df.head())</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<pre><code>  layer_n activition seed   results
+0       1       tanh   11  4.261361
+1       1       tanh   17  4.822595
+2       1       tanh   19  4.929088
+3       1     sigmod   11  6.698047
+4       1     sigmod   17  7.020531
+</code></pre>
+<!-- more -->
+<h3 id="2-绘制带误差的折线图展示训练结果"><a href="#2-绘制带误差的折线图展示训练结果" class="headerlink" title="2. 绘制带误差的折线图展示训练结果"></a>2. 绘制带误差的折线图展示训练结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制带误差的折线图，横轴为网络层数，纵轴为训练结果，</span></span><br><span class="line"><span class="comment"># 激活函数采用不同颜色的线型，误差来自于没有指定的列：不同的随机种子seed</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">sns.lineplot(x=<span class="string">&#x27;layer_n&#x27;</span>, y=<span class="string">&#x27;results&#x27;</span>, hue=<span class="string">&#x27;activition&#x27;</span>,  style=<span class="string">&#x27;activition&#x27;</span>, </span><br><span class="line">             markers=<span class="literal">True</span>, data=df)</span><br><span class="line">plt.grid(linestyle=<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="3-使用pandas透视图、seaborn热力图来展示"><a href="#3-使用pandas透视图、seaborn热力图来展示" class="headerlink" title="3. 使用pandas透视图、seaborn热力图来展示"></a>3. 使用pandas透视图、seaborn热力图来展示</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建透视图，</span></span><br><span class="line"><span class="comment"># 对于没有指定的列（seed），按最大值进行统计</span></span><br><span class="line">dt = pd.pivot_table(df, index=[<span class="string">&#x27;layer_n&#x27;</span>], columns=[<span class="string">&#x27;activition&#x27;</span>], values=[<span class="string">&#x27;results&#x27;</span>], aggfunc=[<span class="built_in">max</span>])</span><br><span class="line"><span class="built_in">print</span>(dt)</span><br><span class="line"><span class="built_in">print</span>(dt.columns)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 找到最大值、最大值所对应的索引</span></span><br><span class="line">max_value, max_idx = dt.stack().<span class="built_in">max</span>(), dt.stack().idxmax()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27; - the max value is <span class="subst">&#123;max_value&#125;</span>;\n - the index is <span class="subst">&#123;max_idx&#125;</span>...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 透视图变成了多重索引(MultiIndex)，重新调整一下</span></span><br><span class="line">new_col = dt.columns.levels[<span class="number">2</span>]</span><br><span class="line">dt.columns = new_col</span><br><span class="line"><span class="comment"># dt.index = list(dt.index)</span></span><br><span class="line"><span class="built_in">print</span>(dt)</span><br><span class="line"></span><br><span class="line">dt.sort_index(axis=<span class="number">0</span>, ascending=<span class="literal">False</span>, inplace=<span class="literal">True</span>)  <span class="comment"># 必要时将索引重新排序</span></span><br><span class="line">dt.sort_index(axis=<span class="number">1</span>, ascending=<span class="literal">False</span>, inplace=<span class="literal">True</span>)  <span class="comment"># 必要时将索引重新排序</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制热力图，横轴为网络层数，纵轴为激活函数，</span></span><br><span class="line"><span class="comment"># 栅格的颜色代表训练结果，颜色越深结果越好</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">g = sns.heatmap(dt, vmin=<span class="number">0.0</span>, annot=<span class="literal">True</span>, fmt=<span class="string">&#x27;.2g&#x27;</span>, cmap=<span class="string">&#x27;Blues&#x27;</span>, cbar=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>ref:</p>
+<ul>
+<li><p>pandas.pivot_table <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html</a></p>
+</li>
+<li><p>seaborn.lineplot <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html">https://seaborn.pydata.org/generated/seaborn.lineplot.html</a></p>
+</li>
+<li><p>seaborn.heatplot <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.heatmap.html">https://seaborn.pydata.org/generated/seaborn.heatmap.html</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="桑基图-Sankey"><a href="#桑基图-Sankey" class="headerlink" title="桑基图(Sankey)"></a>桑基图(Sankey)</h1><h2 id="1-桑基图-Sankey-介绍"><a href="#1-桑基图-Sankey-介绍" class="headerlink" title="1. 桑基图(Sankey)介绍"></a>1. 桑基图(Sankey)介绍</h2><p>sankey图可用于数据从一系列节点到另一系列节点流入流出的可视化。</p>
+<p>主要有两个基本概念：</p>
+<ul>
+<li>节点 （nodes）</li>
+<li>连接 （links）： 源节点至目标节点之间的关系，每个连接包括三个元素：<ul>
+<li>source： 源节点</li>
+<li>target： 目标节点</li>
+<li>value： 数据</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://developers.google.com/chart/interactive/docs/gallery/sankey">https://developers.google.com/chart/interactive/docs/gallery/sankey</a></p>
+</blockquote>
+<h2 id="2-绘制桑基图（使用pyecharts）"><a href="#2-绘制桑基图（使用pyecharts）" class="headerlink" title="2. 绘制桑基图（使用pyecharts）"></a>2. 绘制桑基图（使用pyecharts）</h2><p>常用的绘图库 matplotlib, seaborn 好像不支持桑基图， 这里使用了 pyecharts 。</p>
+<p>这里 <a target="_blank" rel="noopener" href="https://gallery.pyecharts.org/#/Sankey/sankey_base">https://gallery.pyecharts.org/#/Sankey/sankey_base</a> 有几个例子。</p>
+<!-- more -->
+
+<p>简单用法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Sankey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据</span></span><br><span class="line">data = [[ <span class="string">&#x27;Brazil&#x27;</span>, <span class="string">&#x27;Portugal&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Brazil&#x27;</span>, <span class="string">&#x27;France&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Brazil&#x27;</span>, <span class="string">&#x27;Spain&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Brazil&#x27;</span>, <span class="string">&#x27;England&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Canada&#x27;</span>, <span class="string">&#x27;Portugal&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Canada&#x27;</span>, <span class="string">&#x27;France&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Canada&#x27;</span>, <span class="string">&#x27;England&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Portugal&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;France&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Spain&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;England&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Portugal&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;France&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Spain&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;England&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Portugal&#x27;</span>, <span class="string">&#x27;Angola&#x27;</span>, <span class="number">2</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Portugal&#x27;</span>, <span class="string">&#x27;Senegal&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Portugal&#x27;</span>, <span class="string">&#x27;Morocco&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Portugal&#x27;</span>, <span class="string">&#x27;South Africa&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;France&#x27;</span>, <span class="string">&#x27;Angola&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;France&#x27;</span>, <span class="string">&#x27;Senegal&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;France&#x27;</span>, <span class="string">&#x27;Mali&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;France&#x27;</span>, <span class="string">&#x27;Morocco&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;France&#x27;</span>, <span class="string">&#x27;South Africa&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Spain&#x27;</span>, <span class="string">&#x27;Senegal&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Spain&#x27;</span>, <span class="string">&#x27;Morocco&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Spain&#x27;</span>, <span class="string">&#x27;South Africa&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;England&#x27;</span>, <span class="string">&#x27;Angola&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;England&#x27;</span>, <span class="string">&#x27;Senegal&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;England&#x27;</span>, <span class="string">&#x27;Morocco&#x27;</span>, <span class="number">2</span> ],</span><br><span class="line">       [ <span class="string">&#x27;England&#x27;</span>, <span class="string">&#x27;South Africa&#x27;</span>, <span class="number">7</span> ],</span><br><span class="line">       [ <span class="string">&#x27;South Africa&#x27;</span>, <span class="string">&#x27;China&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;South Africa&#x27;</span>, <span class="string">&#x27;India&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;South Africa&#x27;</span>, <span class="string">&#x27;Japan&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Angola&#x27;</span>, <span class="string">&#x27;China&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Angola&#x27;</span>, <span class="string">&#x27;India&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Angola&#x27;</span>, <span class="string">&#x27;Japan&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Senegal&#x27;</span>, <span class="string">&#x27;China&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Senegal&#x27;</span>, <span class="string">&#x27;India&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Senegal&#x27;</span>, <span class="string">&#x27;Japan&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mali&#x27;</span>, <span class="string">&#x27;China&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mali&#x27;</span>, <span class="string">&#x27;India&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Mali&#x27;</span>, <span class="string">&#x27;Japan&#x27;</span>, <span class="number">3</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Morocco&#x27;</span>, <span class="string">&#x27;China&#x27;</span>, <span class="number">5</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Morocco&#x27;</span>, <span class="string">&#x27;India&#x27;</span>, <span class="number">1</span> ],</span><br><span class="line">       [ <span class="string">&#x27;Morocco&#x27;</span>, <span class="string">&#x27;Japan&#x27;</span>, <span class="number">3</span> ]]</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(data, columns=[<span class="string">&#x27;source&#x27;</span>, <span class="string">&#x27;target&#x27;</span>, <span class="string">&#x27;value&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- data shape: &#x27;</span>, df.shape, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成节点， 先合并源节点和目标节点，然后去除重复的节点，最后输出成 dict 形式</span></span><br><span class="line">nn = pd.concat([df[<span class="string">&#x27;source&#x27;</span>], df[<span class="string">&#x27;target&#x27;</span>]])</span><br><span class="line">nn = nn.drop_duplicates()</span><br><span class="line">nodes = pd.DataFrame(nn, columns=[<span class="string">&#x27;name&#x27;</span>]).to_dict(orient=<span class="string">&#x27;records&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- nodes:\n&#x27;</span>, nodes, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成连接， dict 形式</span></span><br><span class="line">links = df.to_dict(orient=<span class="string">&#x27;records&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;- links:\n&#x27;</span>, links, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制桑基图</span></span><br><span class="line">sk =(</span><br><span class="line">    Sankey(init_opts=opts.InitOpts(width=<span class="string">&quot;800px&quot;</span>, height=<span class="string">&quot;600px&quot;</span>)) <span class="comment"># 页面大小</span></span><br><span class="line">    .add(</span><br><span class="line">        series_name=<span class="string">&quot;legend&quot;</span>, <span class="comment"># legend</span></span><br><span class="line">        nodes=nodes,</span><br><span class="line">        links=links,</span><br><span class="line">        <span class="comment"># opacity 透明度； curve 弯曲程度； color 色系</span></span><br><span class="line">        linestyle_opt=opts.LineStyleOpts(opacity=<span class="number">0.2</span>, curve=<span class="number">0.5</span>, color=<span class="string">&quot;source&quot;</span>), </span><br><span class="line">        label_opts=opts.LabelOpts(position=<span class="string">&quot;right&quot;</span>), <span class="comment"># 节点名称</span></span><br><span class="line">    )</span><br><span class="line">    .set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">&quot;sankey&quot;</span>)) <span class="comment"># 标题</span></span><br><span class="line">    .render(<span class="string">&quot;sankey.html&quot;</span>) <span class="comment"># 保存成 html 文件</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>代码说明：</p>
+<ul>
+<li>pyecharts的桑基图对于原始数据的格式比较啰嗦，这里用 pandas 处理了一下，还可以修改一下去读取 csv 文件。</li>
+<li>pyecharts直接保存图片也比较麻烦，需要用 selenium 之类的工具，配置一大堆；还不如直接在浏览器截图。</li>
+</ul>
+<hr>
+<h2 id="使用-D3-绘制"><a href="#使用-D3-绘制" class="headerlink" title="使用 D3 绘制"></a>使用 D3 绘制</h2><p>D3 绘制桑基图貌似更简便一点，可惜不能用 python。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/d3/d3-sankey">https://github.com/d3/d3-sankey</a></p>
+<p>这里还有个在线可实时编辑版。</p>
+<p><a target="_blank" rel="noopener" href="https://observablehq.com/@mbostock/flow-o-matic">https://observablehq.com/@mbostock/flow-o-matic</a></p>
+<p>厉害了！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/images/wechatpay.png" alt="yoyo 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/pandas/" rel="tag"># pandas</a>
+              <a href="/tags/seaborn/" rel="tag"># seaborn</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/08/yoyo/20200208-%E5%85%83%E5%AE%B5%E8%8A%82/" rel="prev" title="元宵">
+                  <i class="fa fa-angle-left"></i> 元宵
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-pandas%E9%80%8F%E8%A7%86%E5%9B%BE-seaborn%E7%83%AD%E5%8A%9B%E5%9B%BE/" rel="next" title="数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey)">
+                  数据可视化-等高线-pandas透视图-seaborn热力图-桑基图(Sankey) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">yoyo</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"G9XfUMsyIbcaopObij5JQ2ER-gzGzoHsz","appKey":"QuS3tiMISxND3p7AJKBjO0ED","serverURLs":"https://g9xfumsy.lc-cn-n1-shared.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"libUrl":"https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.3/Valine.min.js","el":"#valine-comments","path":"/2020/02/17/sci-matplotlib/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E6%A1%91%E5%9F%BA%E5%9B%BE(Sankey)/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.valine.libUrl,
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
